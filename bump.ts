@@ -46,7 +46,7 @@ async function bumpVersion(currentVersion: string, bumpType = 'auto'): Promise<s
     let newPatch = patch + 1;
     let newMinor = minor;
     let newMajor = major;
-
+    // TODO: Add an option to force specific semantic bump
     switch (bumpType) {
         case 'patch':
             // Increment patch version
@@ -61,16 +61,16 @@ async function bumpVersion(currentVersion: string, bumpType = 'auto'): Promise<s
             console.log("Force Patch is not implemented yet...")
             break;
         default:
-            if (patch >= MAX_PATCH_VERSION) {
+            if (newPatch >= MAX_PATCH_VERSION) {
                 console.log('Proposed Version:', `${newMajor}.${newMinor}.${newPatch}`);
-                const bumpMinorPrompt = `Do you want to bump the minor version from ${minor} to ${newMinor} (otherwise only the patch will be bumped to ${newPatch})?`;
+                const bumpMinorPrompt = `Do you want to bump the minor version from ${minor} to ${minor + 1} (otherwise only the patch will be bumped to ${newPatch})?`;
                 const bumpMinor = await askForConfirmation(bumpMinorPrompt);
                 if (bumpMinor) {
                     newPatch = 0;
                     newMinor++;
-                    if (minor >= MAX_MINOR_VERSION) {
+                    if (newMinor >= MAX_MINOR_VERSION) {
                         console.log('Proposed Version:', `${newMajor}.${newMinor}.${newPatch}`);
-                        const bumpMajorPrompt = `Do you want to bump the major version from ${major} to ${newMajor} (otherwise only the minor will be bumped to ${newMinor})?`;
+                        const bumpMajorPrompt = `Do you want to bump the major version from ${major} to ${major + 1} (otherwise only the minor will be bumped to ${newMinor})?`;
                         const bumpMajor = await askForConfirmation(bumpMajorPrompt);
                         if (bumpMajor) {
                             newMinor = 0;
@@ -104,7 +104,6 @@ async function main() {
         process.exit(1);
     }
 
-    // TODO: Add an option to force specific semantic bump
     const newVersion = await bumpVersion(currentVersion);
     console.log('New Version:', newVersion);
 
@@ -120,9 +119,9 @@ async function main() {
                         let content = fs.readFileSync(filePath, 'utf8');
                         const replacement = bump_files[filePath].replace
                             .replace('newVersion', newVersion)
-                            .replace('updateTitle', updateTitle)
-                            .replace('mainDescription', mainDescription)
-                            .replace('secondaryDescription', secondaryDescription);
+                            .replace('updateTitle', updateTitle || 'UpdateTitle')
+                            .replace('mainDescription', mainDescription || 'MainDescription')
+                            .replace('secondaryDescription', secondaryDescription || 'SecondaryDescription');
                         content = content.replace(bump_files[filePath].search.replace('currentVersion', currentVersion), replacement);
                         fs.writeFileSync(filePath, content);
                         console.log(`Updated version in ${filePath}`);

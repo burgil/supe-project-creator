@@ -22,7 +22,7 @@ const argv: string[] = process.argv.slice(2); // Parse command line arguments
 // Variables:
 let CleanProject = true;
 let projectName = 'example-project';
-const supeVersion = '1.3.0';
+const supeVersion = '1.3.1';
 const supeVersionDate = '16/10/2024';
 
 // Loop through each argument

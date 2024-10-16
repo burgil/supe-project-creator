@@ -320,7 +320,11 @@ deno run bump.ts
 
 ## Changelog
 
-# Version 1.3.0 - Version Bump Script for Contributors
+### Version 1.3.1 - Improved Version Bumper
+
+- **Enhanced version bumping system**: Implemented a user-interactive auto bump system that requests confirmation before bumping the minor or major version. Added feature to input brief and secondary descriptions of changes for the README.md file.
+
+### Version 1.3.0 - Version Bump Script for Contributors
 
 - **Added Version Bump Script**: Implemented a simple script to streamline version bumping across multiple files, improving development efficiency.
 

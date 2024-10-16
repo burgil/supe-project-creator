@@ -64,19 +64,35 @@ We are actively working to enhance Supe Project Creator with new features and le
 
 *   **Deno Support**: Add support for Deno as a JavaScript runtime environment.
 *   **AI Demo Projects**: Expand the project creator to support other types of AI demo projects, including machine learning and natural language processing examples.
-*   **Improved Key Features**:
-    *   **Enhanced Project Customization**: Allow users to customize project settings, such as dependencies and configurations, more easily.
-    *   **Streamlined Project Setup**: Simplify the project setup process, making it faster and more intuitive for users.
-    *   **Better Support for Advanced Features**: Improve support for advanced features, such as hot reloading and TypeScript integration.
-- **HTTP/2 Support**: Add support for HTTP/2 to improve performance and user experience.
-- **SSL and HTTPS**: Integrate SSL certificates to serve projects over HTTPS.
-- **Explore HTTP/3**: Investigate and potentially add support for HTTP/3 to future-proof your web applications.
-- **Improved Installation**: Streamline the installation process for easier and faster project setup.
-- **Tutorials and Documentation**: Create detailed tutorials and expand documentation to cover project setup, advanced configurations, and common use cases.
-- **YouTube Videos**: Launch a YouTube channel with video guides covering different aspects of Supe Project Creator.
-- **GIF and Media Demos**: Provide GIFs and other media assets to visually demonstrate the tool's features and workflows.
+*   **Enhanced Project Customization**: Allow users to customize project settings, such as dependencies and configurations, more easily.
+*   **Streamlined Project Setup**: Simplify the project setup process, making it faster and more intuitive for users.
+*   **Better Support for Advanced Features**: Improve support for advanced features, such as hot reloading and TypeScript integration.
+*   **HTTP/2 Support**: Add support for HTTP/2 to improve performance and user experience.
+*   **SSL and HTTPS**: Integrate SSL certificates to serve projects over HTTPS.
+*   **Explore HTTP/3**: Investigate and potentially add support for HTTP/3 to future-proof your web applications.
+*   **Improved Installation**: Streamline the installation process for easier and faster project setup.
+*   **Tutorials and Documentation**: Create detailed tutorials and expand documentation to cover project setup, advanced configurations, and common use cases.
+*   **YouTube Videos**: Launch a YouTube channel with video guides covering different aspects of Supe Project Creator.
+*   **GIF and Media Demos**: Provide GIFs and other media assets to visually demonstrate the tool's features and workflows.
+*   **LLM Demo**: Include more AI demos, specifically large language model demos.
+*   **Optional TypeScript Error Notifications**: Introduce optional notifications for TypeScript errors to enhance user experience.
+*   **Dev Plugins Ecosystem**: Establish a plugins ecosystem for developers to extend and customize the project creator.
+*   **Server Integrations**: Offer out-of-the-box server integrations and auto CORS setup for seamless connectivity.
+*   **CLI and Code Integrations**: Enable CLI and code integrations to utilize the project creator as a package.
+*   **Docs and JSDocs Definitions**: Add comprehensive documentation and JSDocs definitions for improved clarity and usability.
 
 **These features are in active development, and your feedback is always welcome!**
+
+## Prerequisites
+
+Before executing any scripts, please take a moment to:
+
+1. **Read this entire document** to understand the necessary steps and requirements.
+2. **Verify that you have installed** the required dependencies:
+	* `bun`
+	* `deno` (if applicable)
+
+By doing so, you will ensure a smooth and successful execution of the scripts.
 
 ## Usage
 
@@ -239,6 +255,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
+## Contributors
+
+- **Burgil**
+
+## Released
+
+- **16 October 2024**
+
 ## Contributing and Feedback
 
 We welcome contributions from the community! Whether it's a new feature idea, bug fix, or documentation improvement, we'd love to hear from you.
@@ -272,28 +296,35 @@ We welcome contributions from the community! Whether it's a new feature idea, bu
 
 We appreciate your contributions and look forward to hearing from you!
 
-## Contributors
+**Bump Version Script**
+---------------
 
-- **Burgil**
+As a contributor to this project, you may need to update the version number of your own fork or local copy. The following steps outline how to do so.
 
-## Released
+The `bump.ts` script is executed by either `bun` or `deno` to increment the version number of a project, by updating the relevant files such as `package.json`.
 
-- **16 October 2024**
+**Running the Bump Version Script**
+---------------
+
+To run the bump version script in your own local environment, use one of the following commands:
+
+- To run with `bun`, execute: 
+```bash
+bun run bump.ts
+```
+
+- To run with `deno`, execute: 
+```bash
+deno run bump.ts
+```
 
 ## Changelog
 
-### Version 2.0.0 (Upcoming)
+### Version 1.2.9 - Enhanced Roadmap and Fixed Bugs
 
-- **Planned Features**:
-    - Deno Support
-    - HTTP/2 and SSL support.
-    - Tutorials, documentation, and video guides.
-    - More AI Demos.
-    - Streamlined installation.
-    - Optional TypeScript Error Notifications
-    - Explore HTTP/3.
-    - Dev Plugins Ecosystem
-    - Server integrations out of the box + Auto CORS setup + LLM Demo
+- **Preparing for the Future**: Added more planned features for upcoming versions to enhance the project's roadmap.
+- **Added Version Bump Script**: Implemented a simple script to streamline version bumping across multiple files, improving development efficiency.
+- **Resolved GitHub Programming Language Misidentification**: Addressed an issue where GitHub falsely detected the project as 100% JavaScript due to the initial lines of code lacking TypeScript definitions. This was resolved by renaming `index.ts` and modifying the code to include TypeScript types within the first seven lines, ensuring accurate language detection.
 
 ### Version 1.2.8 - NPX Preparation
 

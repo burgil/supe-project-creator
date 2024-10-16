@@ -209,18 +209,20 @@ We appreciate your contributions and look forward to hearing from you!
 
 ---
 
-### Versions 1.0.1 - 1.0.9
+### Versions 1.0.1 - 1.1.0
 
 #### What's New?
 
-*   **Improved README**: Improved the README file, fixed typos, triple checked installation steps, added batteries included.
-*   **Reduced usage-command length**: Reduced the length of the usage command.
-*   **Fixed Installation Instructions**: Updated the README file to support the cross-runtime nature of JSX.
-*   **JSR Global Compatibility**: Updated the package.json file with the initial configurations.
-*   **Contribution Guidelines**: Established clear guidelines for code style, commit messages, and PR labels to ensure consistency and quality in contributions.
-*   **Documentation Update**: Enhanced documentation to include information on contributing and getting started with the project.
-*   **Documentation Update**: Updated the README file to provide a comprehensive overview of the project.
-*   **Documentation Update**: Added a README file to provide a comprehensive overview of the project.
+*   **1.1.0 - Finished README**: Finished learning how JSX works.
+*   **1.0.9 - Fixed Typos**: Fixed typos in the README file.
+*   **1.0.8 - Improved README**: Improved the README file, triple checked installation steps, added batteries included.
+*   **1.0.7 - Reduced usage-command length**: Reduced the length of the usage command.
+*   **1.0.6 - Fixed Installation Instructions**: Updated the README file to support the cross-runtime nature of JSX.
+*   **1.0.5 - JSR Global Compatibility**: Updated the package.json file with the initial configurations.
+*   **1.0.4 - Contribution Guidelines**: Established clear guidelines for code style, commit messages, and PR labels to ensure consistency and quality in contributions.
+*   **1.0.3 - Documentation Update**: Enhanced documentation to include information on contributing and getting started with the project.
+*   **1.0.2 - Documentation Update**: Updated the README file to provide a comprehensive overview of the project.
+*   **1.0.1 - Documentation Update**: Added a README file to provide a comprehensive overview of the project.
 
 #### Changes
 

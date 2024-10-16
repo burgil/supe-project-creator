@@ -22,7 +22,7 @@ import process from 'node:process';
 // Variables:
 let CleanProject = true;
 let projectName = 'example-project';
-const supeVersion = '1.1.0';
+const supeVersion = '1.1.1';
 const supeVersionDate = '16/10/2024';
 
 // Parse command line arguments
@@ -62,21 +62,21 @@ for (const arg of argv) {
     }
 }
 
-const outDir = path.basename(projectName);
-if (!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir);
+if (!fs.existsSync(projectName)) {
+    fs.mkdirSync(projectName);
+    projectName = path.basename(projectName);
 } else {
-    console.error('\x1b[31m%s\x1b[0m', `Error: Folder already exist ${outDir}`);
+    console.error('\x1b[31m%s\x1b[0m', `Error: Folder already exist ${projectName}`);
     process.exit(1);
 }
-const hotreloadDir = path.join(outDir, 'hotreload');
+const hotreloadDir = path.join(projectName, 'hotreload');
 if (!fs.existsSync(hotreloadDir)) fs.mkdirSync(hotreloadDir);
-const publicDir = path.join(outDir, 'public');
+const publicDir = path.join(projectName, 'public');
 if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir);
-const srcDir = path.join(outDir, 'src');
+const srcDir = path.join(projectName, 'src');
 if (!fs.existsSync(srcDir)) fs.mkdirSync(srcDir);
 
-fs.writeFileSync(path.join(outDir, 'package.json'), `{
+fs.writeFileSync(path.join(projectName, 'package.json'), `{
     "name": "${projectName}",
     "module": "index.ts",
     "type": "module",
@@ -92,7 +92,7 @@ fs.writeFileSync(path.join(outDir, 'package.json'), `{
 }
 `);
 
-fs.writeFileSync(path.join(outDir, 'README.md'), `# ${projectName}
+fs.writeFileSync(path.join(projectName, 'README.md'), `# ${projectName}
 
 ## This project was created using Supe Project Creator v${supeVersion}
 
@@ -116,7 +116,7 @@ You have full control over all the source files of almost everything you see, Th
 
 `);
 
-fs.writeFileSync(path.join(outDir, 'tsconfig.json'), `{
+fs.writeFileSync(path.join(projectName, 'tsconfig.json'), `{
   "include": ["src/**/*", "hotreload/**/*"],
   "compilerOptions": {
     // Enable latest features
@@ -146,7 +146,7 @@ fs.writeFileSync(path.join(outDir, 'tsconfig.json'), `{
 }
 `);
 
-fs.writeFileSync(path.join(outDir, `${projectName}.code-workspace`), `{
+fs.writeFileSync(path.join(projectName, `${projectName}.code-workspace`), `{
 	"folders": [
 		{
 			"name": "▪◾",
@@ -169,7 +169,7 @@ fs.writeFileSync(path.join(outDir, `${projectName}.code-workspace`), `{
 }
 `);
 
-fs.writeFileSync(path.join(outDir, '.gitignore'), `# Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
+fs.writeFileSync(path.join(projectName, '.gitignore'), `# Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
 # Logs
 

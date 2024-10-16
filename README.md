@@ -42,7 +42,7 @@ Currently, To use Supe Project Creator, simply run the following commands:
 ```bash
 mkdir supe-project-creator
 cd supe-project-creator
-bun init
+bun init -y
 bunx jsr add @supeprojects/supe-project-creator
 ```
 
@@ -185,7 +185,7 @@ We appreciate your contributions and look forward to hearing from you!
 **Changelog**
 ----------
 
-### Versions 1.1.0
+### Versions 2.0.0
 
 #### What's New?
 
@@ -205,16 +205,17 @@ We appreciate your contributions and look forward to hearing from you!
 
 #### Released
 
-[16 October 2024]
+[TBD]
 
 ---
 
-### Versions 1.0.1 - 1.1.0
+### Versions 1.0.1 - 1.1.1
 
 #### What's New?
 
+*   **1.1.1 - Fixed Bugs**: Fixed 'ENOENT: No such file or directory' when trying to create new projects using a custom absolute path.
 *   **1.1.0 - Finished README**: Finished learning how JSX works.
-*   **1.1.0 - Fixed Typos**: Fixed typos in the README file.
+*   **1.0.9 - Fixed Typos**: Fixed typos in the README file.
 *   **1.0.8 - Improved README**: Improved the README file, triple checked installation steps, added batteries included.
 *   **1.0.7 - Reduced usage-command length**: Reduced the length of the usage command.
 *   **1.0.6 - Fixed Installation Instructions**: Updated the README file to support the cross-runtime nature of JSX.

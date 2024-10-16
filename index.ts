@@ -27,7 +27,7 @@ const supeVersion = '1.2.8';
 const supeVersionDate = '16/10/2024';
 
 // Parse command line arguments
-const argv = process.argv.slice(2);
+const argv: string[] = process.argv.slice(2);
 
 // Loop through each argument
 for (const arg of argv) {

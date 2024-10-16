@@ -260,11 +260,15 @@ We appreciate your contributions and look forward to hearing from you!
 ### Version 2.0.0 (Upcoming)
 
 - **Planned Features**:
+    - Deno Support
     - HTTP/2 and SSL support.
     - Tutorials, documentation, and video guides.
-    - Explore HTTP/3.
     - More AI Demos.
     - Streamlined installation.
+    - Optional TypeScript Error Notifications
+    - Explore HTTP/3.
+    - Dev Plugins Ecosystem
+    - Server integrations out of the box + Auto CORS setup + LLM Demo
 
 ### Version 1.2.4 - Typo Fixes and README Polish
 

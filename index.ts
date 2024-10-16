@@ -22,7 +22,7 @@ import process from 'node:process';
 // Variables:
 let CleanProject = true;
 let projectName = 'example-project';
-const supeVersion = '1.1.1';
+const supeVersion = '1.1.2';
 const supeVersionDate = '16/10/2024';
 
 // Parse command line arguments
@@ -64,7 +64,6 @@ for (const arg of argv) {
 
 if (!fs.existsSync(projectName)) {
     fs.mkdirSync(projectName);
-    projectName = path.basename(projectName);
 } else {
     console.error('\x1b[31m%s\x1b[0m', `Error: Folder already exist ${projectName}`);
     process.exit(1);
@@ -75,6 +74,8 @@ const publicDir = path.join(projectName, 'public');
 if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir);
 const srcDir = path.join(projectName, 'src');
 if (!fs.existsSync(srcDir)) fs.mkdirSync(srcDir);
+
+projectName = path.basename(projectName);
 
 fs.writeFileSync(path.join(projectName, 'package.json'), `{
     "name": "${projectName}",

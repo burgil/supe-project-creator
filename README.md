@@ -216,10 +216,11 @@ We appreciate your contributions and look forward to hearing from you!
 
 ---
 
-### Versions 1.0.1 - 1.1.6
+### Versions 1.0.1 - 1.1.7
 
 #### What's New?
 
+*   **1.1.7 - Added GitHub Actions**: The JSR score should increase now thanks to added provenance.
 *   **1.1.6 - Improved Key Features**: Improved the README file with up-to-date key features.
 *   **1.1.5 - Fixed More Typos**: Fixed more typos in the README file.
 *   **1.1.4 - Improved Updating Mechanism**: Added an important argument in the installation instruction to ensure new updates are always served in time.

@@ -1,6 +1,6 @@
 {
   "name": "supe-project-creator",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "module": "supe-project-creator.ts",
   "type": "module",

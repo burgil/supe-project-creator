@@ -40,6 +40,21 @@ These features are currently in development and will be released in future versi
 To use Supe Project Creator, simply run the following command:
 
 ```bash
+mkdir my-new-project
+cd my new project
+bun init
+bunx jsr add @supeprojects/supe-project-creator
+```
+
+```bash
+bun ./node_modules/@supeprojects/supe-project-creator/supe-project-creator.js --help
+deno ./node_modules/@supeprojects/supe-project-creator/supe-project-creator.js --help
+node ./node_modules/@supeprojects/supe-project-creator/supe-project-creator.js --help
+```
+
+In the future it might be possible to reduce the command length into something like: 🤞
+
+```bash
 jsx supe-project-creator [options]
 ```
 
@@ -160,10 +175,11 @@ We appreciate your contributions and look forward to hearing from you!
 **Changelog**
 ----------
 
-### Versions 1.0.1 - 1.0.4
+### Versions 1.0.1 - 1.0.5
 
 #### What's New?
 
+*   **Fixed Installation Instructions**: Updated the README file to support the cross-runtime nature of JSX.
 *   **JSR Global Compatibility**: Updated the package.json file with the initial configurations.
 *   **Contribution Guidelines**: Established clear guidelines for code style, commit messages, and PR labels to ensure consistency and quality in contributions.
 *   **Documentation Update**: Enhanced documentation to include information on contributing and getting started with the project.

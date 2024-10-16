@@ -3,6 +3,8 @@
 
 A powerful tool for creating modern projects with battries included.
 
+[JSR](https://jsr.io/@supeprojects/supe-project-creator)
+
 **Description**
 ---------------
 

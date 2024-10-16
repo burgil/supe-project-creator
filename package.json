@@ -5,7 +5,8 @@
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/node": "latest"
   },
   "peerDependencies": {
     "typescript": "latest"

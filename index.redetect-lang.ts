@@ -1,7 +1,5 @@
-#!/usr/bin/env node
-// @ts-ignore
-import fs from 'node:fs'; // @ts-ignore
-import path from 'node:path'; // @ts-ignore
+import fs from 'node:fs';
+import path from 'node:path';
 import process from 'node:process';
 const argv: string[] = process.argv.slice(2); // Parse command line arguments
 

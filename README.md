@@ -12,8 +12,6 @@ The tool comes with a **built-in web server** that runs on **HTTP/1.1**, making 
 
 By streamlining the project setup process, Supe Project Creator allows developers to focus on writing code rather than spending time on tedious configuration tasks.
 
----
-
 ## Key Features
 
 ### 1. **Lightning-Fast Project Setup**
@@ -37,8 +35,6 @@ Experience fast startup times and intelligent browser handling that optimizes yo
 ### 7. **Intelligent Development Workflow**
 Eliminate unnecessary browser launches and avoid cumbersome manual configurations with an intelligent development tool designed to streamline the entire process.
 
----
-
 ## Upcoming Features
 
 ### Roadmap
@@ -60,8 +56,6 @@ We are actively working to enhance Supe Project Creator with new features and le
 - **GIF and Media Demos**: Provide GIFs and other media assets to visually demonstrate the tool's features and workflows.
 
 **These features are in active development, and your feedback is always welcome!**
-
----
 
 ## Usage
 
@@ -89,16 +83,12 @@ node ./node_modules/@supeprojects/supe-project-creator --help
 jsx supe-project-creator [options]
 ```
 
----
-
 ## Options
 
 - `-h`, `--help`: Displays help information.
 - `-v`, `--version`: Displays the version number.
 - `-n`, `--name <string>`: Sets the project name (default: `"example-project"`).
 - `-d`, `--demo`: Creates a demo project (default: `false`).
-
----
 
 ## Example Use Cases
 
@@ -126,8 +116,6 @@ bun ./node_modules/@supeprojects/supe-project-creator --demo --name cat-dog-dete
 bun ./node_modules/@supeprojects/supe-project-creator --help
 ```
 
----
-
 ## Getting Started
 
 1. **Install Dependencies**:
@@ -144,8 +132,6 @@ bun start
 
 3. **Open your browser** and navigate to `http://localhost:80`.
 
----
-
 ## Project Structure
 
 Supe Project Creator organizes your project using the following structure:
@@ -153,8 +139,6 @@ Supe Project Creator organizes your project using the following structure:
 - `src`: Contains the project's source code (TypeScript).
 - `public`: Public-facing files, including `index.html`.
 - `hotreload`: Configuration and scripts for hot reloading.
-
----
 
 ## License
 
@@ -181,8 +165,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
----
 
 ## Contributing and Feedback
 
@@ -217,8 +199,6 @@ We welcome contributions from the community! Whether it's a new feature idea, bu
 
 We appreciate your contributions and look forward to hearing from you!
 
----
-
 ## Contributors
 
 - **Burgil**
@@ -226,8 +206,6 @@ We appreciate your contributions and look forward to hearing from you!
 ## Released
 
 - **16 October 2024**
-
----
 
 ## Changelog
 
@@ -240,7 +218,9 @@ We appreciate your contributions and look forward to hearing from you!
     - More AI Demos.
     - Streamlined installation.
 
----
+### Version 1.2.0 - Corrected README Formatting
+
+- **Lines Removed**: Removed the trailing lines in the README.
 
 ### Version 1.1.9 - Updated README Format
 
@@ -317,8 +297,6 @@ We appreciate your contributions and look forward to hearing from you!
 ### Version 1.0.1 - Initial README Release
 
 - **Project Documentation**: Created the initial README to provide basic information about the project for users and contributors.
-
----
 
 ### Version 1.0.0
 

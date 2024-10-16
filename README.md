@@ -1,7 +1,7 @@
 **Supe Project Creator**
 ==========================
 
-A powerful tool for creating modern projects.
+A powerful tool for creating modern projects with battries included.
 
 **Description**
 ---------------
@@ -41,7 +41,7 @@ To use Supe Project Creator, simply run the following command:
 
 ```bash
 mkdir my-new-project
-cd my new project
+cd my-new-project
 bun init
 bunx jsr add @supeprojects/supe-project-creator
 ```
@@ -175,10 +175,11 @@ We appreciate your contributions and look forward to hearing from you!
 **Changelog**
 ----------
 
-### Versions 1.0.1 - 1.0.6
+### Versions 1.0.1 - 1.0.7
 
 #### What's New?
 
+*   **Improved README**: Improved the README file, fixed typos, triple checked installation steps, added batteries included.
 *   **Reduced usage-command length**: Reduced the length of the usage command.
 *   **Fixed Installation Instructions**: Updated the README file to support the cross-runtime nature of JSX.
 *   **JSR Global Compatibility**: Updated the package.json file with the initial configurations.

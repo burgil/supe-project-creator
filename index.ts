@@ -1,20 +1,16 @@
 #!/usr/bin/env node
-
-// Parse command line arguments
-const argv: string[] = process.argv.slice(2);
-
+const argv: string[] = process.argv.slice(2); // Parse command line arguments
 /*
 * MIT
 * Enjoy
 * Made by Burgil
-* TODO: Add Deno Support
 * Dependencies: TypeScript
-
-bunx jsr publish
-or
-npx jsr publish
-or
-deno publish
+* TODO: Add Deno Support
+* bunx jsr publish
+* or
+* npx jsr publish
+* or
+* deno publish
 */
 
 // @ts-ignore

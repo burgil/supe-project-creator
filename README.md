@@ -209,10 +209,11 @@ We appreciate your contributions and look forward to hearing from you!
 
 ---
 
-### Versions 1.0.1 - 1.1.2
+### Versions 1.0.1 - 1.1.3
 
 #### What's New?
 
+*   **1.1.3 - Finished Initial Release**: Fixed a relative path bug when creating the package.json in new projects.
 *   **1.1.2 - Fixed More Bugs**: Fixed errors while creating sub folders when using custom absolute path as the project name.
 *   **1.1.1 - Fixed Bugs**: Fixed 'ENOENT: No such file or directory' when trying to create new projects using a custom absolute path.
 *   **1.1.0 - Finished README**: Finished learning how JSX works.

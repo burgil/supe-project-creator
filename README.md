@@ -13,15 +13,25 @@ Supe Project Creator is a project scaffolding tool that helps you create new pro
 **Key Features**
 ----------------
 
-*   Creates a new project with a basic structure
-*   Configures hot reloading for fast and efficient development, Only important files are watched, Fully configurable.
-*   Supports various options for customizing the project setup
-*   Fully configurable - No third party modules
-*   TypeScript, TypeScript Everywhere. ESNext, ESM, Bun, Deno. We got it all.
-*   TypeScript error watcher
-*   Fast. Very fast start up time.
-*   Smart. Even the browser won't launch twice if it's already open.
-*   Will also supports Deno in next update.
+### 1. **Lightning-Fast Project Setup**
+
+Create new projects in seconds with our intuitive scaffolding tool. Get started with a basic project structure, hot reloading, and a seamless development experience.
+
+### 2. **Customizable and Configurable**
+
+Tailor your project to your needs with our flexible options and configurations. No third-party modules required - you're in control.
+
+### 3. **TypeScript Mastery**
+
+Enjoy comprehensive TypeScript support, including error watching, ESNext, ESM, Bun, and Deno. We've got you covered for all your TypeScript needs.
+
+### 4. **Blazing-Fast Performance**
+
+Experience rapid startup times and intelligent browser handling. Our tool is designed to optimize your workflow.
+
+### 5. **Intelligent Development**
+
+Say goodbye to unnecessary browser launches and tedious manual configurations. Our tool is designed to simplify your development workflow.
 
 **Upcoming Features**
 --------------------
@@ -216,10 +226,11 @@ We appreciate your contributions and look forward to hearing from you!
 
 ---
 
-### Versions 1.0.1 - 1.1.7
+### Versions 1.0.1 - 1.1.8
 
 #### What's New?
 
+*   **1.1.8 - Improved Key Features**: Added description for every key feature.
 *   **1.1.7 - Added GitHub Actions**: The JSR score should increase now thanks to added provenance.
 *   **1.1.6 - Improved Key Features**: Improved the README file with up-to-date key features.
 *   **1.1.5 - Fixed More Typos**: Fixed more typos in the README file.

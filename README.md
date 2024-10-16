@@ -4,13 +4,26 @@ A powerful tool for creating modern web projects with batteries included.
 
 [JSR](https://jsr.io/@supeprojects/supe-project-creator)
 
+**Important Note:** Deno support is currently untested and not recommended for use at this time. For a stable experience, we recommend using Bun until Deno support is fully implemented and tested.
+
 ## Overview
 
 Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. 
 
+**Note:** The created project is client-only. You are welcome to combine Super Project Creator with any other server framework, such as Express.JS, FastAPI, Cloudflare Workers, etc.
+
 The tool comes with a **built-in web server**, making it easy to test and deploy your projects locally or in production. One of the standout features is a pre-configured **AI demo** that showcases object detection in images, demonstrating the integration of machine learning in web apps.
 
-By streamlining the project setup process, Supe Project Creator allows developers to focus on writing code rather than spending time on tedious configuration tasks.
+**Unlock Your Productivity**
+
+By utilizing Supe Project Creator, you can:
+
+* **Save Time**: Skip tedious configuration tasks and jumpstart your project with a pre-configured template.
+* **Boost Efficiency**: Focus on writing code, not setting up your project structure.
+* **Streamline Your Workflow**: Take advantage of hot reloading and instant feedback to accelerate your development process.
+* **Explore New Possibilities**: Leverage the included AI demo to experiment with machine learning in your web applications.
+
+With Supe Project Creator, you can concentrate on what matters most – building innovative and effective web applications.
 
 ## Key Features
 
@@ -59,6 +72,8 @@ We are actively working to enhance Supe Project Creator with new features and le
 
 ## Usage
 
+**Note**: JSR currently does not support NPX or BUNX-style direct execution, but `--global` installation may be available soon. Feel free to suggest a better approach if you find one.
+
 To start using Supe Project Creator, run the following commands:
 
 ```bash
@@ -68,15 +83,26 @@ bun init -y
 bunx jsr add @supeprojects/supe-project-creator@latest
 ```
 
-To display available options, run:
+### Displaying Available Options
 
+To view the available options for Supe Project Creator, run the following command:
+
+#### Using Bun
 ```bash
 bun ./node_modules/@supeprojects/supe-project-creator --help
-deno ./node_modules/@supeprojects/supe-project-creator --help
-node ./node_modules/@supeprojects/supe-project-creator --help
 ```
 
-**Note**: JSR currently does not support NPX or BUNX-style direct execution, but `--global` installation may be available soon. Feel free to suggest a better approach if you find one.
+#### Using Deno
+```bash
+deno ./node_modules/@supeprojects/supe-project-creator --help
+```
+**Note:** Deno support is currently untested, but it will be fully supported in the future.
+
+#### Using Node
+```bash
+node ./node_modules/@supeprojects/supe-project-creator --help
+```
+**Note:** Node currently has limitations due to missing built-in TypeScript compatibility, but the above command will still work.
 
 ### Future Command (🤞):
 ```bash
@@ -110,12 +136,6 @@ bun ./node_modules/@supeprojects/supe-project-creator -n my-supe-project
 bun ./node_modules/@supeprojects/supe-project-creator --demo --name cat-dog-detector
 ```
 
-- **Display the help menu:**
-
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator --help
-```
-
 ## Getting Started
 
 After creating a new project using the Supe Project Creator, you will first need to navigate to the newly created project directory before proceeding with the setup. This ensures you're working inside the correct folder where all project files are stored.
@@ -124,12 +144,6 @@ For example, after running the command to create the project, navigate to the pr
 
 ```bash
 cd "C:\Users\%username%\Desktop\my-supe-project"
-```
-
-or:
-
-```bash
-cd my-supe-project
 ```
 
 Once you're inside the project directory, you can then follow the steps to install dependencies and start the development server:
@@ -159,6 +173,20 @@ Supe Project Creator organizes your project using the following structure:
 - `src`: Contains the project's source code (TypeScript).
 - `public`: Public-facing files, including `index.html`.
 - `hotreload`: Configuration and scripts for hot reloading.
+
+### Recommended Workspace Configuration
+
+To enhance your development experience, we provide a recommended `.code-workspace` file named after your project. This configuration excludes unnecessary files from view, allowing you to focus on your code.
+
+**Opening the Workspace:**
+
+1. Locate the `<project-name>.code-workspace` file in your project directory.
+2. Double-click the file to open it in VS Code, or select "Open Workspace" from the VS Code menu and navigate to the file.
+
+**Benefits of Using the Recommended Workspace:**
+
+* Streamlined view: Concentrate on your project's essential files, without clutter from `node_modules` and other irrelevant directories.
+* Improved performance: By excluding unnecessary files, you'll experience faster loading times and more efficient search results.
 
 ## License
 
@@ -237,6 +265,10 @@ We appreciate your contributions and look forward to hearing from you!
     - Explore HTTP/3.
     - More AI Demos.
     - Streamlined installation.
+
+### Version 1.2.3 - Enhanced README Description
+
+- **Refined README Overview**: Improved the readability of the README's overview section by clarifying key points and ensuring grammatical accuracy.
 
 ### Version 1.2.2 - Updated README Format
 

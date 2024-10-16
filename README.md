@@ -1,44 +1,49 @@
-**Supe Project Creator**
-==========================
+# Supe Project Creator
 
-A powerful tool for creating modern projects with batteries included.
+A powerful tool for creating modern web projects with batteries included.
 
 [JSR](https://jsr.io/@supeprojects/supe-project-creator)
 
-**Description**
----------------
+## Overview
 
-Supe Project Creator is a project scaffolding tool that helps you create new projects quickly and efficiently. It sets up a basic project structure and configures hot reloading for a seamless development experience.
+Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with built-in **hot reloading** for a seamless development workflow. 
 
-**Key Features**
-----------------
+The tool comes with a **built-in web server** that runs on **HTTP/1.1**, making it easy to test and deploy your projects locally or in production. One of the standout features is a pre-configured **AI demo** that showcases object detection in images, demonstrating the integration of machine learning in web apps.
+
+By streamlining the project setup process, Supe Project Creator allows developers to focus on writing code rather than spending time on tedious configuration tasks.
+
+---
+
+## Key Features
 
 ### 1. **Lightning-Fast Project Setup**
-
-Create new projects in seconds with our intuitive scaffolding tool. Get started with a basic project structure, hot reloading, and a seamless development experience.
+Quickly create new projects with our intuitive scaffolding tool. Start with a pre-configured project structure, hot reloading, and optimized development tools.
 
 ### 2. **Customizable and Configurable**
+Adapt your project setup to your specific needs with flexible options and configurations. No reliance on third-party modules—you maintain full control over your environment.
 
-Tailor your project to your needs with our flexible options and configurations. No third-party modules required - you're in control.
+### 3. **Comprehensive TypeScript Support**
+Enjoy full TypeScript support, including ESNext, ESM, Bun, and Deno, for an efficient, strongly-typed development process. The tool also features built-in error tracking and real-time updates.
 
-### 3. **TypeScript Mastery**
+### 4. **Built-in HTTP/1.1 Web Server**
+Easily serve your project using the built-in web server that supports HTTP/1.1 for development. This allows quick local testing of your project with minimal setup.
 
-Enjoy comprehensive TypeScript support, including error watching, ESNext, ESM, Bun, and Deno. We've got you covered for all your TypeScript needs.
+### 5. **AI Demo Integration**
+Explore the potential of AI with our pre-configured demo, which features an object detection system that can recognize items in images—ideal for machine learning demonstrations or real-world AI projects.
 
-### 4. **Blazing-Fast Performance**
+### 6. **Blazing-Fast Performance**
+Experience fast startup times and intelligent browser handling that optimizes your workflow, allowing you to focus more on development and less on configuration.
 
-Experience rapid startup times and intelligent browser handling. Our tool is designed to optimize your workflow.
+### 7. **Intelligent Development Workflow**
+Eliminate unnecessary browser launches and avoid cumbersome manual configurations with an intelligent development tool designed to streamline the entire process.
 
-### 5. **Intelligent Development**
+---
 
-Say goodbye to unnecessary browser launches and tedious manual configurations. Our tool is designed to simplify your development workflow.
-
-**Upcoming Features**
---------------------
+## Upcoming Features
 
 ### Roadmap
 
-The following features are planned for future releases:
+We are actively working to enhance Supe Project Creator with new features and learning resources:
 
 *   **Deno Support**: Add support for Deno as a JavaScript runtime environment.
 *   **AI Demo Projects**: Expand the project creator to support other types of AI demo projects, including machine learning and natural language processing examples.
@@ -46,15 +51,21 @@ The following features are planned for future releases:
     *   **Enhanced Project Customization**: Allow users to customize project settings, such as dependencies and configurations, more easily.
     *   **Streamlined Project Setup**: Simplify the project setup process, making it faster and more intuitive for users.
     *   **Better Support for Advanced Features**: Improve support for advanced features, such as hot reloading and TypeScript integration.
+- **HTTP/2 Support**: Add support for HTTP/2 to improve performance and user experience.
+- **SSL and HTTPS**: Integrate SSL certificates to serve projects over HTTPS.
+- **Explore HTTP/3**: Investigate and potentially add support for HTTP/3 to future-proof your web applications.
+- **Improved Installation**: Streamline the installation process for easier and faster project setup.
+- **Tutorials and Documentation**: Create detailed tutorials and expand documentation to cover project setup, advanced configurations, and common use cases.
+- **YouTube Videos**: Launch a YouTube channel with video guides covering different aspects of Supe Project Creator.
+- **GIF and Media Demos**: Provide GIFs and other media assets to visually demonstrate the tool's features and workflows.
 
-### Development Status
+**These features are in active development, and your feedback is always welcome!**
 
-These features are currently in development and will be released in future versions of the project creator. If you have any feedback or suggestions, please don't hesitate to reach out.
+---
 
-**Usage**
----------
+## Usage
 
-Currently, To use Supe Project Creator, simply run the following commands:
+To start using Supe Project Creator, run the following commands:
 
 ```bash
 mkdir supe-project-creator
@@ -63,86 +74,91 @@ bun init -y
 bunx jsr add @supeprojects/supe-project-creator@latest
 ```
 
+To display available options, run:
+
 ```bash
 bun ./node_modules/@supeprojects/supe-project-creator --help
 deno ./node_modules/@supeprojects/supe-project-creator --help
 node ./node_modules/@supeprojects/supe-project-creator --help
 ```
 
-* Note:
+**Note**: JSR currently does not support NPX or BUNX-style direct execution, but `--global` installation may be available soon. Feel free to suggest a better approach if you find one.
 
-JSR currently can not work like NPX or BUNX, but might have --global installation soon, please let me know if you found a better way of doing this
-
-In the future it might be possible to reduce the command length into something like: 🤞
-
+### Future Command (🤞):
 ```bash
 jsx supe-project-creator [options]
 ```
 
-**Options**
-------------
+---
 
-*   `-h`, `--help`: Displays help information
-*   `-v`, `--version`: Displays the version number
-*   `-n`, `--name <string>`: Sets the project name (default: "example-project")
-*   `-d`, `--demo`: Creates a demo project (default: false)
+## Options
 
-**Example Use Cases**
---------------------
+- `-h`, `--help`: Displays help information.
+- `-v`, `--version`: Displays the version number.
+- `-n`, `--name <string>`: Sets the project name (default: `"example-project"`).
+- `-d`, `--demo`: Creates a demo project (default: `false`).
 
-*   Create a new project with a custom name in a specific path:
+---
+
+## Example Use Cases
+
+- **Create a new project with a custom name at a specific path:**
 
 ```bash
 bun ./node_modules/@supeprojects/supe-project-creator -n "C:\Users\%username%\Desktop\my-supe-project"
 ```
 
-*   Create a new project folder with a custom name in the current directory:
+- **Create a new project folder with a custom name in the current directory:**
 
 ```bash
 bun ./node_modules/@supeprojects/supe-project-creator -n my-supe-project
 ```
 
-*   Create a demo project:
+- **Create a demo project:**
 
 ```bash
 bun ./node_modules/@supeprojects/supe-project-creator --demo --name cat-dog-detector
 ```
 
-*   Display the help menu:
+- **Display the help menu:**
 
 ```bash
 bun ./node_modules/@supeprojects/supe-project-creator --help
 ```
 
-**Getting Started**
--------------------
+---
 
-1.  Install dependencies:
+## Getting Started
+
+1. **Install Dependencies**:
 
 ```bash
 bun install
 ```
 
-2.  Start the development server:
+2. **Start the Development Server**:
 
 ```bash
 bun start
 ```
 
-3.  Open your web browser and navigate to <http://localhost:80>
+3. **Open your browser** and navigate to `http://localhost:80`.
 
-**Project Structure**
----------------------
+---
 
-The project structure is organized into the following directories:
+## Project Structure
 
-*   `src`: Source code for the project
-*   `public`: Publicly accessible files, including the index.html file
-*   `hotreload`: Hot reloading configuration and scripts
+Supe Project Creator organizes your project using the following structure:
 
-**License**
-----------
+- `src`: Contains the project's source code (TypeScript).
+- `public`: Public-facing files, including `index.html`.
+- `hotreload`: Configuration and scripts for hot reloading.
 
+---
+
+## License
+
+```
 MIT License
 
 Copyright (c) 2024 Burgil
@@ -164,30 +180,32 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
 
-**Contributing and Feedback**
----------------------------
+---
 
-We welcome contributions and suggestions from the community! If you have an idea for a new feature, a bug fix, or a documentation improvement, we encourage you to share it with us.
+## Contributing and Feedback
+
+We welcome contributions from the community! Whether it's a new feature idea, bug fix, or documentation improvement, we'd love to hear from you.
 
 ### Ways to Contribute
 
-*   **Open Issues**: Check our issue tracker for open issues that need attention. You can filter by labels such as "beginner-friendly" or "feature request".
-*   **Pull Requests**: Submit a pull request with your proposed changes. Our team will review and merge them if approved.
-*   **Documentation**: Help improve our documentation by submitting updates or new guides.
-*   **Community Feedback**: Share your thoughts and feedback on our project in the discussions section or on social media.
+- **Open Issues**: Check our issue tracker for open issues, such as "beginner-friendly" or "feature request."
+- **Submit Pull Requests**: Submit your changes via a pull request, and our team will review and merge them.
+- **Documentation Improvements**: Help enhance our documentation by adding guides or correcting errors.
+- **Community Feedback**: Share your ideas and suggestions in the discussions section or on social media.
 
 ### Types of Contributions
 
-*   **Code Contributions**: We welcome code contributions in the form of bug fixes, new features, or performance enhancements.
-*   **Design Contributions**: If you have design skills, you can contribute to our project by creating new UI components, updating existing ones, or proposing design changes.
-*   **Translation Contributions**: Help us translate our project into different languages by submitting translations.
+- **Code**: Bug fixes, new features, and performance improvements.
+- **Design**: UI/UX design contributions.
+- **Translation**: Help translate our documentation into different languages.
 
 ### Contribution Guidelines
 
-*   **Code Style**: We follow standard code styles for Bun and TypeScript.
-*   **Commit Messages**: Use descriptive commit messages that explain the purpose of your changes.
-*   **PR Labels**: Use relevant labels for your pull requests to help us categorize and review them.
+- **Code Style**: Follow standard TypeScript and Bun conventions.
+- **Commit Messages**: Use clear and descriptive commit messages.
+- **PR Labels**: Tag pull requests with relevant labels for easier review.
 
 **Getting Started**
 ---------------
@@ -199,71 +217,106 @@ We welcome contributions and suggestions from the community! If you have an idea
 
 We appreciate your contributions and look forward to hearing from you!
 
-**Changelog**
-----------
+---
 
-### Versions 2.0.0
+## Contributors
 
-#### What's New?
+- **Burgil**
 
-*   **Not released yet**: TODO
+## Released
 
-#### Changes
-
-*   No code changes were made in this version.
-
-#### Known Issues
-
-*   None reported.
-
-#### Contributors
-
-*   [Burgil]
-
-#### Released
-
-[TBD]
+- **16 October 2024**
 
 ---
 
-### Versions 1.0.1 - 1.1.8
+## Changelog
 
-#### What's New?
+### Version 2.0.0 (Upcoming)
 
-*   **1.1.8 - Improved Key Features**: Added description for every key feature.
-*   **1.1.7 - Added GitHub Actions**: The JSR score should increase now thanks to added provenance.
-*   **1.1.6 - Improved Key Features**: Improved the README file with up-to-date key features.
-*   **1.1.5 - Fixed More Typos**: Fixed more typos in the README file.
-*   **1.1.4 - Improved Updating Mechanism**: Added an important argument in the installation instruction to ensure new updates are always served in time.
-*   **1.1.3 - Finished Initial Release**: Fixed a relative path bug when creating the package.json in new projects.
-*   **1.1.2 - Fixed More Bugs**: Fixed errors while creating sub folders when using custom absolute path as the project name.
-*   **1.1.1 - Fixed Bugs**: Fixed 'ENOENT: No such file or directory' when trying to create new projects using a custom absolute path.
-*   **1.1.0 - Finished README**: Finished learning how JSX works.
-*   **1.0.9 - Fixed Typos**: Fixed typos in the README file.
-*   **1.0.8 - Improved README**: Improved the README file, triple checked installation steps, added batteries included.
-*   **1.0.7 - Reduced usage-command length**: Reduced the length of the usage command.
-*   **1.0.6 - Fixed Installation Instructions**: Updated the README file to support the cross-runtime nature of JSX.
-*   **1.0.5 - JSR Global Compatibility**: Updated the package.json file with the initial configurations.
-*   **1.0.4 - Contribution Guidelines**: Established clear guidelines for code style, commit messages, and PR labels to ensure consistency and quality in contributions.
-*   **1.0.3 - Documentation Update**: Enhanced documentation to include information on contributing and getting started with the project.
-*   **1.0.2 - Documentation Update**: Updated the README file to provide a comprehensive overview of the project.
-*   **1.0.1 - Documentation Update**: Added a README file to provide a comprehensive overview of the project.
+- **Planned Features**:
+    - HTTP/2 and SSL support.
+    - Tutorials, documentation, and video guides.
+    - Explore HTTP/3.
+    - More AI Demos.
+    - Streamlined installation.
 
-#### Changes
+---
 
-*   **Fixed External Project Path Creation**: When project names contain an absolute path the program will crash when trying to create some of the files, this was fixed in the current patch.
+### Version 1.1.9 - Updated README Format
 
-#### Known Issues
+- **Improved Readability**: Enhanced the grammar and clarity of the changelog section in the README for easier understanding.
 
-*   None reported.
+### Version 1.1.8 - Enhanced Feature Descriptions
 
-#### Contributors
+- **Detailed Features**: Added comprehensive descriptions for all key features, giving a more detailed overview of each.
 
-*   [Burgil]
+### Version 1.1.7 - Integrated GitHub Actions
 
-#### Released
+- **Automation Boost**: Introduced GitHub Actions to automate the build and improve the JSR score through enhanced provenance tracking.
 
-[16 October 2024]
+### Version 1.1.6 - Updated Key Features in README
+
+- **Up-to-Date Information**: Refined the README by adding accurate and up-to-date descriptions of the tool's core features.
+
+### Version 1.1.5 - Corrected README Typos
+
+- **Typo Fixes**: Addressed minor typos in the README, ensuring the documentation reads more smoothly.
+
+### Version 1.1.4 - Optimized Update Mechanism
+
+- **Improved Installation**: Introduced an additional argument to the installation instructions to guarantee timely updates of the tool.
+
+### Version 1.1.3 - Path Bug Fix
+
+- **Resolved Path Issues**: Fixed a bug related to the relative path in `package.json` creation for newly generated projects.
+
+### Version 1.1.2 - Fixed Subfolder Creation Issue
+
+- **Subfolder Bug Fix**: Corrected an error that occurred when using a custom absolute path, ensuring subfolders are created correctly.
+
+### Version 1.1.1 - Resolved Absolute Path Bug
+
+- **Bug Squashing**: Fixed the 'ENOENT: No such file or directory' error that occurred when creating new projects with custom absolute paths.
+
+### Version 1.1.0 - Completed README
+
+- **Learning Milestone**: Finished understanding JSX and applied it to finalize the README structure.
+
+### Version 1.0.9 - Corrected Minor Typos
+
+- **Cleaned Up Documentation**: Addressed small typos to make the README file more professional and readable.
+
+### Version 1.0.8 - Enhanced Documentation
+
+- **Batteries Included**: Improved the README by triple-checking installation steps and adding a clearer "batteries-included" description.
+
+### Version 1.0.7 - Shortened Usage Commands
+
+- **User-Friendly Commands**: Streamlined the usage instructions by reducing the length of the command, making it easier to run.
+
+### Version 1.0.6 - Refined Installation Instructions
+
+- **Cross-Runtime Support**: Updated the README to better reflect the cross-runtime nature of JSX, ensuring compatibility across environments.
+
+### Version 1.0.5 - Global JSR Compatibility
+
+- **Initial Configuration**: Made the package globally compatible by adding the essential initial configurations to the `package.json` file.
+
+### Version 1.0.4 - Established Contribution Guidelines
+
+- **Community Standards**: Outlined clear guidelines for contributing, including code style, commit messages, and PR labeling for better project collaboration.
+
+### Version 1.0.3 - Documentation Improvements
+
+- **Expanded Details**: Enhanced the documentation to better inform contributors and new users on how to get started and contribute to the project.
+
+### Version 1.0.2 - README Expansion
+
+- **Comprehensive Overview**: Expanded the README file to provide a thorough overview of the project's goals and features.
+
+### Version 1.0.1 - Initial README Release
+
+- **Project Documentation**: Created the initial README to provide basic information about the project for users and contributors.
 
 ---
 

@@ -6,9 +6,9 @@ A powerful tool for creating modern web projects with batteries included.
 
 ## Overview
 
-Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with built-in **hot reloading** for a seamless development workflow. 
+Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. 
 
-The tool comes with a **built-in web server** that runs on **HTTP/1.1**, making it easy to test and deploy your projects locally or in production. One of the standout features is a pre-configured **AI demo** that showcases object detection in images, demonstrating the integration of machine learning in web apps.
+The tool comes with a **built-in web server**, making it easy to test and deploy your projects locally or in production. One of the standout features is a pre-configured **AI demo** that showcases object detection in images, demonstrating the integration of machine learning in web apps.
 
 By streamlining the project setup process, Supe Project Creator allows developers to focus on writing code rather than spending time on tedious configuration tasks.
 
@@ -18,7 +18,7 @@ By streamlining the project setup process, Supe Project Creator allows developer
 Quickly create new projects with our intuitive scaffolding tool. Start with a pre-configured project structure, hot reloading, and optimized development tools.
 
 ### 2. **Customizable and Configurable**
-Adapt your project setup to your specific needs with flexible options and configurations. No reliance on third-party modules—you maintain full control over your environment.
+Adapt your project setup to your specific needs with flexible options and configurations. No reliance on third-party modules - you maintain full control over your environment.
 
 ### 3. **Comprehensive TypeScript Support**
 Enjoy full TypeScript support, including ESNext, ESM, Bun, and Deno, for an efficient, strongly-typed development process. The tool also features built-in error tracking and real-time updates.
@@ -27,7 +27,7 @@ Enjoy full TypeScript support, including ESNext, ESM, Bun, and Deno, for an effi
 Easily serve your project using the built-in web server that supports HTTP/1.1 for development. This allows quick local testing of your project with minimal setup.
 
 ### 5. **AI Demo Integration**
-Explore the potential of AI with our pre-configured demo, which features an object detection system that can recognize items in images—ideal for machine learning demonstrations or real-world AI projects.
+Explore the potential of AI with our pre-configured demo, which features an object detection system that can recognize items in images - ideal for machine learning demonstrations or real-world AI projects.
 
 ### 6. **Blazing-Fast Performance**
 Experience fast startup times and intelligent browser handling that optimizes your workflow, allowing you to focus more on development and less on configuration.
@@ -238,6 +238,10 @@ We appreciate your contributions and look forward to hearing from you!
     - More AI Demos.
     - Streamlined installation.
 
+### Version 1.2.2 - Updated README Format
+
+- **Improved Overview Readability**: Enhanced the grammar and clarity of the overview section in the README with accurate information.
+
 ### Version 1.2.1 - Added Project Navigation Instructions
 
 - **Project Navigation**: Added instructions for users to navigate to the newly created project directory before running the installation and development commands, ensuring they operate within the correct context.
@@ -248,7 +252,7 @@ We appreciate your contributions and look forward to hearing from you!
 
 ### Version 1.1.9 - Updated README Format
 
-- **Improved Readability**: Enhanced the grammar and clarity of the changelog section in the README for easier understanding.
+- **Improved Changelog Readability**: Enhanced the grammar and clarity of the changelog section in the README for easier understanding.
 
 ### Version 1.1.8 - Enhanced Feature Descriptions
 

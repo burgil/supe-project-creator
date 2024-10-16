@@ -11,16 +11,16 @@ const bump_files: {
         replace: "const supeVersion = 'newVersion'",
     },
     "jsr.json": {
-        search: 'version: "currentVersion"',
-        replace: 'version: "newVersion"',
+        search: '"version": "currentVersion"',
+        replace: '"version": "newVersion"',
     },
     "package.json": {
         search: '"version": "currentVersion"',
         replace: '"version": "newVersion"',
     },
-    "README.md": {
+    "README.md": { // TODO: Ask for required information
         search: '## Changelog',
-        replace: '## Changelog\n\n# Version newVersion - mainDescription\n\n- **secondaryDescription**: explainChanges\n',
+        replace: '## Changelog\n\n# Version newVersion - mainDescription\n\n- **secondaryDescription**: explainChanges',
     },
 };
 const packageJsonPath = './package.json';
@@ -40,8 +40,24 @@ if (currentVersion === null) {
     process.exit(1);
 }
 
-const [major, minor, patch] = currentVersion.split('.').map(Number);
-const newVersion = `${major}.${minor}.${patch + 1}`;
+// Add an option to force specific semantic bump
+let [major, minor, patch] = currentVersion.split('.').map(Number);
+patch++;
+if (patch >= 10) {
+    // biome-ignore lint/correctness/noConstantCondition: TODO - ask if you want to bump minor version
+    if (true) {
+        patch = 0;
+        minor++;
+        if (minor >= 10) {
+            // biome-ignore lint/correctness/noConstantCondition: TODO - ask if you want to bump major
+            if (true) {
+                minor = 0;
+                major++;
+            }
+        }
+    }
+}
+const newVersion = `${major}.${minor}.${patch}`;
 for (const filePath in bump_files) {
     try {
         let content = fs.readFileSync(filePath, 'utf8');
@@ -56,3 +72,4 @@ for (const filePath in bump_files) {
         }
     }
 }
+console.log(`Updated version from v${currentVersion} to v${newVersion}`);

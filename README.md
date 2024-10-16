@@ -37,11 +37,11 @@ These features are currently in development and will be released in future versi
 **Usage**
 ---------
 
-To use Supe Project Creator, simply run the following command:
+Currently, To use Supe Project Creator, simply run the following command:
 
 ```bash
-mkdir my-new-project
-cd my-new-project
+mkdir supe-project-creator
+cd supe-project-creator
 bun init
 bunx jsr add @supeprojects/supe-project-creator
 ```
@@ -51,6 +51,10 @@ bun ./node_modules/@supeprojects/supe-project-creator --help
 deno ./node_modules/@supeprojects/supe-project-creator --help
 node ./node_modules/@supeprojects/supe-project-creator --help
 ```
+
+* Note:
+
+JSR currently can not work like NPX or BUNX, but might have --global installation soon, please let me know if you found a better way of doing this
 
 In the future it might be possible to reduce the command length into something like: 🤞
 
@@ -205,7 +209,7 @@ We appreciate your contributions and look forward to hearing from you!
 
 ---
 
-### Versions 1.0.1 - 1.0.8
+### Versions 1.0.1 - 1.0.9
 
 #### What's New?
 

@@ -43,7 +43,7 @@ Currently, To use Supe Project Creator, simply run the following commands:
 mkdir supe-project-creator
 cd supe-project-creator
 bun init -y
-bunx jsr add @supeprojects/supe-project-creator
+bunx jsr add @supeprojects/supe-project-creator@latest
 ```
 
 ```bash
@@ -209,10 +209,11 @@ We appreciate your contributions and look forward to hearing from you!
 
 ---
 
-### Versions 1.0.1 - 1.1.3
+### Versions 1.0.1 - 1.1.4
 
 #### What's New?
 
+*   **1.1.4 - Improved Updating Mechanism**: Added an important argument in the installation instruction to ensure new updates are always served in time.
 *   **1.1.3 - Finished Initial Release**: Fixed a relative path bug when creating the package.json in new projects.
 *   **1.1.2 - Fixed More Bugs**: Fixed errors while creating sub folders when using custom absolute path as the project name.
 *   **1.1.1 - Fixed Bugs**: Fixed 'ENOENT: No such file or directory' when trying to create new projects using a custom absolute path.

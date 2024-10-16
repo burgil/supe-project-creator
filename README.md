@@ -104,3 +104,36 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+**Changelog**
+----------
+
+### Version 1.0.1
+
+#### What's New?
+
+*   **Documentation Update**: Added a README file to provide a comprehensive overview of the project.
+
+#### Changes
+
+*   No code changes were made in this version.
+
+#### Known Issues
+
+*   None reported.
+
+#### Contributors
+
+*   [Burgil] for adding the README file.
+
+#### Released
+
+[16 October 2024]
+
+---
+
+### Version 1.0.0
+
+*Initial Release*
+
+Note: Since this is the first version of the changelog, there are no previous versions to report on. Future updates will include detailed information about changes, bug fixes, and new features.

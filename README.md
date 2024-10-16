@@ -160,10 +160,13 @@ We appreciate your contributions and look forward to hearing from you!
 **Changelog**
 ----------
 
-### Version 1.0.1
+### Versions 1.0.1 - 1.0.2
 
 #### What's New?
 
+*   **Contribution Guidelines**: Established clear guidelines for code style, commit messages, and PR labels to ensure consistency and quality in contributions.
+*   **Documentation Update**: Enhanced documentation to include information on contributing and getting started with the project.
+*   **Documentation Update**: Updated the README file to provide a comprehensive overview of the project.
 *   **Documentation Update**: Added a README file to provide a comprehensive overview of the project.
 
 #### Changes

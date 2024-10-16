@@ -1,10 +1,14 @@
 #!/usr/bin/env node
 
+// Parse command line arguments
+const argv: string[] = process.argv.slice(2);
+
 /*
 * MIT
 * Enjoy
 * Made by Burgil
 * TODO: Add Deno Support
+* Dependencies: TypeScript
 
 bunx jsr publish
 or
@@ -25,9 +29,6 @@ let CleanProject = true;
 let projectName = 'example-project';
 const supeVersion = '1.2.8';
 const supeVersionDate = '16/10/2024';
-
-// Parse command line arguments
-const argv: string[] = process.argv.slice(2);
 
 // Loop through each argument
 for (const arg of argv) {

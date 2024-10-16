@@ -4,13 +4,13 @@ A powerful tool for creating modern web projects with batteries included.
 
 [JSR](https://jsr.io/@supeprojects/supe-project-creator)
 
-**Important Note:** Deno support is currently untested and not recommended for use at this time. For a stable experience, we recommend using Bun until Deno support is fully implemented and tested.
+**Important Note:** Deno support is currently untested for this package and not recommended for use at this time. For a stable experience, we recommend using Bun until Deno support is fully implemented and tested.
 
 ## Overview
 
 Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. 
 
-**Note:** The created project is client-only. You are welcome to combine Super Project Creator with any other server framework, such as Express.JS, FastAPI, Cloudflare Workers, etc.
+**Note:** The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework, such as Express.JS, FastAPI, Cloudflare Workers, etc.
 
 The tool comes with a **built-in web server**, making it easy to test and deploy your projects locally or in production. One of the standout features is a pre-configured **AI demo** that showcases object detection in images, demonstrating the integration of machine learning in web apps.
 
@@ -265,6 +265,10 @@ We appreciate your contributions and look forward to hearing from you!
     - Explore HTTP/3.
     - More AI Demos.
     - Streamlined installation.
+
+### Version 1.2.4 - Typo Fixes and README Polish
+
+- **Corrected Typos**: Identified and corrected minor typographical errors throughout the README to maintain a professional tone and presentation.
 
 ### Version 1.2.3 - Enhanced README Description
 

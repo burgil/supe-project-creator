@@ -1,7 +1,7 @@
 **Supe Project Creator**
 ==========================
 
-A powerful tool for creating modern projects with battries included.
+A powerful tool for creating modern projects with batteries included.
 
 [JSR](https://jsr.io/@supeprojects/supe-project-creator)
 
@@ -211,10 +211,11 @@ We appreciate your contributions and look forward to hearing from you!
 
 ---
 
-### Versions 1.0.1 - 1.1.4
+### Versions 1.0.1 - 1.1.5
 
 #### What's New?
 
+*   **1.1.5 - Fixed More Typos**: Fixed more typos in the README file.
 *   **1.1.4 - Improved Updating Mechanism**: Added an important argument in the installation instruction to ensure new updates are always served in time.
 *   **1.1.3 - Finished Initial Release**: Fixed a relative path bug when creating the package.json in new projects.
 *   **1.1.2 - Fixed More Bugs**: Fixed errors while creating sub folders when using custom absolute path as the project name.

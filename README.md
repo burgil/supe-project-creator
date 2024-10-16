@@ -270,6 +270,10 @@ We appreciate your contributions and look forward to hearing from you!
     - Dev Plugins Ecosystem
     - Server integrations out of the box + Auto CORS setup + LLM Demo
 
+### Version 1.2.5 - Additional README Polish
+
+- **README Refinements**: Implemented additional polish to the README, ensuring clarity and concision in its content.
+
 ### Version 1.2.4 - Typo Fixes and README Polish
 
 - **Corrected Typos**: Identified and corrected minor typographical errors throughout the README to maintain a professional tone and presentation.

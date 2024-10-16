@@ -22,7 +22,7 @@ import process from 'node:process';
 // Variables:
 let CleanProject = true;
 let projectName = 'example-project';
-const supeVersion = '1.2.4';
+const supeVersion = '1.2.5';
 const supeVersionDate = '16/10/2024';
 
 // Parse command line arguments

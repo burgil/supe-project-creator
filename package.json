@@ -1,6 +1,6 @@
 {
   "name": "supe-project-creator",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "license": "MIT",
   "module": "index.ts",
   "type": "module",
@@ -9,5 +9,6 @@
   },
   "peerDependencies": {
     "typescript": "latest"
-  }
+  },
+  "bin": "index.js"
 }

@@ -4,15 +4,17 @@ A powerful tool for creating modern web projects with batteries included.
 
 [JSR](https://jsr.io/@supeprojects/supe-project-creator)
 
-**Important Note:** Deno support is currently untested for this package and not recommended for use at this time. For a stable experience, we recommend using Bun until Deno support is fully implemented and tested.
+> [!WARNING]  
+> Deno support is currently untested for this package and not recommended for use at this time. For a stable experience, we recommend using Bun until Deno support is fully implemented and tested.
 
 ## Overview
 
 Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. 
 
-**Note:** The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework, such as Express.JS, FastAPI, Cloudflare Workers, etc.
+> [!NOTE]  
+> The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework, such as Express.JS, FastAPI, Cloudflare Workers, etc.
 
-The tool comes with a **built-in web server**, making it easy to test and deploy your projects locally or in production. One of the standout features is a pre-configured **AI demo** that showcases object detection in images, demonstrating the integration of machine learning in web apps.
+The tool comes with a **built-in web server**, making it easy to test and deploy your projects locally or in production. One of the standout features is a pre-configured **AI DEMO** that showcases object detection in images, demonstrating the integration of machine learning in web apps.
 
 **Unlock Your Productivity**
 
@@ -24,6 +26,9 @@ By utilizing Supe Project Creator, you can:
 * **Explore New Possibilities**: Leverage the included AI demo to experiment with machine learning in your web applications.
 
 With Supe Project Creator, you can concentrate on what matters most – building innovative and effective web applications.
+
+> [!CAUTION]
+> The package is not production-ready yet.
 
 ## Key Features
 
@@ -47,6 +52,9 @@ Experience fast startup times and intelligent browser handling that optimizes yo
 
 ### 7. **Intelligent Development Workflow**
 Eliminate unnecessary browser launches and avoid cumbersome manual configurations with an intelligent development tool designed to streamline the entire process.
+
+> [!TIP]
+> Wait until v2.0.0 drops!
 
 ## Upcoming Features
 
@@ -72,7 +80,8 @@ We are actively working to enhance Supe Project Creator with new features and le
 
 ## Usage
 
-**Note**: JSR currently does not support NPX or BUNX-style direct execution, but `--global` installation may be available soon. Feel free to suggest a better approach if you find one.
+> [!IMPORTANT]  
+> JSR currently does not support NPX or BUNX-style direct execution, but `--global` installation may be available soon. Feel free to suggest a better approach if you find one.
 
 To start using Supe Project Creator, run the following commands:
 
@@ -107,6 +116,18 @@ node ./node_modules/@supeprojects/supe-project-creator --help
 ### Future Command (🤞):
 ```bash
 jsr supe-project-creator [options]
+
+# Windows Example:
+$env:npm_config_registry="https://your.custom.registry/"; npx -p @yourcompany/tools foo
+# Linux Example:
+npm_config_registry=https://your.custom.registry/ npx -p @yourcompany/tools foo
+
+# Almost Working!:
+$env:npm_config_registry="https://npm.jsr.io/@jsr/"
+npx supeprojects__supe-project-creator
+
+$env:npm_config_registry="https://npm.jsr.io/@jsr/"
+bunx supeprojects__supe-project-creator
 ```
 
 ## Options
@@ -269,6 +290,11 @@ We appreciate your contributions and look forward to hearing from you!
     - Explore HTTP/3.
     - Dev Plugins Ecosystem
     - Server integrations out of the box + Auto CORS setup + LLM Demo
+
+### Version 1.2.7 - Enhanced Documentation and NPX Preparation
+
+- **Added Informative Notes**: Included detailed notes to enhance user understanding and improve overall documentation quality.
+- **NPX Execution Preparation**: Made necessary adjustments to prepare the package for seamless execution via NPX, enhancing usability and accessibility.
 
 ### Version 1.2.6 - Additional Typo Fixes
 

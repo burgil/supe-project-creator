@@ -1,9 +1,10 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 
 /*
 * MIT
 * Enjoy
 * Made by Burgil
+* TODO: Add Deno Support
 
 bunx jsr publish
 or
@@ -22,7 +23,7 @@ import process from 'node:process';
 // Variables:
 let CleanProject = true;
 let projectName = 'example-project';
-const supeVersion = '1.2.6';
+const supeVersion = '1.2.7';
 const supeVersionDate = '16/10/2024';
 
 // Parse command line arguments
@@ -590,6 +591,7 @@ ${CleanProject ? '' : `
 }`}
 `);
 
+// TODO: Add Deno Support
 fs.writeFileSync(path.join(hotreloadDir, 'start.ts'), `import { $ } from "bun"
 import config from "./config"
 const packageJSON = await Bun.file('package.json').json()

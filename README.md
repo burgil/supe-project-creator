@@ -106,7 +106,7 @@ node ./node_modules/@supeprojects/supe-project-creator --help
 
 ### Future Command (🤞):
 ```bash
-jsx supe-project-creator [options]
+jsr supe-project-creator [options]
 ```
 
 ## Options
@@ -270,6 +270,10 @@ We appreciate your contributions and look forward to hearing from you!
     - Dev Plugins Ecosystem
     - Server integrations out of the box + Auto CORS setup + LLM Demo
 
+### Version 1.2.6 - Additional Typo Fixes
+
+- **Corrected Typos**: Identified and corrected minor typos.
+
 ### Version 1.2.5 - Additional README Polish
 
 - **README Refinements**: Implemented additional polish to the README, ensuring clarity and concision in its content.
@@ -332,7 +336,7 @@ We appreciate your contributions and look forward to hearing from you!
 
 ### Version 1.1.0 - Completed README
 
-- **Learning Milestone**: Finished understanding JSX and applied it to finalize the README structure.
+- **Learning Milestone**: Finished understanding JSR and applied it to finalize the README structure.
 
 ### Version 1.0.9 - Corrected Minor Typos
 
@@ -348,7 +352,7 @@ We appreciate your contributions and look forward to hearing from you!
 
 ### Version 1.0.6 - Refined Installation Instructions
 
-- **Cross-Runtime Support**: Updated the README to better reflect the cross-runtime nature of JSX, ensuring compatibility across environments.
+- **Cross-Runtime Support**: Updated the README to better reflect the cross-runtime nature of JSR, ensuring compatibility across environments.
 
 ### Version 1.0.5 - Global JSR Compatibility
 

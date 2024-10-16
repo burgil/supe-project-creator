@@ -14,9 +14,14 @@ Supe Project Creator is a project scaffolding tool that helps you create new pro
 ----------------
 
 *   Creates a new project with a basic structure
-*   Configures hot reloading for fast and efficient development
+*   Configures hot reloading for fast and efficient development, Only important files are watched, Fully configurable.
 *   Supports various options for customizing the project setup
-*   Will also supports Deno in next update, in addition to above mentioned runtimes
+*   Fully configurable - No third party modules
+*   TypeScript, TypeScript Everywhere. ESNext, ESM, Bun, Deno. We got it all.
+*   TypeScript error watcher
+*   Fast. Very fast start up time.
+*   Smart. Even the browser won't launch twice if it's already open.
+*   Will also supports Deno in next update.
 
 **Upcoming Features**
 --------------------
@@ -211,10 +216,11 @@ We appreciate your contributions and look forward to hearing from you!
 
 ---
 
-### Versions 1.0.1 - 1.1.5
+### Versions 1.0.1 - 1.1.6
 
 #### What's New?
 
+*   **1.1.6  Improved Key Features**: Improved the README file with up-to-date key features.
 *   **1.1.5 - Fixed More Typos**: Fixed more typos in the README file.
 *   **1.1.4 - Improved Updating Mechanism**: Added an important argument in the installation instruction to ensure new updates are always served in time.
 *   **1.1.3 - Finished Initial Release**: Fixed a relative path bug when creating the package.json in new projects.

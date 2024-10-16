@@ -1,11 +1,18 @@
 #!/usr/bin/env node
+// @ts-ignore
+import fs from 'node:fs'; // @ts-ignore
+import path from 'node:path'; // @ts-ignore
+import process from 'node:process';
 const argv: string[] = process.argv.slice(2); // Parse command line arguments
+
 /*
 * MIT
-* Enjoy
 * Made by Burgil
 * Dependencies: TypeScript
+* Enjoy
 * TODO: Add Deno Support
+* 
+* Publishing:
 * bunx jsr publish
 * or
 * npx jsr publish
@@ -13,12 +20,6 @@ const argv: string[] = process.argv.slice(2); // Parse command line arguments
 * deno publish
 */
 
-// @ts-ignore
-import fs from 'node:fs';
-// @ts-ignore
-import path from 'node:path';
-// @ts-ignore
-import process from 'node:process';
 
 // Variables:
 let CleanProject = true;

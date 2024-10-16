@@ -214,7 +214,7 @@ We appreciate your contributions and look forward to hearing from you!
 #### What's New?
 
 *   **1.1.0 - Finished README**: Finished learning how JSX works.
-*   **1.0.9 - Fixed Typos**: Fixed typos in the README file.
+*   **1.1.0 - Fixed Typos**: Fixed typos in the README file.
 *   **1.0.8 - Improved README**: Improved the README file, triple checked installation steps, added batteries included.
 *   **1.0.7 - Reduced usage-command length**: Reduced the length of the usage command.
 *   **1.0.6 - Fixed Installation Instructions**: Updated the README file to support the cross-runtime nature of JSX.

@@ -118,6 +118,22 @@ bun ./node_modules/@supeprojects/supe-project-creator --help
 
 ## Getting Started
 
+After creating a new project using the Supe Project Creator, you will first need to navigate to the newly created project directory before proceeding with the setup. This ensures you're working inside the correct folder where all project files are stored.
+
+For example, after running the command to create the project, navigate to the project folder:
+
+```bash
+cd "C:\Users\%username%\Desktop\my-supe-project"
+```
+
+or:
+
+```bash
+cd my-supe-project
+```
+
+Once you're inside the project directory, you can then follow the steps to install dependencies and start the development server:
+
 1. **Install Dependencies**:
 
 ```bash
@@ -129,6 +145,10 @@ bun install
 ```bash
 bun start
 ```
+
+After navigating to the project folder and running the command to start the development server with `bun start`, a new browser tab will open, directing you to `http://localhost:80` if it isn't already open. This allows you to immediately view and interact with your project in your web browser.
+
+This behavior is, of course, configurable in `hotreload/config.ts`, allowing you to customize the port or other settings according to your project's requirements.
 
 3. **Open your browser** and navigate to `http://localhost:80`.
 
@@ -218,9 +238,13 @@ We appreciate your contributions and look forward to hearing from you!
     - More AI Demos.
     - Streamlined installation.
 
+### Version 1.2.1 - Added Project Navigation Instructions
+
+- **Project Navigation**: Added instructions for users to navigate to the newly created project directory before running the installation and development commands, ensuring they operate within the correct context.
+
 ### Version 1.2.0 - Corrected README Formatting
 
-- **Lines Removed**: Removed the trailing lines in the README.
+- **Lines Removed**: Removed trailing lines from the README. 
 
 ### Version 1.1.9 - Updated README Format
 

@@ -22,7 +22,7 @@ import process from 'node:process';
 // Variables:
 let CleanProject = true;
 let projectName = 'example-project';
-const supeVersion = '1.0.7';
+const supeVersion = '1.0.8';
 const supeVersionDate = '16/10/2024';
 
 // Parse command line arguments
@@ -62,7 +62,7 @@ for (const arg of argv) {
     }
 }
 
-const outDir = projectName;
+const outDir = path.basename(projectName);
 if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir);
 } else {

@@ -69,22 +69,28 @@ jsx supe-project-creator [options]
 **Example Use Cases**
 --------------------
 
-*   Create a new project with a custom name:
+*   Create a new project with a custom name in a specific path:
 
 ```bash
-jsx supe-project-creator -n my-project
+bun ./node_modules/@supeprojects/supe-project-creator -n "C:\Users\%username%\Desktop\my-supe-project"
+```
+
+*   Create a new project folder with a custom name in the current directory:
+
+```bash
+bun ./node_modules/@supeprojects/supe-project-creator -n my-supe-project
 ```
 
 *   Create a demo project:
 
 ```bash
-jsx supe-project-creator --demo --name cat-dog-detector
+bun ./node_modules/@supeprojects/supe-project-creator --demo --name cat-dog-detector
 ```
 
 *   Display the help menu:
 
 ```bash
-jsx supe-project-creator --help
+bun ./node_modules/@supeprojects/supe-project-creator --help
 ```
 
 **Getting Started**
@@ -175,7 +181,31 @@ We appreciate your contributions and look forward to hearing from you!
 **Changelog**
 ----------
 
-### Versions 1.0.1 - 1.0.7
+### Versions 1.1.0
+
+#### What's New?
+
+*   **Not released yet**: TODO
+
+#### Changes
+
+*   No code changes were made in this version.
+
+#### Known Issues
+
+*   None reported.
+
+#### Contributors
+
+*   [Burgil]
+
+#### Released
+
+[16 October 2024]
+
+---
+
+### Versions 1.0.1 - 1.0.8
 
 #### What's New?
 
@@ -190,7 +220,7 @@ We appreciate your contributions and look forward to hearing from you!
 
 #### Changes
 
-*   No code changes were made in this version.
+*   **Fixed External Project Path Creation**: When project names contain an absolute path the program will crash when trying to create some of the files, this was fixed in the current patch.
 
 #### Known Issues
 
@@ -198,7 +228,7 @@ We appreciate your contributions and look forward to hearing from you!
 
 #### Contributors
 
-*   [Burgil] for adding the README file.
+*   [Burgil]
 
 #### Released
 

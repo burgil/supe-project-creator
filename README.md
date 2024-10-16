@@ -47,9 +47,9 @@ bunx jsr add @supeprojects/supe-project-creator
 ```
 
 ```bash
-bun ./node_modules/@supeprojects/supe-project-creator/supe-project-creator.js --help
-deno ./node_modules/@supeprojects/supe-project-creator/supe-project-creator.js --help
-node ./node_modules/@supeprojects/supe-project-creator/supe-project-creator.js --help
+bun ./node_modules/@supeprojects/supe-project-creator --help
+deno ./node_modules/@supeprojects/supe-project-creator --help
+node ./node_modules/@supeprojects/supe-project-creator --help
 ```
 
 In the future it might be possible to reduce the command length into something like: 🤞
@@ -175,10 +175,11 @@ We appreciate your contributions and look forward to hearing from you!
 **Changelog**
 ----------
 
-### Versions 1.0.1 - 1.0.5
+### Versions 1.0.1 - 1.0.6
 
 #### What's New?
 
+*   **Reduced usage-command length**: Reduced the length of the usage command.
 *   **Fixed Installation Instructions**: Updated the README file to support the cross-runtime nature of JSX.
 *   **JSR Global Compatibility**: Updated the package.json file with the initial configurations.
 *   **Contribution Guidelines**: Established clear guidelines for code style, commit messages, and PR labels to ensure consistency and quality in contributions.

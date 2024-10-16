@@ -37,7 +37,7 @@ These features are currently in development and will be released in future versi
 **Usage**
 ---------
 
-Currently, To use Supe Project Creator, simply run the following command:
+Currently, To use Supe Project Creator, simply run the following commands:
 
 ```bash
 mkdir supe-project-creator

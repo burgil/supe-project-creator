@@ -320,10 +320,13 @@ deno run bump.ts
 
 ## Changelog
 
+# Version 1.3.0 - Version Bump Script for Contributors
+
+- **Added Version Bump Script**: Implemented a simple script to streamline version bumping across multiple files, improving development efficiency.
+
 ### Version 1.2.9 - Enhanced Roadmap and Fixed Bugs
 
 - **Preparing for the Future**: Added more planned features for upcoming versions to enhance the project's roadmap.
-- **Added Version Bump Script**: Implemented a simple script to streamline version bumping across multiple files, improving development efficiency.
 - **Resolved GitHub Programming Language Misidentification**: Addressed an issue where GitHub falsely detected the project as 100% JavaScript due to the initial lines of code lacking TypeScript definitions. This was resolved by renaming `index.ts` and modifying the code to include TypeScript types within the first seven lines, ensuring accurate language detection.
 
 ### Version 1.2.8 - NPX Preparation

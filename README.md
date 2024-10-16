@@ -220,7 +220,7 @@ We appreciate your contributions and look forward to hearing from you!
 
 #### What's New?
 
-*   **1.1.6  Improved Key Features**: Improved the README file with up-to-date key features.
+*   **1.1.6 - Improved Key Features**: Improved the README file with up-to-date key features.
 *   **1.1.5 - Fixed More Typos**: Fixed more typos in the README file.
 *   **1.1.4 - Improved Updating Mechanism**: Added an important argument in the installation instruction to ensure new updates are always served in time.
 *   **1.1.3 - Finished Initial Release**: Fixed a relative path bug when creating the package.json in new projects.

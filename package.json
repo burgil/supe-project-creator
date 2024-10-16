@@ -1,0 +1,14 @@
+{
+  "name": "@supeprojects/supe-project-creator",
+  "version": "1.0.2",
+  "license": "MIT",
+  "module": "supe-project-creator.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "latest"
+  },
+  "bin": "./supe-project-creator"
+}

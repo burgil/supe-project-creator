@@ -5,6 +5,8 @@
 * Enjoy
 * Made by Burgil
 
+bunx jsr publish
+or
 npx jsr publish
 or
 deno publish
@@ -20,7 +22,7 @@ import process from 'node:process';
 // Variables:
 let CleanProject = true;
 let projectName = 'example-project';
-const supeVersion = '1.0.2';
+const supeVersion = '1.0.3';
 const supeVersionDate = '16/10/2024';
 
 // Parse command line arguments

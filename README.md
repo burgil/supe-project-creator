@@ -128,6 +128,10 @@ npx supeprojects__supe-project-creator
 
 $env:npm_config_registry="https://npm.jsr.io/@jsr/"
 bunx supeprojects__supe-project-creator
+
+# Without JSR: (Temporary solution until another method is discovered)
+bunx burgil/supe-project-creator
+npx github:burgil/supe-project-creator
 ```
 
 ## Options
@@ -290,6 +294,10 @@ We appreciate your contributions and look forward to hearing from you!
     - Explore HTTP/3.
     - Dev Plugins Ecosystem
     - Server integrations out of the box + Auto CORS setup + LLM Demo
+
+### Version 1.2.8 - NPX Preparation
+
+- **NPX Execution Preparation**: Preparing the package for seamless execution via NPX, Added a `bin` value in the `package.json` file.
 
 ### Version 1.2.7 - Enhanced Documentation and NPX Preparation
 

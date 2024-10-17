@@ -99,13 +99,13 @@ By doing so, you will ensure a smooth and successful execution of the scripts.
 To start using Supe Project Creator, run the following commands:
 
 ```bash
-deno run jsr:@supeprojects/supe-project-creator --demo --name cat-dog-detector
+deno jsr:@supeprojects/supe-project-creator --demo --name cat-dog-detector
 ```
 
 To view the available options for Supe Project Creator, run the following command:
 
 ```bash
-deno run jsr:@supeprojects/supe-project-creator --help
+deno jsr:@supeprojects/supe-project-creator --help
 ```
 
 ## Options
@@ -248,15 +248,20 @@ To run the bump version script in your own local environment, use one of the fol
 
 - To run with `bun`, execute: 
 ```bash
-bun run bump.ts
+bun bump.ts
 ```
 
 - To run with `deno`, execute: 
 ```bash
-deno run bump.ts
+deno bump.ts
 ```
+**Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.3.3 - Enhanced Readme and Minor Improvements
+
+- **Improved readability and documentation**: Refactored README for better structure, added clear section headings, and reorganized content for easier navigation.
 
 ### Version 1.3.2 - Improved Command and Readme
 

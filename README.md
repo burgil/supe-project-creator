@@ -290,6 +290,10 @@ deno bump.ts
 
 ## Changelog
 
+### Version 1.3.9 - Improved Bump Script
+
+- **Version Control Support for the Bump Script**: When `bun bump` is used the script will prompt to push into GitHub at the end, but if there are any pending changes it will ask you if you want to pull them first and let you know if there were conflicts while pushing, Otherwise it will use the bump message to commit a detailed commit into GitHub
+
 ### Version 1.3.8 - Fixed Docs
 
 - **Moved JSDocs**: The docs were moved to the correct place and should appear properly now on JSR

@@ -91,24 +91,48 @@ Before executing any scripts, please take a moment to:
 2. **Verify that you have installed** the required dependencies:
 	* `bun`
 	* `deno` (if applicable)
+	* `node`
+3. **Verify ESBuild Functionality** in Your Environment:
+	* Run the command `bunx esbuild --version` to check the installed version. At the time of writing, the expected output is `0.24.0`.
+	* You can also check this with `deno`, Run the command `deno npm:esbuild --version`, the expected output is:
+	`✅ Granted all env access.`
+	`✅ Granted all read access.`
+	`✅ Granted all run access.`
+	`0.24.0`
 
 By doing so, you will ensure a smooth and successful execution of the scripts.
 
 ## Usage
 
-To start using Supe Project Creator, run the following command:
+To start using Supe Project Creator, simply run the following command:
 
+### Create an AI Demo Project in the Current Working Directory:
 ```bash
-deno jsr:@supeprojects/supe-project-creator --demo --name cat-dog-detector
+deno jsr:@supeprojects/supe-project-creator --demo -n cat-dog-detector
 ```
+
+### Create a Clean Project in the Current Working Directory:
+```bash
+deno jsr:@supeprojects/supe-project-creator -n my-supe-project
+```
+
+### Create a Clean Project in a Specific Directory:
+```bash
+deno jsr:@supeprojects/supe-project-creator --name "C:\Users\%username%\Desktop\my-supe-project"
+```
+
+If you get any error related to `esbuild` during usage, Try to restart the terminal and try again, To avoid downloading dependencies it uses `bunx` (`NPX` Alternative) to fetch packages like `http-server`, `nodemon` and `esbuild`.
+
+> [!IMPORTANT]
+> Supe Project Creator does not require a separate installation step. Simply execute the command above to create a new project instantly. In future releases, it will also be available as a package, allowing you to write custom code that generates projects programmatically.
+
+## Options
 
 To view the available options for Supe Project Creator, run the following command:
 
 ```bash
 deno jsr:@supeprojects/supe-project-creator --help
 ```
-
-## Options
 
 - `-h`, `--help`: Displays help information.
 - `-v`, `--version`: Displays the version number.
@@ -117,12 +141,16 @@ deno jsr:@supeprojects/supe-project-creator --help
 
 ## Getting Started
 
-After creating a new project using the Supe Project Creator, you will first need to navigate to the newly created project directory before proceeding with the setup. This ensures you're working inside the correct folder where all project files are stored.
+After creating a new project using the Supe Project Creator, you will first need to navigate to the newly created project directory before proceeding with the setup:
 
-For example, after running the command to create the project, navigate to the project folder:
-
+### For a project created in a specific directory:
 ```bash
 cd "C:\Users\%username%\Desktop\my-supe-project"
+```
+
+### For a project created in the current working directory (e.g., AI demo):
+```bash
+cd cat-dog-detector
 ```
 
 Once you're inside the project directory, you can then follow the steps to install dependencies and start the development server:
@@ -131,12 +159,16 @@ Once you're inside the project directory, you can then follow the steps to insta
 
 ```bash
 bun install
+# or
+deno install # (Deno is not tested yet)
 ```
 
 2. **Start the Development Server**:
 
 ```bash
 bun start
+# or
+deno start # (Deno is not tested yet)
 ```
 
 After navigating to the project folder and running the command to start the development server with `bun start`, a new browser tab will open, directing you to `http://localhost` if it isn't already open. This allows you to immediately view and interact with your project in your web browser.
@@ -256,6 +288,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.3.5 - Fixed ESBuild Dependency
+
+- **Fixed Project Setup**: ESBuild was causing an unexpected issue when running for the first time, Notes were added.
 
 ### Version 1.3.4 - README File Optimization
 

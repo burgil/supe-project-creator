@@ -22,7 +22,7 @@ const argv: string[] = process.argv.slice(2); // Parse command line arguments
 // Variables:
 let CleanProject = true;
 let projectName = 'example-project';
-const supeVersion = '1.3.4';
+const supeVersion = '1.3.5';
 const supeVersionDate = '16/10/2024';
 
 // Loop through each argument
@@ -81,8 +81,9 @@ fs.writeFileSync(path.join(outDir, 'package.json'), `{
     "scripts": {
         "start": "bun hotreload/start.ts"
     },
-    "devDependencies": {${CleanProject ? '' : '\n\t\t"@mediapipe/tasks-vision": "^0.10.17",'}
-        "@types/bun": "latest"
+    "devDependencies": {${CleanProject ? '' : '\n\t"@mediapipe/tasks-vision": "^0.10.17",'}
+        "@types/bun": "latest",
+        "@types/node": "latest"
     },
     "peerDependencies": {
         "typescript": "latest"

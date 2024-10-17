@@ -96,58 +96,16 @@ By doing so, you will ensure a smooth and successful execution of the scripts.
 
 ## Usage
 
-> [!IMPORTANT]  
-> JSR currently does not support NPX or BUNX-style direct execution, but `--global` installation may be available soon. Feel free to suggest a better approach if you find one.
-
 To start using Supe Project Creator, run the following commands:
 
 ```bash
-mkdir supe-project-creator
-cd supe-project-creator
-bun init -y
-bunx jsr add @supeprojects/supe-project-creator@latest
+deno run jsr:@supeprojects/supe-project-creator --demo --name cat-dog-detector
 ```
-
-### Displaying Available Options
 
 To view the available options for Supe Project Creator, run the following command:
 
-#### Using Bun
 ```bash
-bun ./node_modules/@supeprojects/supe-project-creator --help
-```
-
-#### Using Deno
-```bash
-deno ./node_modules/@supeprojects/supe-project-creator --help
-```
-**Note:** Deno support is currently untested, but it will be fully supported in the future.
-
-#### Using Node
-```bash
-node ./node_modules/@supeprojects/supe-project-creator --help
-```
-**Note:** Node currently has limitations due to missing built-in TypeScript compatibility, but the above command will still work.
-
-### Future Command (🤞):
-```bash
-jsr supe-project-creator [options]
-
-# Windows Example:
-$env:npm_config_registry="https://your.custom.registry/"; npx -p @yourcompany/tools foo
-# Linux Example:
-npm_config_registry=https://your.custom.registry/ npx -p @yourcompany/tools foo
-
-# Almost Working!:
-$env:npm_config_registry="https://npm.jsr.io/@jsr/"
-npx supeprojects__supe-project-creator
-
-$env:npm_config_registry="https://npm.jsr.io/@jsr/"
-bunx supeprojects__supe-project-creator
-
-# Without JSR: (Temporary solution until another method is discovered)
-bunx burgil/supe-project-creator
-npx github:burgil/supe-project-creator
+deno run jsr:@supeprojects/supe-project-creator --help
 ```
 
 ## Options
@@ -156,26 +114,6 @@ npx github:burgil/supe-project-creator
 - `-v`, `--version`: Displays the version number.
 - `-n`, `--name <string>`: Sets the project name (default: `"example-project"`).
 - `-d`, `--demo`: Creates a demo project (default: `false`).
-
-## Example Use Cases
-
-- **Create a new project with a custom name at a specific path:**
-
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator -n "C:\Users\%username%\Desktop\my-supe-project"
-```
-
-- **Create a new project folder with a custom name in the current directory:**
-
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator -n my-supe-project
-```
-
-- **Create a demo project:**
-
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator --demo --name cat-dog-detector
-```
 
 ## Getting Started
 
@@ -320,6 +258,10 @@ deno run bump.ts
 
 ## Changelog
 
+### Version 1.3.2 - Improved Command and Readme
+
+- **Simplify usage and documentation**: Replaced lengthy command with concise alternative and revamped readme for enhanced user experience and clarity.
+
 ### Version 1.3.1 - Improved Version Bumper
 
 - **Enhanced version bumping system**: Implemented a user-interactive auto bump system that requests confirmation before bumping the minor or major version. Added feature to input brief and secondary descriptions of changes for the README.md file.
@@ -451,3 +393,79 @@ deno run bump.ts
 *Initial Release*
 
 Note: Since this is the first version of the changelog, there are no previous versions to report on. Future updates will include detailed information about changes, bug fixes, and new features.
+
+## Old Usage
+
+> [!IMPORTANT]  
+> JSR currently does not support NPX or BUNX-style direct execution, but `--global` installation may be available soon. Feel free to suggest a better approach if you find one.
+
+To start using Supe Project Creator, run the following commands:
+
+```bash
+mkdir supe-project-creator
+cd supe-project-creator
+bun init -y
+bunx jsr add @supeprojects/supe-project-creator@latest
+```
+
+### Displaying Available Options
+
+To view the available options for Supe Project Creator, run the following command:
+
+#### Using Bun
+```bash
+bun ./node_modules/@supeprojects/supe-project-creator --help
+```
+
+#### Using Deno
+```bash
+deno ./node_modules/@supeprojects/supe-project-creator --help
+```
+**Note:** Deno support is currently untested, but it will be fully supported in the future.
+
+#### Using Node
+```bash
+node ./node_modules/@supeprojects/supe-project-creator --help
+```
+**Note:** Node currently has limitations due to missing built-in TypeScript compatibility, but the above command will still work.
+
+### Future Command (🤞):
+```bash
+jsr supe-project-creator [options]
+
+# Windows Example:
+$env:npm_config_registry="https://your.custom.registry/"; npx -p @yourcompany/tools foo
+# Linux Example:
+npm_config_registry=https://your.custom.registry/ npx -p @yourcompany/tools foo
+
+# Almost Working!:
+$env:npm_config_registry="https://npm.jsr.io/@jsr/"
+npx supeprojects__supe-project-creator
+
+$env:npm_config_registry="https://npm.jsr.io/@jsr/"
+bunx supeprojects__supe-project-creator
+
+# Without JSR: (Temporary solution until another method is discovered)
+bunx burgil/supe-project-creator
+npx github:burgil/supe-project-creator
+```
+
+### Old Example
+
+- **Create a new project with a custom name at a specific path:**
+
+```bash
+bun ./node_modules/@supeprojects/supe-project-creator -n "C:\Users\%username%\Desktop\my-supe-project"
+```
+
+- **Create a new project folder with a custom name in the current directory:**
+
+```bash
+bun ./node_modules/@supeprojects/supe-project-creator -n my-supe-project
+```
+
+- **Create a demo project:**
+
+```bash
+bun ./node_modules/@supeprojects/supe-project-creator --demo --name cat-dog-detector
+```

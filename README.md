@@ -288,6 +288,10 @@ deno bump.ts
 
 ## Changelog
 
+### Version 1.4.6 - Added colors to the version bumper logs
+
+- **Improved Version Bumper**: Added colors to console logs and optimized the algorithm
+
 ### Version 1.4.5 - Added Code of Conduct
 
 - **New Rules**: It is important that new contributors read the code of conduct if they plan to contribute

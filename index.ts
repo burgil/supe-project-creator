@@ -50,7 +50,7 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = 'example-project';
-    const supeVersion = '1.5.1';
+    const supeVersion = '1.5.2';
     const supeVersionDate = '2024-10-16';
     if (argv.length === 0) argv.push('--help');
 

@@ -4,11 +4,15 @@ A simple tool for creating modern web projects with batteries included.
 
 ![Supe Project Creator - AI Demo Project](https://github.com/burgil/burgil/blob/main/public/Supe-Project-Creator-Gif.gif?raw=true)
 
+This is the first package under the @supeprojects scope, with more planned for the future.
+
 ## Overview - What is Supe Project Creator?
 
-Supe Project Creator is a simple tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. 
+Supe Project Creator is a simple tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. But there's a catch - the generated project has no dependencies, a fresh start. All the source code that runs the project will be waiting for you in the generated project folder, no strings attached. It's as simple as you can get.
 
 [JSR](https://jsr.io/@supeprojects/supe-project-creator) - [Source Code](https://github.com/burgil/supe-project-creator) - [Known Issues](https://github.com/burgil/supe-project-creator/issues) - [Docs/Wiki](https://github.com/burgil/supe-project-creator/wiki)
+
+For a bit of technical detail: how it does all of that is thanks to the built-in TypeScript compilers in the new runtimes. To avoid downloading dependencies, it uses `bunx` (an `npx` alternative) to fetch packages like `http-server`, `nodemon`, and `esbuild`.
 
 > [!NOTE]  
 > The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework, such as Express.JS, FastAPI, Cloudflare Workers, etc.
@@ -300,6 +304,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.5.2 - README Enhancements, bun start Command, and New Test Script
+
+- **Improved README, added bun start command, and introduced a tests.ts script for testing.**: The README has been updated for clearer guidance. We've added the bun start command to streamline project execution and included a tests.ts script to help users begin testing their project right away.
 
 ### Version 1.5.1 - Require Project Name and Deno Compatibility
 

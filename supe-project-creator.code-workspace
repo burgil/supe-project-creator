@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"name": "SPC",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"README.md": false,
+			"supe-project-creator.code-workspace": false,
+			// --
+			"package.json": true,
+			"deno.json": true,
+			"bun.lockb": true,
+			"deno.lock": true,
+			// --
+			"jsr.json": true,
+			// --
+			"CODE_OF_CONDUCT.md": true,
+			"LICENSE": true,
+			".gitignore": true,
+			".gitattributes": true,
+			".github": true,
+			"node_modules": true,
+			"tsconfig.tsbuildinfo": true,
+		}
+	}
+}

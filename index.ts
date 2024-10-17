@@ -50,7 +50,7 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = 'example-project';
-    const supeVersion = '1.4.7';
+    const supeVersion = '1.4.8';
     const supeVersionDate = '16/10/2024';
 
     // Loop through each argument
@@ -75,6 +75,7 @@ export default function SupeProjectCreator(argv: string[]): void {
             const nextArg = argv[argv.indexOf(arg) + 1];
             if (nextArg && !nextArg.startsWith('-')) {
                 projectName = nextArg;
+                // TODO: validations - no spaces - no special characters - lowercase?
             } else {
                 console.error('\x1b[31m%s\x1b[0m', 'Error: Missing project name');
                 process.exit(1);
@@ -184,7 +185,7 @@ You have full control over all the source files of almost everything you see, Th
 		"files.exclude": {
 			"package.json": false,
 			"tsconfig.json": false,
-			"vs.code-workspace": false,
+			"${projectName}.code-workspace": false,
 			// --
 			"README.md": true,
 			"bun.lockb": true,

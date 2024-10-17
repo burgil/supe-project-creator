@@ -6,12 +6,9 @@ A simple tool for creating modern web projects with batteries included.
 
 ## Overview - What is Supe Project Creator?
 
-[JSR](https://jsr.io/@supeprojects/supe-project-creator)
-[Source Code](https://github.com/burgil/supe-project-creator)
-[Known Issues](https://github.com/burgil/supe-project-creator/issues)
-[Docs/Wiki](https://github.com/burgil/supe-project-creator/wiki)
-
 Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. 
+
+[JSR](https://jsr.io/@supeprojects/supe-project-creator) - [Source Code](https://github.com/burgil/supe-project-creator) - [Known Issues](https://github.com/burgil/supe-project-creator/issues) - [Docs/Wiki](https://github.com/burgil/supe-project-creator/wiki)
 
 > [!NOTE]  
 > The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework, such as Express.JS, FastAPI, Cloudflare Workers, etc.
@@ -186,16 +183,16 @@ Supe Project Creator organizes your project using the following structure:
 - `public`: Public-facing files, including `index.html`.
 - `hotreload`: Configuration and scripts for hot reloading.
 
-### Recommended Workspace Configuration
+### Recommended VSCode Workspace Configuration
 
 To enhance your development experience, Use the provided recommended `.code-workspace` file named after your project. This configuration excludes unnecessary files from view, allowing you to focus on your code.
 
-**Opening the Workspace:**
+**Opening the VSCode Workspace:**
 
 1. Locate the `<project-name>.code-workspace` file in your project directory.
 2. Double-click the file to open it in VS Code, or find "Open Workspace" inside VS Code.
 
-**Benefits of Using the Recommended Workspace:**
+**Benefits of Using the Recommended VSCode Workspace:**
 
 * Streamlined view: Concentrate on your project's essential files, without clutter from `node_modules` and other irrelevant directories.
 * Improved performance: By excluding unnecessary files, you'll experience faster loading times and more efficient search results.
@@ -303,6 +300,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.4.8 - Added lock files and VSCode Workspace
+
+- **Improved Experience**: The project now have a new VSCode Workspace that hides all the unnecessary files from the view
 
 ### Version 1.4.7 - Added Screenshots
 

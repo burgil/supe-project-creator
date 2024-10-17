@@ -260,7 +260,8 @@ We welcome contributions from the community! Whether it's a new feature idea, bu
 1.  **Fork the Repository**: Fork our repository to create a copy of the code.
 2.  **Create a Branch**: Create a new branch for your changes.
 3.  **Make Changes**: Make your changes and commit them.
-4.  **Submit a PR**: Submit a pull request with your changes.
+4.  **Lint & Bump**: Bump the version using `bun bump` and lint the project with `deno lint` to find important issues.
+5.  **Submit a PR**: Submit a pull request with your changes.
 
 We appreciate your contributions and look forward to hearing from you!
 
@@ -278,7 +279,7 @@ To run the bump version script in your own local environment, use one of the fol
 
 - To run with `bun`, execute: 
 ```bash
-bun bump.ts
+bun bump
 ```
 
 - To run with `deno`, execute: 
@@ -288,6 +289,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.3.6 - Fixed linting and added default export
+
+- **Deno Lint and Default Export**: Fixed linting issues and added support for packages and cli at the same time
 
 ### Version 1.3.5 - Fixed ESBuild Dependency
 

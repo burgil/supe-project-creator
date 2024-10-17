@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 const argv: string[] = process.argv.slice(2); // Parse command line arguments
-
 /*
 * MIT
 * Made by Burgil
@@ -17,64 +16,63 @@ const argv: string[] = process.argv.slice(2); // Parse command line arguments
 * or
 * deno publish
 */
+function main() {
+    // Variables:
+    let CleanProject = true;
+    let projectName = 'example-project';
+    const supeVersion = '1.3.6';
+    const supeVersionDate = '16/10/2024';
 
-
-// Variables:
-let CleanProject = true;
-let projectName = 'example-project';
-const supeVersion = '1.3.5';
-const supeVersionDate = '16/10/2024';
-
-// Loop through each argument
-for (const arg of argv) {
-    if (arg === '-v' || arg === '--version') {
-        console.log(`Supe Project Creator - Version: ${supeVersion} - ${supeVersionDate}`);
-        process.exit(0);
-    } else if (arg === '-h' || arg === '--help') {
-        console.log(`Supe Project Creator - Version: ${supeVersion} - ${supeVersionDate}`);
-        console.log('\x1b[36m%s\x1b[0m', 'Usage:');
-        console.log('  example-project [options]');
-        console.log('');
-        console.log('\x1b[36m%s\x1b[0m', 'Options:');
-        console.log('  -v, --version        Display version number');
-        console.log('  -h, --help           Display this help message');
-        console.log('  -n, --name <string>  Set project name (default: example-project)');
-        console.log('  -d, --demo          Demo project (default: false)');
-        process.exit(0);
-    } else if (arg === '-d' || arg === '--demo') {
-        CleanProject = false;
-    } else if (arg === '-n' || arg === '--name') {
-        const nextArg = argv[argv.indexOf(arg) + 1];
-        if (nextArg && !nextArg.startsWith('-')) {
-            projectName = nextArg;
+    // Loop through each argument
+    for (const arg of argv) {
+        if (arg === '-v' || arg === '--version') {
+            console.log(`Supe Project Creator - Version: ${supeVersion} - ${supeVersionDate}`);
+            process.exit(0);
+        } else if (arg === '-h' || arg === '--help') {
+            console.log(`Supe Project Creator - Version: ${supeVersion} - ${supeVersionDate}`);
+            console.log('\x1b[36m%s\x1b[0m', 'Usage:');
+            console.log('  example-project [options]');
+            console.log('');
+            console.log('\x1b[36m%s\x1b[0m', 'Options:');
+            console.log('  -v, --version        Display version number');
+            console.log('  -h, --help           Display this help message');
+            console.log('  -n, --name <string>  Set project name (default: example-project)');
+            console.log('  -d, --demo          Demo project (default: false)');
+            process.exit(0);
+        } else if (arg === '-d' || arg === '--demo') {
+            CleanProject = false;
+        } else if (arg === '-n' || arg === '--name') {
+            const nextArg = argv[argv.indexOf(arg) + 1];
+            if (nextArg && !nextArg.startsWith('-')) {
+                projectName = nextArg;
+            } else {
+                console.error('\x1b[31m%s\x1b[0m', 'Error: Missing project name');
+                process.exit(1);
+            }
         } else {
-            console.error('\x1b[31m%s\x1b[0m', 'Error: Missing project name');
-            process.exit(1);
-        }
-    } else {
-        if (arg.startsWith('-')) {
-            console.error('\x1b[31m%s\x1b[0m', `Error: Unknown option ${arg}`);
-            process.exit(1);
+            if (arg.startsWith('-')) {
+                console.error('\x1b[31m%s\x1b[0m', `Error: Unknown option ${arg}`);
+                process.exit(1);
+            }
         }
     }
-}
 
-const outDir = projectName;
-projectName = path.basename(projectName);
-if (!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir);
-} else {
-    console.error('\x1b[31m%s\x1b[0m', `Error: Folder already exist ${outDir}`);
-    process.exit(1);
-}
-const hotreloadDir = path.join(outDir, 'hotreload');
-if (!fs.existsSync(hotreloadDir)) fs.mkdirSync(hotreloadDir);
-const publicDir = path.join(outDir, 'public');
-if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir);
-const srcDir = path.join(outDir, 'src');
-if (!fs.existsSync(srcDir)) fs.mkdirSync(srcDir);
+    const outDir = projectName;
+    projectName = path.basename(projectName);
+    if (!fs.existsSync(outDir)) {
+        fs.mkdirSync(outDir);
+    } else {
+        console.error('\x1b[31m%s\x1b[0m', `Error: Folder already exist ${outDir}`);
+        process.exit(1);
+    }
+    const hotreloadDir = path.join(outDir, 'hotreload');
+    if (!fs.existsSync(hotreloadDir)) fs.mkdirSync(hotreloadDir);
+    const publicDir = path.join(outDir, 'public');
+    if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir);
+    const srcDir = path.join(outDir, 'src');
+    if (!fs.existsSync(srcDir)) fs.mkdirSync(srcDir);
 
-fs.writeFileSync(path.join(outDir, 'package.json'), `{
+    fs.writeFileSync(path.join(outDir, 'package.json'), `{
     "name": "${projectName}",
     "module": "index.ts",
     "type": "module",
@@ -91,7 +89,7 @@ fs.writeFileSync(path.join(outDir, 'package.json'), `{
 }
 `);
 
-fs.writeFileSync(path.join(outDir, 'README.md'), `# ${projectName}
+    fs.writeFileSync(path.join(outDir, 'README.md'), `# ${projectName}
 
 ## This project was created using Supe Project Creator v${supeVersion}
 
@@ -115,7 +113,7 @@ You have full control over all the source files of almost everything you see, Th
 
 `);
 
-fs.writeFileSync(path.join(outDir, 'tsconfig.json'), `{
+    fs.writeFileSync(path.join(outDir, 'tsconfig.json'), `{
   "include": ["src/**/*", "hotreload/**/*"],
   "compilerOptions": {
     // Enable latest features
@@ -145,7 +143,7 @@ fs.writeFileSync(path.join(outDir, 'tsconfig.json'), `{
 }
 `);
 
-fs.writeFileSync(path.join(outDir, `${projectName}.code-workspace`), `{
+    fs.writeFileSync(path.join(outDir, `${projectName}.code-workspace`), `{
 	"folders": [
 		{
 			"name": "▪◾",
@@ -168,7 +166,7 @@ fs.writeFileSync(path.join(outDir, `${projectName}.code-workspace`), `{
 }
 `);
 
-fs.writeFileSync(path.join(outDir, '.gitignore'), `# Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
+    fs.writeFileSync(path.join(outDir, '.gitignore'), `# Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
 # Logs
 
@@ -345,7 +343,7 @@ dist
 .DS_Store
 `);
 
-fs.writeFileSync(path.join(srcDir, 'index.ts'), CleanProject ? '' : `import { ObjectDetector, FilesetResolver, type ObjectDetectorResult } from "@mediapipe/tasks-vision"; // 19.4MB
+    fs.writeFileSync(path.join(srcDir, 'index.ts'), CleanProject ? '' : `import { ObjectDetector, FilesetResolver, type ObjectDetectorResult } from "@mediapipe/tasks-vision"; // 19.4MB
 
 let fileIndex = 0;
 document.getElementById('fileInput')?.addEventListener('change', handleFileInput); // Keep first to allow uploads during loading times
@@ -468,7 +466,7 @@ function handleFileInput(event: Event) {
 }
 `);
 
-fs.writeFileSync(path.join(publicDir, 'index.html'), `<!DOCTYPE html>
+    fs.writeFileSync(path.join(publicDir, 'index.html'), `<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -509,7 +507,7 @@ fs.writeFileSync(path.join(publicDir, 'index.html'), `<!DOCTYPE html>
 </html>
 `);
 
-fs.writeFileSync(path.join(publicDir, 'style.css'), `/* General Styles */
+    fs.writeFileSync(path.join(publicDir, 'style.css'), `/* General Styles */
 img {
 	width: 100%;
 }
@@ -588,8 +586,8 @@ ${CleanProject ? '' : `
 }`}
 `);
 
-// TODO: Add Deno Support
-fs.writeFileSync(path.join(hotreloadDir, 'start.ts'), `import { $ } from "bun"
+    // TODO: Add Deno Support
+    fs.writeFileSync(path.join(hotreloadDir, 'start.ts'), `import { $ } from "bun"
 import config from "./config"
 const packageJSON = await Bun.file('package.json').json()
 
@@ -627,7 +625,7 @@ await Promise.all([
 
 `);
 
-fs.writeFileSync(path.join(hotreloadDir, 'config.ts'), `export default {
+    fs.writeFileSync(path.join(hotreloadDir, 'config.ts'), `export default {
     port: 80,
     hotreloadPort: 49142,
     debug: false,
@@ -660,7 +658,7 @@ fs.writeFileSync(path.join(hotreloadDir, 'config.ts'), `export default {
 };
 `);
 
-fs.writeFileSync(path.join(hotreloadDir, 'client.ts'), `import config from "./config";
+    fs.writeFileSync(path.join(hotreloadDir, 'client.ts'), `import config from "./config";
 
 function createWebSocket() {
   const ws = new WebSocket(\`\${config.secure ? 'wss' : 'ws'}://\${config.address}:\${config.hotreloadPort}\`);
@@ -698,7 +696,7 @@ if (config.autoFixCSS) {
 }
 `);
 
-fs.writeFileSync(path.join(hotreloadDir, 'server.ts'), `import type Message from "ws"
+    fs.writeFileSync(path.join(hotreloadDir, 'server.ts'), `import type Message from "ws"
 import { WebSocketServer } from 'ws';
 import { exec } from 'node:child_process';
 import os from 'node:os';
@@ -753,7 +751,7 @@ if (config.browser) {
 }
 `);
 
-fs.writeFileSync(path.join(hotreloadDir, 'refresh.ts'), `import config from "./config";
+    fs.writeFileSync(path.join(hotreloadDir, 'refresh.ts'), `import config from "./config";
 
 if (!config.hotreload) process.exit();
 
@@ -776,3 +774,9 @@ const timer = setInterval(() => {
     if (!waiting) clearInterval(timer);
 }, 100);
 `);
+
+}
+
+// P/CLI - A half package half command line interface hybrid
+if (argv.length > 0) main();
+export default main;

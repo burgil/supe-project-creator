@@ -1,9 +1,12 @@
 {
   "name": "supe-project-creator",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "license": "MIT",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "bump": "bun bump.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/node": "latest"

@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import * as readline from 'node:readline';
+import process from "node:process";
 
 const bump_files: {
     [key: string]: {
@@ -28,7 +29,7 @@ const packageJsonPath = './package.json';
 const MAX_PATCH_VERSION = 10;
 const MAX_MINOR_VERSION = 10;
 
-async function askForConfirmation(question: string): Promise<boolean> {
+function askForConfirmation(question: string): Promise<boolean> {
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout

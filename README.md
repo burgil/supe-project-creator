@@ -92,7 +92,7 @@ Before executing any scripts, please take a moment to:
 1. **Read this entire document** to understand the necessary steps and requirements.
 2. **Verify that you have installed** the required dependencies:
 	* `bun`
-	* `deno 2` (if applicable)
+	* `deno 2`
 	* `node`
 3. **Verify ESBuild Functionality** in Your Environment:
 	* Run the command `bunx esbuild --version` to check the installed version. At the time of writing, the expected output is `0.24.0`.
@@ -300,6 +300,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.5.0 - Improved Project Creation and Validation
+
+- **Added project name validation and clear setup instructions**: Supe Project Creator now validates project names and provides colored console logs for guidance.
 
 ### Version 1.4.9 - Improved README
 

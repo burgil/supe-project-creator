@@ -50,8 +50,8 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = 'example-project';
-    const supeVersion = '1.4.9';
-    const supeVersionDate = '16/10/2024';
+    const supeVersion = '1.5.0';
+    const supeVersionDate = '2024-10-16';
 
     // Loop through each argument
     for (const arg of argv) {
@@ -74,8 +74,13 @@ export default function SupeProjectCreator(argv: string[]): void {
         } else if (arg === '-n' || arg === '--name') {
             const nextArg = argv[argv.indexOf(arg) + 1];
             if (nextArg && !nextArg.startsWith('-')) {
-                projectName = nextArg;
-                // TODO: validations - no spaces - no special characters - lowercase?
+                const validProjectName = /^[a-z0-9_-]+$/.test(nextArg);
+                if (validProjectName) {
+                    projectName = nextArg.toLowerCase();
+                } else {
+                    console.error('\x1b[31m%s\x1b[0m', 'Error: Project name can only contain lowercase letters, numbers, hyphens, and underscores.');
+                    process.exit(1);
+                }
             } else {
                 console.error('\x1b[31m%s\x1b[0m', 'Error: Missing project name');
                 process.exit(1);
@@ -806,6 +811,11 @@ const timer = setInterval(() => {
 }, 100);
 `);
 
+    console.log('\x1b[32m%s\x1b[0m', `Project has been created successfully at: ${path.resolve(outDir)}`);
+    console.log('\x1b[36m%s\x1b[0m', '\nTo get started:');
+    console.log('\x1b[36m%s\x1b[0m', `  cd ${projectName}`);
+    console.log('\x1b[36m%s\x1b[0m', '  bun install');
+    console.log('\x1b[36m%s\x1b[0m', '  bun start');
 }
 
 // P/CLI - A half package half command line interface hybrid

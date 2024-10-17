@@ -14,7 +14,7 @@ const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely d
  *
  * Supe Project Creator is a simple tool designed to help you build modern web applications quickly and efficiently. 
  * It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow.
- * But there's a catch — the generated project has no dependencies, offering a fresh start. All the source code that runs the project will be 
+ * But there's a catch - the generated project has no dependencies, offering a fresh start. All the source code that runs the project will be 
  * waiting for you in the generated project folder, no strings attached. It's as simple as you can get.
  *
  * **NOTE**: The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework,

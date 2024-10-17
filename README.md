@@ -5,9 +5,9 @@ A simple tool for creating modern web projects with batteries included.
 [JSR](https://jsr.io/@supeprojects/supe-project-creator)
 
 > [!WARNING]  
-> Deno support is currently untested for this package and not recommended for use at this time.
+> Deno support for this package is currently untested, but it is being actively worked on.
 
-## Overview
+## Overview - What is Supe Project Creator?
 
 Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. 
 
@@ -30,7 +30,7 @@ With Supe Project Creator, you can concentrate on what matters most – building
 > [!CAUTION]
 > The package is not production-ready yet.
 
-## Key Features
+## Key Features - What can Supe Project Creator do?
 
 ### 1. **Lightning-Fast Project Setup**
 Quickly create new projects with our intuitive scaffolding tool. Start with a pre-configured project structure, hot reloading, and optimized development tools.
@@ -56,7 +56,7 @@ Eliminate unnecessary browser launches and avoid cumbersome manual configuration
 > [!TIP]
 > Wait until v2.0.0 drops!
 
-## Upcoming Features
+## Upcoming Features - What is planned for the future of Supe Project Creator?
 
 ### Roadmap
 
@@ -83,7 +83,7 @@ I'm actively working to enhance Supe Project Creator with new features and learn
 
 **These features are in active development, and your feedback is always welcome!**
 
-## Prerequisites
+## Prerequisites - What do you need to run Supe Project Creator?
 
 Before executing any scripts, please take a moment to:
 
@@ -102,7 +102,7 @@ Before executing any scripts, please take a moment to:
 
 By doing so, you will ensure a smooth and successful execution of the scripts.
 
-## Usage
+## 🛠 Getting Started - Usage - Quickstart - Tutorial
 
 To start using Supe Project Creator, simply run the following command:
 
@@ -126,29 +126,14 @@ If you get any error related to `esbuild` during usage, Try to restart the termi
 > [!IMPORTANT]
 > Supe Project Creator does not require a separate installation step. Simply execute the command above to create a new project instantly. In future releases, it will also be available as a package, allowing you to write custom code that generates projects programmatically.
 
-## Options
-
-To view the available options for Supe Project Creator, run the following command:
-
-```bash
-deno jsr:@supeprojects/supe-project-creator --help
-```
-
-- `-h`, `--help`: Displays help information.
-- `-v`, `--version`: Displays the version number.
-- `-n`, `--name <string>`: Sets the project name (default: `"example-project"`).
-- `-d`, `--demo`: Creates a demo project (default: `false`).
-
-## Getting Started
-
 After creating a new project using the Supe Project Creator, you will first need to navigate to the newly created project directory before proceeding with the setup:
 
-### For a project created in a specific directory:
+#### For a project created in a specific directory:
 ```bash
 cd "C:\Users\%username%\Desktop\my-supe-project"
 ```
 
-### For a project created in the current working directory (e.g., AI demo):
+#### For a project created in the current working directory (e.g., AI demo):
 ```bash
 cd cat-dog-detector
 ```
@@ -175,7 +160,20 @@ After navigating to the project folder and running the command to start the deve
 
 This behavior is, of course, configurable in `hotreload/config.ts`, allowing you to customize the port or other settings according to your project's requirements.
 
-## Project Structure
+## Help Options
+
+To view the available options for Supe Project Creator, run the following command:
+
+```bash
+deno jsr:@supeprojects/supe-project-creator --help
+```
+
+- `-h`, `--help`: Displays help information.
+- `-v`, `--version`: Displays the version number.
+- `-n`, `--name <string>`: Sets the project name (default: `"example-project"`).
+- `-d`, `--demo`: Creates a demo project (default: `false`).
+
+## Project Structure - What generated projects look like in Supe Project Creator?
 
 Supe Project Creator organizes your project using the following structure:
 
@@ -223,15 +221,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-## Contributors
+## Contributors - Who helped build Supe Project Creator?
 
 - **Burgil**
 
-## Released
+## Released - When Supe Project Creater was released?
 
 - **16 October 2024**
 
-## Contributing and Feedback
+## Contributing and Feedback - How to help me develop Supe Project Creator?
 
 Contributions are welcome from the community! Whether it's a new feature idea, bug fix, or documentation improvement, I'd love to hear from you.
 
@@ -289,6 +287,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.4.5 - Added Code of Conduct
+
+- **New Rules**: It is important that new contributors read the code of conduct if they plan to contribute
 
 ### Version 1.4.4 - Fixed Version Bumper
 
@@ -530,7 +532,7 @@ bunx burgil/supe-project-creator
 npx github:burgil/supe-project-creator
 ```
 
-### Old Example
+### Old Examples
 
 - **Create a new project with a custom name at a specific path:**
 

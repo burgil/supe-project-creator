@@ -2,12 +2,14 @@
 
 A simple tool for creating modern web projects with batteries included.
 
-[JSR](https://jsr.io/@supeprojects/supe-project-creator)
-
-> [!WARNING]  
-> Deno support for this package is currently untested, but it is being actively worked on.
+![Supe Project Creator - AI Demo Project](https://github.com/burgil/burgil/blob/main/public/Supe-Project-Creator-Gif.gif?raw=true)
 
 ## Overview - What is Supe Project Creator?
+
+[JSR](https://jsr.io/@supeprojects/supe-project-creator)
+[Source Code](https://github.com/burgil/supe-project-creator)
+[Known Issues](https://github.com/burgil/supe-project-creator/issues)
+[Docs/Wiki](https://github.com/burgil/supe-project-creator/wiki)
 
 Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. 
 
@@ -29,6 +31,9 @@ With Supe Project Creator, you can concentrate on what matters most – building
 
 > [!CAUTION]
 > The package is not production-ready yet.
+
+> [!WARNING]  
+> Deno support for this package is currently untested, but it is being actively worked on.
 
 ## Key Features - What can Supe Project Creator do?
 
@@ -270,6 +275,17 @@ As a contributor to this project, you may need to update the version number of y
 
 The `bump.ts` script is executed by either `bun` or `deno` to increment the version number of a project, by updating the relevant files such as `package.json`.
 
+Automations. Algorithms. Everywhere.
+
+![Bump Version Script](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot1.png?raw=true)
+
+**Inspecting the Final Commit of the Automation Script:**
+---------------
+
+The following screenshots demonstrate the changes made by the version bump script:
+
+![Bump Version Script Commit Example - README.md](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot2.png?raw=true) ![Bump Version Script Commit Example - index.ts](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot3.png?raw=true) ![Bump Version Script Commit Example - jsr.json](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot4.png?raw=true) ![Bump Version Script Commit Example - package.json](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot5.png?raw=true)
+
 **Running the Bump Version Script**
 ---------------
 
@@ -287,6 +303,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.4.7 - Added Screenshots
+
+- **New README Screenshots and GIF**: Who doesn't like screenshots and GIFs, added some preview screenshots hosted in my profile repo (not on JSR)
 
 ### Version 1.4.6 - Added colors to the version bumper logs
 

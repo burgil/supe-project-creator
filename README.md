@@ -90,7 +90,7 @@ Before executing any scripts, please take a moment to:
 1. **Read this entire document** to understand the necessary steps and requirements.
 2. **Verify that you have installed** the required dependencies:
 	* `bun`
-	* `deno` (if applicable)
+	* `deno 2` (if applicable)
 	* `node`
 3. **Verify ESBuild Functionality** in Your Environment:
 	* Run the command `bunx esbuild --version` to check the installed version. At the time of writing, the expected output is `0.24.0`.
@@ -289,6 +289,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.3.8 - Fixed Docs
+
+- **Moved JSDocs**: The docs were moved to the correct place and should appear properly now on JSR
 
 ### Version 1.3.7 - Added JSDocs
 

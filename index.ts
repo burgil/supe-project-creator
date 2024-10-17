@@ -1,26 +1,56 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-const argv: string[] = process.argv.slice(2); // Parse command line arguments
-/*
-* MIT
-* Made by Burgil
-* Dependencies: TypeScript
-* Enjoy
-* TODO: Add Deno Support
-* 
-* Publishing: (Publishing locally is disabled for security)
-* bunx jsr publish
-* or
-* npx jsr publish
-* or
-* deno publish
-*/
-function SupeProjectCreator(): void {
+const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely detected language on GitHub
+
+/**
+ * # Supe Project Creator
+ *
+ * A powerful tool for creating modern web projects with batteries included.
+ *
+ * [JSR](https://jsr.io/@supeprojects/supe-project-creator)
+ *
+ * ## Overview
+ *
+ * Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently.
+ * It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow.
+ *
+ * **NOTE**: The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework,
+ * such as Express.JS, FastAPI, Cloudflare Workers, etc.
+ *
+ * ## License
+ *
+ * MIT
+ *
+ * ## Credits
+ *
+ * Made by Burgil
+ *
+ * ## Usage
+ *
+ * To use Supe Project Creator, simply run the `main` function with the desired command line arguments.
+ *
+ * @example Usage
+ * 
+ * ```bash
+ * deno jsr:@supeprojects/supe-project-creator -n my-supe-project
+ * ```
+ * or
+ * ```bash
+ * deno jsr:@supeprojects/supe-project-creator --demo -n cat-dog-detector
+ * ```
+ *
+ * ## TODO
+ *
+ * - Add Deno Support
+ *
+ * @param {string[]} argv - Command line arguments
+ */
+export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = 'example-project';
-    const supeVersion = '1.3.7';
+    const supeVersion = '1.3.8';
     const supeVersionDate = '16/10/2024';
 
     // Loop through each argument
@@ -599,7 +629,7 @@ if (!packageJSON.module.endsWith('.ts')) {
 const bundle = (input: string, output: string) => \`\${input} --outfile=\${output} --bundle --platform=browser --format=esm --target=\${config.target}\${config.minify ? ' --minify' : ''}\`
 const index = bundle(\`\${config.paths.srcFolder}/\${packageJSON.module}\`, \`\${config.paths.publicFolder}/\${packageJSON.module.replace('.ts', '.js')}\`)
 
-await $\`echo Hello World!\`;
+await $\`echo ${CLI_COMMENT}\`;
 
 setTimeout(async () => {
     console.log(\`\\x1b[32mHello\\x1b[0m \\x1b[34mWorld!\\x1b[0m\nThank you for using Supe Project Creator v${supeVersion}\`);
@@ -778,47 +808,5 @@ const timer = setInterval(() => {
 }
 
 // P/CLI - A half package half command line interface hybrid
-if (argv.length > 0) SupeProjectCreator();
-
-/**
- * # Supe Project Creator
- *
- * A powerful tool for creating modern web projects with batteries included.
- *
- * [JSR](https://jsr.io/@supeprojects/supe-project-creator)
- *
- * ## Overview
- *
- * Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently.
- * It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow.
- *
- * **NOTE**: The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework,
- * such as Express.JS, FastAPI, Cloudflare Workers, etc.
- *
- * ## License
- *
- * MIT
- *
- * ## Credits
- *
- * Made by Burgil
- *
- * ## Usage
- *
- * To use Supe Project Creator, simply run the `main` function with the desired command line arguments.
- *
- * ```bash
- * deno jsr:@supeprojects/supe-project-creator -n my-supe-project
- * ```
- * or
- * ```bash
- * deno jsr:@supeprojects/supe-project-creator --demo -n cat-dog-detector
- * ```
- *
- * ## TODO
- *
- * - Add Deno Support
- *
- * @param {string[]} argv - Command line arguments
- */
-export default SupeProjectCreator;
+const argv: string[] = process.argv.slice(2); // Parse command line arguments
+if (argv.length > 0) SupeProjectCreator(argv);

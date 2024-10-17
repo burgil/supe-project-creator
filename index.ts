@@ -28,7 +28,7 @@ const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely d
  *
  * ## Usage
  *
- * To use Supe Project Creator, simply run the `main` function with the desired command line arguments.
+ * To use Supe Project Creator, simply run the `SupeProjectCreator` function with the desired command line arguments.
  *
  * @example Usage
  * 

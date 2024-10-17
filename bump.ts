@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import * as readline from 'node:readline';
 import process from "node:process";
+import { spawnSync, execSync } from 'node:child_process';
 
 const bump_files: {
     [key: string]: {
@@ -86,6 +87,56 @@ async function bumpVersion(currentVersion: string, bumpType = 'auto'): Promise<s
     return `${newMajor}.${newMinor}.${newPatch}`;
 }
 
+async function gitCommitAndPush(updateTitle: string, mainDescription: string, secondaryDescription: string) {
+    console.log('Checking for remote changes...');
+    // Fetch changes from the remote repository
+    const fetchResult = spawnSync('git', ['fetch', '--all']);
+    if (fetchResult.status !== 0) {
+        console.error('Failed to fetch changes from remote repository:', fetchResult.stderr.toString());
+        return;
+    }
+    // Check if there are any changes to pull
+    const statusResult = spawnSync('git', ['status', '-sb']);
+    if (statusResult.stdout.toString().includes('behind')) {
+        console.log('There are changes to pull from the remote repository.');
+        const pullPrompt = 'Do you want to pull the changes from the remote repository?';
+        const pullChanges = await askForConfirmation(pullPrompt);
+        if (pullChanges) {
+            // Pull changes from the remote repository
+            const pullResult = spawnSync('git', ['pull']);
+            if (pullResult.status !== 0) {
+                console.error('Failed to pull changes from remote repository:', pullResult.stderr.toString());
+                return;
+            }
+        }
+    }
+    // Add all changes
+    const addResult = spawnSync('git', ['add', '.']);
+    if (addResult.status !== 0) {
+        console.error('Failed to add changes:', addResult.stderr.toString());
+        return;
+    }
+    // Commit changes
+    const commitMessage = `${updateTitle}\n\n- **${mainDescription}**: ${secondaryDescription}`;
+    const commitResult = spawnSync('git', ['commit', '-m', commitMessage]);
+    if (commitResult.status !== 0) {
+        console.error('Failed to commit changes:', commitResult.stderr.toString());
+        return;
+    }
+
+    // Push changes to the remote repository
+    const pushPrompt = 'Do you want to push the changes to the remote repository?';
+    const pushChanges = await askForConfirmation(pushPrompt);
+    if (pushChanges) {
+        const pushResult = spawnSync('git', ['push']);
+        if (pushResult.status !== 0) {
+            console.error('Failed to push changes to remote repository:', pushResult.stderr.toString());
+            return;
+        }
+        console.log('Changes pushed to remote repository successfully!');
+    }
+}
+
 async function main() {
     let currentVersion: null | string = null;
 
@@ -114,7 +165,7 @@ async function main() {
     });
     rl.question('Enter a title for the update: ', (updateTitle) => {
         rl.question('Enter a brief description of the changes: ', (mainDescription) => {
-            rl.question('Enter a secondary description of the changes: ', (secondaryDescription) => {
+            rl.question('Enter a secondary description of the changes: ', async (secondaryDescription) => {
                 for (const filePath in bump_files) {
                     try {
                         let content = fs.readFileSync(filePath, 'utf8');
@@ -135,7 +186,13 @@ async function main() {
                     }
                 }
                 console.log(`Updated version from v${currentVersion} to v${newVersion}`);
-                rl.close();
+                const gitPrompt = 'Do you want to publish the new version to GitHub?';
+                const gitChanges = await askForConfirmation(gitPrompt);
+                if (gitChanges) {
+                    gitCommitAndPush(updateTitle, mainDescription, secondaryDescription).finally(() => {
+                        rl.close();
+                    });
+                }
             });
         });
     });

@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import * as readline from 'node:readline';
 import process from "node:process";
-import { spawnSync, execSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 
 const bump_files: {
     [key: string]: {

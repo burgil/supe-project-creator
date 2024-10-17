@@ -6,7 +6,7 @@ const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely d
 /**
  * # Supe Project Creator
  *
- * A powerful tool for creating modern web projects with batteries included.
+ * A simple tool for creating modern web projects with batteries included.
  *
  * [JSR](https://jsr.io/@supeprojects/supe-project-creator)
  *
@@ -50,7 +50,7 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = 'example-project';
-    const supeVersion = '1.4.1';
+    const supeVersion = '1.4.2';
     const supeVersionDate = '16/10/2024';
 
     // Loop through each argument

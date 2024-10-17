@@ -1,11 +1,11 @@
 # Supe Project Creator
 
-A powerful tool for creating modern web projects with batteries included.
+A simple tool for creating modern web projects with batteries included.
 
 [JSR](https://jsr.io/@supeprojects/supe-project-creator)
 
 > [!WARNING]  
-> Deno support is currently untested for this package and not recommended for use at this time. For a stable experience, we recommend using Bun until Deno support is fully implemented and tested.
+> Deno support is currently untested for this package and not recommended for use at this time.
 
 ## Overview
 
@@ -60,7 +60,7 @@ Eliminate unnecessary browser launches and avoid cumbersome manual configuration
 
 ### Roadmap
 
-We are actively working to enhance Supe Project Creator with new features and learning resources:
+I'm actively working to enhance Supe Project Creator with new features and learning resources:
 
 *   **Deno Support**: Add support for Deno as a JavaScript runtime environment.
 *   **AI Demo Projects**: Expand the project creator to support other types of AI demo projects, including machine learning and natural language processing examples.
@@ -185,7 +185,7 @@ Supe Project Creator organizes your project using the following structure:
 
 ### Recommended Workspace Configuration
 
-To enhance your development experience, we provide a recommended `.code-workspace` file named after your project. This configuration excludes unnecessary files from view, allowing you to focus on your code.
+To enhance your development experience, Use the provided recommended `.code-workspace` file named after your project. This configuration excludes unnecessary files from view, allowing you to focus on your code.
 
 **Opening the Workspace:**
 
@@ -233,7 +233,7 @@ SOFTWARE.
 
 ## Contributing and Feedback
 
-We welcome contributions from the community! Whether it's a new feature idea, bug fix, or documentation improvement, we'd love to hear from you.
+Contributions are welcome from the community! Whether it's a new feature idea, bug fix, or documentation improvement, I'd love to hear from you.
 
 ### Ways to Contribute
 
@@ -263,7 +263,7 @@ We welcome contributions from the community! Whether it's a new feature idea, bu
 4.  **Lint & Bump**: Bump the version using `bun bump` and lint the project with `deno lint` to find important issues.
 5.  **Submit a PR**: Submit a pull request with your changes.
 
-We appreciate your contributions and look forward to hearing from you!
+I appreciate your contributions and look forward to hearing from you!
 
 **Bump Version Script**
 ---------------
@@ -289,6 +289,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.4.2 - README Enhancements
+
+- **Accurate project description**: The project description has changed from "powerful" to "simple" to better reflect what the project is about and remove "we" from the README
 
 ### Version 1.4.1 - Removed an unused variable
 

@@ -159,7 +159,7 @@ async function main() {
     }
 
     const newVersion = await bumpVersion(currentVersion);
-    console.log('New Version:', newVersion);
+    console.log('Final Version:', newVersion);
 
     const rl = readline.createInterface({
         input: process.stdin,

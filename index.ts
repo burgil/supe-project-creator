@@ -50,8 +50,12 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = 'example-project';
-    const supeVersion = '1.5.0';
+    const supeVersion = '1.5.1';
     const supeVersionDate = '2024-10-16';
+    if (argv.length === 0) argv.push('--help');
+
+    const runtime = detectRuntime();
+    console.log(`\x1b[32mSupe Project Creator is running in the\x1b[0m \x1b[36m${runtime}\x1b[0m \x1b[32mruntime\x1b[0m ${require.main === module ? '\x1b[32mas a\x1b[0m \x1b[36mmodule\x1b[0m' : '\x1b[32mfrom a\x1b[0m \x1b[36mCLI\x1b[0m'}`);
 
     // Loop through each argument
     for (const arg of argv) {
@@ -78,16 +82,16 @@ export default function SupeProjectCreator(argv: string[]): void {
                 if (validProjectName) {
                     projectName = nextArg.toLowerCase();
                 } else {
-                    console.error('\x1b[31m%s\x1b[0m', 'Error: Project name can only contain lowercase letters, numbers, hyphens, and underscores.');
+                    console.error('Error: Project name can only contain lowercase letters, numbers, hyphens, and underscores.');
                     process.exit(1);
                 }
             } else {
-                console.error('\x1b[31m%s\x1b[0m', 'Error: Missing project name');
+                console.error('Error: Missing project name');
                 process.exit(1);
             }
         } else {
             if (arg.startsWith('-')) {
-                console.error('\x1b[31m%s\x1b[0m', `Error: Unknown option ${arg}`);
+                console.error(`Error: Unknown option ${arg}`);
                 process.exit(1);
             }
         }
@@ -98,7 +102,7 @@ export default function SupeProjectCreator(argv: string[]): void {
     if (!fs.existsSync(outDir)) {
         fs.mkdirSync(outDir);
     } else {
-        console.error('\x1b[31m%s\x1b[0m', `Error: Folder already exist ${outDir}`);
+        console.error(`Error: Folder already exist ${outDir}`);
         process.exit(1);
     }
     const hotreloadDir = path.join(outDir, 'hotreload');
@@ -818,6 +822,25 @@ const timer = setInterval(() => {
     console.log('\x1b[36m%s\x1b[0m', '  bun start');
 }
 
-// P/CLI - A half package half command line interface hybrid
-const argv: string[] = process.argv.slice(2); // Parse command line arguments
-if (argv.length > 0) SupeProjectCreator(argv);
+function detectRuntime() {
+    if (typeof Deno !== 'undefined') return 'deno';
+    if (typeof Bun !== 'undefined') return 'bun';
+    if (typeof process !== 'undefined' && process.versions && process.versions.node) return 'node';
+    return 'unknown';
+}
+
+// P/CLI - A half package half command line interface hybrid with cross-runtime support
+const runtime = detectRuntime();
+const DEBUG = false;
+if (DEBUG) console.log(`Running in ${runtime}`);
+let _isCLI = false;
+let _isModule = false;
+if (require.main === module) {
+    if (DEBUG) console.log("Running from CLI");
+    _isCLI = true;
+    const argv: string[] = process.argv.slice(2); // Parse command line arguments
+    SupeProjectCreator(argv);
+} else {
+    if (DEBUG) console.log("Imported as a module");
+    _isModule = true;
+}

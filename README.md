@@ -301,6 +301,10 @@ deno bump.ts
 
 ## Changelog
 
+### Version 1.5.1 - Require Project Name and Deno Compatibility
+
+- **Supe Project Creator now requires a project name to run and includes Deno types**: Running the tool without a project name triggers the help message, and the project is now set up for Deno compatibility.
+
 ### Version 1.5.0 - Improved Project Creation and Validation
 
 - **Added project name validation and clear setup instructions**: Supe Project Creator now validates project names and provides colored console logs for guidance.

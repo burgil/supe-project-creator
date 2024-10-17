@@ -10,7 +10,7 @@
 			"README.md": false,
 			"supe-project-creator.code-workspace": false,
 			// --
-			"package.json": true,
+			"package.json": false,
 			"bun.lockb": true,
 			"deno.json": false,
 			"deno.lock": false,

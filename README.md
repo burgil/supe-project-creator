@@ -292,7 +292,7 @@ deno bump.ts
 
 ### Version 1.4.1 - Removed an unused variable
 
-- **Fixed error no-unused-vars**: When using `deno lint` the project will be checked for TypeScript issues, Removing this unused variable was the last error to fix in both typescript files, note that `index.ts` is the main package used to create projects and `bump.ts` is a contributor only script to bump version in multiple files and then push to GitHub which will trigger the action to push into JSR. GG.
+- **Fixed error no-unused-vars**: When using `deno lint` the project will be checked for TypeScript issues, Removing this unused variable was the last error to fix in both typescript files, note that `index.ts` is the main package used to create projects and `bump.ts` is a contributor only script to bump version in multiple files and then push to GitHub which will trigger the action to push into JSR. Good Job!
 
 ### Version 1.4.0 - Improved Version Bumper Script
 

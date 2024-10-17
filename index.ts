@@ -12,11 +12,15 @@ const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely d
  *
  * ## Overview
  *
- * Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently.
+ * Supe Project Creator is a simple tool designed to help you build modern web applications quickly and efficiently. 
  * It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow.
+ * But there's a catch — the generated project has no dependencies, offering a fresh start. All the source code that runs the project will be 
+ * waiting for you in the generated project folder, no strings attached. It's as simple as you can get.
  *
  * **NOTE**: The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework,
  * such as Express.JS, FastAPI, Cloudflare Workers, etc.
+ * 
+ * **For a bit of technical detail:** how it does all of that is thanks to the built-in TypeScript compilers in the new runtimes. To avoid downloading dependencies, it uses `bunx` (an `npx` alternative) to fetch packages like `http-server`, `nodemon`, and `esbuild`.
  *
  * ## License
  *
@@ -30,7 +34,7 @@ const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely d
  *
  * To use Supe Project Creator, simply run the `SupeProjectCreator` function with the desired command line arguments.
  *
- * @example Usage
+ * @example CLI Usage
  * 
  * ```bash
  * deno jsr:@supeprojects/supe-project-creator -n my-supe-project
@@ -40,22 +44,37 @@ const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely d
  * deno jsr:@supeprojects/supe-project-creator --demo -n cat-dog-detector
  * ```
  *
+ * @example Programmatic Usage
+ * 
+ * ```ts
+ * import SPC from 'jsr:@supeprojects/supe-project-creator'; 
+ *
+ * console.log("Testing SPC programmatically...");
+ *
+ * SPC([]); // Shows the help menu
+ * SPC(['--name', 'my-example-project']); // Creates a new clean project
+ * ```
+ *
  * ## TODO
  *
  * - Add Deno Support
  *
- * @param {string[]} argv - Command line arguments
+ * @param {string[]} argv - Command line arguments provided by the user. These control the behavior of the project creation.
+ * @param {'bun' | 'deno' | 'node'} [runtime='bun'] - The runtime environment for the project creation process. Defaults to 'bun'.
+ * @returns {void}
  */
-export default function SupeProjectCreator(argv: string[]): void {
+export default function SupeProjectCreator(argv: string[], runtime: 'bun' | 'deno' | 'node' = 'bun'): void {
     // Variables:
     let CleanProject = true;
     let projectName = 'example-project';
-    const supeVersion = '1.5.2';
+    const supeVersion = '1.5.3';
     const supeVersionDate = '2024-10-16';
     if (argv.length === 0) argv.push('--help');
 
-    const runtime = detectRuntime();
-    console.log(`\x1b[32mSupe Project Creator is running in the\x1b[0m \x1b[36m${runtime}\x1b[0m \x1b[32mruntime\x1b[0m ${require.main === module ? '\x1b[32mas a\x1b[0m \x1b[36mmodule\x1b[0m' : '\x1b[32mfrom a\x1b[0m \x1b[36mCLI\x1b[0m'}`);
+    if (runtime === 'node' || runtime === 'deno') {
+        console.error(`The '${runtime}' is not supported yet. Follow up for changes in the GitHub repository!`);
+        // process.exit(); // Support is being actively explored, Uncommenting this leads to type errors
+    }
 
     // Loop through each argument
     for (const arg of argv) {
@@ -112,39 +131,56 @@ export default function SupeProjectCreator(argv: string[]): void {
     const srcDir = path.join(outDir, 'src');
     if (!fs.existsSync(srcDir)) fs.mkdirSync(srcDir);
 
-    fs.writeFileSync(path.join(outDir, 'package.json'), `{
-    "name": "${projectName}",
-    "module": "index.ts",
-    "type": "module",
-    "scripts": {
-        "start": "bun hotreload/start.ts"
-    },
-    "devDependencies": {${CleanProject ? '' : '\n\t"@mediapipe/tasks-vision": "^0.10.17",'}
-        "@types/bun": "latest",
-        "@types/node": "latest"
-    },
-    "peerDependencies": {
-        "typescript": "latest"
+    // Cross Runtime compatibility:
+    const packageJSON = runtime === 'deno' ? 'deno.json' : 'package.json';
+
+    let packageOutput = '{\n';
+    packageOutput += `\t"name": "${projectName}",\n`;
+    packageOutput += '\t"version": "0.0.1",\n';
+    packageOutput += '\t"license": "",\n';
+    packageOutput += `\t"${runtime === 'deno' ? 'exports' : 'module'}": "./index.ts",\n`;
+    if (runtime !== 'deno') packageOutput += '\t"type": "module",\n';
+    packageOutput += `\t"${runtime === 'deno' ? 'tasks' : 'scripts'}": {
+        "start": "${runtime} hotreload/start.ts"
+    },\n`;
+    packageOutput += `\t"${runtime === 'deno' ? 'imports' : 'devDependencies'}": {\n`;
+    if (!CleanProject) packageOutput += '\t\t"@mediapipe/tasks-vision": "^0.10.17",\n';
+    packageOutput += `\t\t"@types/${runtime}": "latest",\n`;
+    if (runtime !== 'node') packageOutput += '\t\t"@types/node": "latest"\n';
+    if (runtime === 'deno') {
+        packageOutput += '\t}\n';
+    } else {
+        packageOutput += '\t},\n';
     }
-}
-`);
+    if (runtime !== 'deno') packageOutput += `\t"peerDependencies": {
+        "typescript": "latest"
+    }\n`;
+    packageOutput += '}\n';
+
+    // TODO: Ask what license should be used
+    fs.writeFileSync(path.join(outDir, packageJSON), packageOutput);
 
     fs.writeFileSync(path.join(outDir, 'README.md'), `# ${projectName}
 
 ## This project was created using Supe Project Creator v${supeVersion}
 
-Use bun to install and run the project. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+> [!TIP]
+> Remember, the true measure of your project's success lies not in its power, but in the positive impact it has on the world. use it wisely and for the betterment of all.
+
+## Usage:
+
+Use ${runtime} to install and run the project.
 
 1. To install dependencies:
 
 \`\`\`bash
-bun install
+${runtime} install
 \`\`\`
 
 2. To run:
 
 \`\`\`bash
-bun start
+${runtime} start
 \`\`\`
 
 3. Everything else:
@@ -186,21 +222,21 @@ You have full control over all the source files of almost everything you see, Th
     fs.writeFileSync(path.join(outDir, `${projectName}.code-workspace`), `{
 	"folders": [
 		{
-			"name": "▪◾",
+			"name": "▪${projectName}◾", // Yang and Yin. With great power comes great responsibility. wield your creation for the greater good, and never let it be used to harm or exploit others.
 			"path": "."
 		}
 	],
 	"settings": {
 		"files.exclude": {
-			"package.json": false,
-			"tsconfig.json": false,
+			"${packageJSON}": false,
+			"tsconfig.json": false, // TODO remove in deno? did not seem to work first-try
 			"${projectName}.code-workspace": false,
 			// --
 			"README.md": true,
-			"bun.lockb": true,
+			${runtime === 'bun' ? '"bun.lockb": true,' : ''}${runtime === 'deno' ? '"deno.lock": true,' : ''}
 			".gitignore": true,
 			"node_modules": true,
-			"tsconfig.tsbuildinfo": true,
+			"tsconfig.tsbuildinfo": true, // useless artifact, we can make it build into node_modules in the future
 		}
 	}
 }
@@ -442,7 +478,7 @@ function detect(imageName: string | HTMLElement) {
     recalculateBoundingBoxes();
 }
 
-window.addEventListener('resize', () => {
+addEventListener('resize', () => {
     recalculateBoundingBoxes();
 });
 
@@ -625,11 +661,10 @@ ${CleanProject ? '' : `
 	}
 }`}
 `);
-
-    // TODO: Add Deno Support
-    fs.writeFileSync(path.join(hotreloadDir, 'start.ts'), `import { $ } from "bun"
-import config from "./config"
-const packageJSON = await Bun.file('package.json').json()
+    const bunStartScript = `import { $ } from "bun";
+import config from "./config";
+import process from "node:process";
+const packageJSON = await Bun.file('package.json').json();
 
 if (!packageJSON.module.endsWith('.ts')) {
     console.error(\`Could not load module. Expected a .ts file, but received \${packageJSON.module}\`);
@@ -663,7 +698,21 @@ await Promise.all([
 
 // End of file - Nothing will run below. Use CTRL+C in the terminal to terminate (due to awaiting running servers...)
 
+`;
+    if (runtime === 'bun') {
+        fs.writeFileSync(path.join(hotreloadDir, 'start.ts'), bunStartScript);
+    } else if (runtime === 'deno') {
+        fs.writeFileSync(path.join(hotreloadDir, 'start.ts'), `
+console.error("Deno support is under construction, Check again in the upcoming version!");
 `);
+    } else if (runtime === 'node') {
+        fs.writeFileSync(path.join(hotreloadDir, 'start.ts'), `
+console.error("Node support is under construction, Check again in the upcoming version!");
+`);
+    } else {
+        console.log(`Unsupported runtime: ${runtime}`);
+        process.exit();
+    }
 
     fs.writeFileSync(path.join(hotreloadDir, 'config.ts'), `export default {
     port: 80,
@@ -673,7 +722,7 @@ await Promise.all([
     browser: true,
     browserDelay: 1550,
     address: 'localhost',
-    secure: false, // bun http-server --help
+    secure: false, // Requires SSL Configuration, More Info: ${runtime === 'bun' ? 'bunx http-server --help' : ''}${runtime === 'deno' ? 'deno --allow-sys --allow-env npm:http-server --help' : ''}${runtime === 'node' ? 'npx -y http-server --help' : ''}
     hotreload: true,
     reconnectDelay: 500,
     minify: false,
@@ -705,7 +754,7 @@ function createWebSocket() {
 
   ws.onmessage = (event) => {
     if (config.debug) console.log("Hot Reload - Incoming Reload!");
-    if (event.data === 'reload') window.location.reload();
+    if (event.data === 'reload') location.reload();
   };
 
   ws.onopen = () => {
@@ -728,7 +777,7 @@ function createWebSocket() {
 createWebSocket();
 
 if (config.autoFixCSS) {
-  window.addEventListener('load', () => {
+  addEventListener('load', () => {
     for (const link of document.querySelectorAll('link')) {
       link.href = \`\${link.href}?t=\${Date.now()}\`;
     }
@@ -740,6 +789,7 @@ if (config.autoFixCSS) {
 import { WebSocketServer } from 'ws';
 import { exec } from 'node:child_process';
 import os from 'node:os';
+import { Buffer } from "node:buffer";
 import config from "./config";
 
 const wss = new WebSocketServer({ port: config.hotreloadPort });
@@ -751,7 +801,7 @@ wss.on('connection', (ws) => {
     if (config.debug) console.log('Client connected');
     ws.on('message', (input: Message) => {
         let msg: string | Message = input;
-        try { if (Buffer.isBuffer(msg)) msg = msg.toString(); } catch (e) { }
+        try { if (Buffer.isBuffer(msg)) msg = msg.toString(); } catch (_e) { 'pass' }
         if (typeof msg !== 'string') return;
         if (config.debug) console.log('Client sent a message:', msg);
         if (msg === 'reload') return triggerReload();
@@ -792,6 +842,7 @@ if (config.browser) {
 `);
 
     fs.writeFileSync(path.join(hotreloadDir, 'refresh.ts'), `import config from "./config";
+import process from "node:process";
 
 if (!config.hotreload) process.exit();
 
@@ -818,8 +869,46 @@ const timer = setInterval(() => {
     console.log('\x1b[32m%s\x1b[0m', `Project has been created successfully at: ${path.resolve(outDir)}`);
     console.log('\x1b[36m%s\x1b[0m', '\nTo get started:');
     console.log('\x1b[36m%s\x1b[0m', `  cd ${projectName}`);
-    console.log('\x1b[36m%s\x1b[0m', '  bun install');
-    console.log('\x1b[36m%s\x1b[0m', '  bun start');
+    console.log('\x1b[36m%s\x1b[0m', `  ${runtime} install`);
+    console.log('\x1b[36m%s\x1b[0m', `  ${runtime} start`);
+}
+
+// Function to render options
+function renderOptions(options: string[], currentIndex: number) {
+    console.clear();
+    console.log('Use arrow keys to navigate, press Enter to select\n');
+    options.forEach((option, index) => {
+        if (index === currentIndex) {
+            console.log(`\x1b[36m> ${capitalizeFirstChar(option)}\x1b[0m`); // Highlight current option
+        } else {
+            console.log(`  ${capitalizeFirstChar(option)}`);
+        }
+    });
+}
+
+// Function to handle keypress events
+function handleKeyPress(key: string, options: ('bun' | 'deno' | 'node')[], currentIndex: number): number {
+    let newCurrentIndex = currentIndex;
+    if (key === '\u001B\u005B\u0041') { // Up arrow
+        newCurrentIndex = newCurrentIndex > 0 ? newCurrentIndex - 1 : options.length - 1;
+    } else if (key === '\u001B\u005B\u0042') { // Down arrow
+        newCurrentIndex = newCurrentIndex < options.length - 1 ? newCurrentIndex + 1 : 0;
+    } else if (key === '\r') { // Enter key
+        console.clear();
+        console.log(`You selected: ${options[newCurrentIndex]}`);
+        const argv: string[] = process.argv.slice(2); // Parse command line arguments
+        SupeProjectCreator(argv, options[newCurrentIndex]);
+        process.exit();
+    } else if (key === '\u0003') { // Ctrl+C to exit
+        process.exit();
+    }
+    renderOptions(options, newCurrentIndex);
+    return newCurrentIndex;
+}
+
+function capitalizeFirstChar(str: string) {
+    if (!str) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 function detectRuntime() {
@@ -832,14 +921,28 @@ function detectRuntime() {
 // P/CLI - A half package half command line interface hybrid with cross-runtime support
 const runtime = detectRuntime();
 const DEBUG = false;
-if (DEBUG) console.log(`Running in ${runtime}`);
+if (DEBUG) console.log(`\x1b[32mSupe Project Creator is running in the\x1b[0m \x1b[36m${runtime}\x1b[0m \x1b[32mruntime\x1b[0m ${require.main === module ? '\x1b[32mas a\x1b[0m \x1b[36mmodule\x1b[0m' : '\x1b[32mfrom a\x1b[0m \x1b[36mCLI\x1b[0m'}`);
 let _isCLI = false;
 let _isModule = false;
 if (require.main === module) {
     if (DEBUG) console.log("Running from CLI");
     _isCLI = true;
-    const argv: string[] = process.argv.slice(2); // Parse command line arguments
-    SupeProjectCreator(argv);
+    // Enable raw mode to capture input
+    process.stdin.setRawMode(true);
+    process.stdin.resume();
+    process.stdin.setEncoding('utf8');
+    // Options to navigate
+    const options: ('bun' | 'deno' | 'node')[] = ['bun', 'deno', 'node'];
+    let currentIndex = 0;
+    if (runtime === 'bun') currentIndex = 0;
+    if (runtime === 'deno') currentIndex = 1;
+    if (runtime === 'node') currentIndex = 2;
+    // Initial rendering of the options
+    renderOptions(options, currentIndex);
+    // Capture and handle keypresses
+    process.stdin.on('data', (key: string) => {
+        currentIndex = handleKeyPress(key, options, currentIndex);
+    });
 } else {
     if (DEBUG) console.log("Imported as a module");
     _isModule = true;

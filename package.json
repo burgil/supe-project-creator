@@ -1,12 +1,12 @@
 {
   "name": "supe-project-creator",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "license": "MIT",
   "module": "index.ts",
   "type": "module",
   "scripts": {
     "start": "deno lint && bun index.ts",
-    "bump": "bun bump.ts"
+    "bump": "deno lint && bun bump.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",

@@ -8,13 +8,13 @@ This is the first package under the @supeprojects scope, with more planned for t
 
 ## Overview - What is Supe Project Creator?
 
-Supe Project Creator is a simple tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. But there's a catch - the generated project has no dependencies, a fresh start. All the source code that runs the project will be waiting for you in the generated project folder, no strings attached. It's as simple as you can get.
+Supe Project Creator is a simple tool designed to help you build modern web applications quickly and efficiently. It generates project templates boilerplate using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. But there's a catch - the generated project has no dependencies, a fresh start. All the source code that runs the project will be waiting for you in the generated project folder, no strings attached. It's as simple as you can get.
 
 [JSR](https://jsr.io/@supeprojects/supe-project-creator) - [Source Code](https://github.com/burgil/supe-project-creator) - [Known Issues](https://github.com/burgil/supe-project-creator/issues) - [Docs/Wiki](https://github.com/burgil/supe-project-creator/wiki)
 
-For a bit of technical detail: how it does all of that is thanks to the built-in TypeScript compilers in the new runtimes. To avoid downloading dependencies, it uses `bunx` (an `npx` alternative) to fetch packages like `http-server`, `nodemon`, and `esbuild`.
+**For a bit of technical detail:** how it does all of that is thanks to the built-in TypeScript compilers in the new runtimes. To avoid downloading dependencies, it uses `bunx` (an `npx` alternative) to fetch packages like `http-server`, `nodemon`, and `esbuild`.
 
-> [!NOTE]  
+> [!NOTE]
 > The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework, such as Express.JS, FastAPI, Cloudflare Workers, etc.
 
 The tool comes with a **built-in web server**, making it easy to test and deploy your projects locally or in production. One of the standout features is a pre-configured **AI DEMO** that showcases object detection in images, demonstrating the integration of machine learning in web apps.
@@ -33,7 +33,7 @@ With Supe Project Creator, you can concentrate on what matters most – building
 > [!CAUTION]
 > The package is not production-ready yet.
 
-> [!WARNING]  
+> [!WARNING]
 > Deno support for this package is currently untested, but it is being actively worked on.
 
 ## Key Features - What can Supe Project Creator do?
@@ -130,7 +130,7 @@ deno jsr:@supeprojects/supe-project-creator --name "C:\Users\%username%\Desktop\
 If you get any error related to `esbuild` during usage, Try to restart the terminal and try again, To avoid downloading dependencies it uses `bunx` (`NPX` Alternative) to fetch packages like `http-server`, `nodemon` and `esbuild`.
 
 > [!IMPORTANT]
-> Supe Project Creator does not require a separate installation step. Simply execute the command above to create a new project instantly. In future releases, it will also be available as a package, allowing you to write custom code that generates projects programmatically.
+> Supe Project Creator does not require a separate installation step. Simply execute the command above to create a new project instantly. In future releases, it will also be available as a package, allowing you to write custom code that generates projects programmatically. (**Work in Progress**). To test this feature, run `bun test` in your terminal.
 
 After creating a new project using the Supe Project Creator, you will first need to navigate to the newly created project directory before proceeding with the setup:
 
@@ -304,6 +304,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.5.3 - Basic Deno Support, JSDoc Improvements, and Linting Fixes
+
+- **Added basic Deno support, improved JSDoc documentation, and resolved linting issues in generated projects**: Supe Project Creator now supports Deno alongside Node.js and Bun. JSDoc documentation has been enhanced, including the addition of a new `runtime` variable. Linting issues in the generated Deno and Bun projects have also been fixed, ensuring cleaner, error-free code.
 
 ### Version 1.5.2 - README Enhancements, bun start Command, and New Test Script
 
@@ -523,7 +527,7 @@ Note: Since this is the first version of the changelog, there are no previous ve
 
 ## Old Usage
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > JSR currently does not support NPX or BUNX-style direct execution, but `--global` installation may be available soon. Feel free to suggest a better approach if you find one.
 
 To start using Supe Project Creator, run the following commands:

@@ -179,7 +179,7 @@ deno jsr:@supeprojects/supe-project-creator --help
 - `-n`, `--name <string>`: Sets the project name (default: `"example-project"`).
 - `-d`, `--demo`: Creates a demo project (default: `false`).
 
-## Project Structure - What generated projects look like in Supe Project Creator?
+## Project Structure - What Supe Project Creator generated projects have?
 
 Supe Project Creator organizes your project using the following structure:
 
@@ -235,7 +235,7 @@ SOFTWARE.
 
 - **16 October 2024**
 
-## Contributing and Feedback - How to help me develop Supe Project Creator?
+## Contributing and Feedback - How to help develop Supe Project Creator?
 
 Contributions are welcome from the community! Whether it's a new feature idea, bug fix, or documentation improvement, I'd love to hear from you.
 
@@ -304,6 +304,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.5.4 - README Improvements and Enhancements
+
+- **Enhanced the README for clearer guidance and better user experience.**: The README has been improved with clearer instructions and detailed explanations to help users better understand how to use Supe Project Creator.
 
 ### Version 1.5.3 - Basic Deno Support, JSDoc Improvements, and Linting Fixes
 

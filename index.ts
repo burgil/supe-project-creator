@@ -16,11 +16,11 @@ const argv: string[] = process.argv.slice(2); // Parse command line arguments
 * or
 * deno publish
 */
-function main() {
+function SupeProjectCreator(): void {
     // Variables:
     let CleanProject = true;
     let projectName = 'example-project';
-    const supeVersion = '1.3.6';
+    const supeVersion = '1.3.7';
     const supeVersionDate = '16/10/2024';
 
     // Loop through each argument
@@ -778,5 +778,47 @@ const timer = setInterval(() => {
 }
 
 // P/CLI - A half package half command line interface hybrid
-if (argv.length > 0) main();
-export default main;
+if (argv.length > 0) SupeProjectCreator();
+
+/**
+ * # Supe Project Creator
+ *
+ * A powerful tool for creating modern web projects with batteries included.
+ *
+ * [JSR](https://jsr.io/@supeprojects/supe-project-creator)
+ *
+ * ## Overview
+ *
+ * Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently.
+ * It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow.
+ *
+ * **NOTE**: The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework,
+ * such as Express.JS, FastAPI, Cloudflare Workers, etc.
+ *
+ * ## License
+ *
+ * MIT
+ *
+ * ## Credits
+ *
+ * Made by Burgil
+ *
+ * ## Usage
+ *
+ * To use Supe Project Creator, simply run the `main` function with the desired command line arguments.
+ *
+ * ```bash
+ * deno jsr:@supeprojects/supe-project-creator -n my-supe-project
+ * ```
+ * or
+ * ```bash
+ * deno jsr:@supeprojects/supe-project-creator --demo -n cat-dog-detector
+ * ```
+ *
+ * ## TODO
+ *
+ * - Add Deno Support
+ *
+ * @param {string[]} argv - Command line arguments
+ */
+export default SupeProjectCreator;

@@ -290,6 +290,10 @@ deno bump.ts
 
 ## Changelog
 
+### Version 1.3.7 - Added JSDocs
+
+- **First Docs**: Added an extensive JSDocs for the main package function
+
 ### Version 1.3.6 - Fixed linting and added default export
 
 - **Deno Lint and Default Export**: Fixed linting issues and added support for packages and cli at the same time

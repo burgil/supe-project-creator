@@ -48,6 +48,8 @@ async function bumpVersion(currentVersion: string, bumpType = 'auto'): Promise<s
     let newPatch = patch + 1;
     let newMinor = minor;
     let newMajor = major;
+    console.log('Current Version:', currentVersion);
+    console.log('New Version:', `${newMajor}.${newMinor}.${newPatch}`);
     // TODO: Add an option to force specific semantic bump
     switch (bumpType) {
         case 'patch':
@@ -64,15 +66,15 @@ async function bumpVersion(currentVersion: string, bumpType = 'auto'): Promise<s
             break;
         default:
             if (newPatch >= MAX_PATCH_VERSION) {
-                console.log('Proposed Version:', `${newMajor}.${newMinor}.${newPatch}`);
-                const bumpMinorPrompt = `Do you want to bump the minor version from ${minor} to ${minor + 1} (otherwise only the patch will be bumped to ${newPatch})?`;
+                console.log('Proposed Version:', `${newMajor}.${newMinor + 1}.0`);
+                const bumpMinorPrompt = `Do you want to bump the minor version from ${newMinor} to ${newMinor + 1} (otherwise only the patch will be bumped to ${newPatch})?`;
                 const bumpMinor = await askForConfirmation(bumpMinorPrompt);
                 if (bumpMinor) {
                     newPatch = 0;
                     newMinor++;
                     if (newMinor >= MAX_MINOR_VERSION) {
-                        console.log('Proposed Version:', `${newMajor}.${newMinor}.${newPatch}`);
-                        const bumpMajorPrompt = `Do you want to bump the major version from ${major} to ${major + 1} (otherwise only the minor will be bumped to ${newMinor})?`;
+                        console.log('Proposed Version:', `${newMajor + 1}.0.${newPatch}`);
+                        const bumpMajorPrompt = `Do you want to bump the major version from ${newMajor} to ${newMajor + 1} (otherwise only the minor will be bumped to ${newMinor})?`;
                         const bumpMajor = await askForConfirmation(bumpMajorPrompt);
                         if (bumpMajor) {
                             newMinor = 0;
@@ -186,13 +188,10 @@ async function main() {
                     }
                 }
                 console.log(`Updated version from v${currentVersion} to v${newVersion}`);
+                rl.close();
                 const gitPrompt = 'Do you want to publish the new version to GitHub?';
                 const gitChanges = await askForConfirmation(gitPrompt);
-                if (gitChanges) {
-                    gitCommitAndPush(updateTitle, mainDescription, secondaryDescription).finally(() => {
-                        rl.close();
-                    });
-                }
+                if (gitChanges) gitCommitAndPush(updateTitle, mainDescription, secondaryDescription);
             });
         });
     });

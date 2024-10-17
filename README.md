@@ -290,6 +290,10 @@ deno bump.ts
 
 ## Changelog
 
+### Version 1.4.3 - Improved Version Bumper
+
+- **Smarter Questions**: Questions in the version bumper will now properly handle mistakes
+
 ### Version 1.4.2 - README Enhancements
 
 - **Accurate project description**: The project description has changed from "powerful" to "simple" to better reflect what the project is about and remove "we" from the README

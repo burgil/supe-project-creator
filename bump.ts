@@ -30,15 +30,28 @@ const packageJsonPath = './package.json';
 const MAX_PATCH_VERSION = 10;
 const MAX_MINOR_VERSION = 10;
 
-function askForConfirmation(question: string): Promise<boolean> {
+function askForConfirmation(question: string, noQuestion = false): Promise<boolean | string> {
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
     });
     return new Promise((resolve) => {
-        rl.question(`${question} (y/n): `, (answer) => {
-            resolve(answer.toLowerCase() === 'y');
+        rl.question(noQuestion ? question : `${question} (y/n): `, (answer) => {
             rl.close();
+            const incorrectAnswer = "Incorrect Answer! Press CTRL+C in the terminal to terminate the process.";
+            if (noQuestion) {
+                if (!answer) {
+                    console.error(incorrectAnswer)
+                    return askForConfirmation(question, true);
+                }
+                resolve(answer);
+            } else {
+                if (answer.toLowerCase() !== 'y' && answer.toLowerCase() !== 'n') {
+                    console.error(incorrectAnswer)
+                    return askForConfirmation(question);
+                }
+                resolve(answer.toLowerCase() === 'y');
+            }
         });
     });
 }
@@ -67,15 +80,13 @@ async function bumpVersion(currentVersion: string, bumpType = 'auto'): Promise<s
         default:
             if (newPatch >= MAX_PATCH_VERSION) {
                 console.log('Proposed Version:', `${newMajor}.${newMinor + 1}.0`);
-                const bumpMinorPrompt = `Do you want to bump the minor version from ${newMinor} to ${newMinor + 1} (otherwise only the patch will be bumped to ${newPatch})?`;
-                const bumpMinor = await askForConfirmation(bumpMinorPrompt);
+                const bumpMinor = await askForConfirmation(`Do you want to bump the minor version from ${newMinor} to ${newMinor + 1} (otherwise only the patch will be bumped to ${newPatch})?`);
                 if (bumpMinor) {
                     newPatch = 0;
                     newMinor++;
                     if (newMinor >= MAX_MINOR_VERSION) {
                         console.log('Proposed Version:', `${newMajor + 1}.0.${newPatch}`);
-                        const bumpMajorPrompt = `Do you want to bump the major version from ${newMajor} to ${newMajor + 1} (otherwise only the minor will be bumped to ${newMinor})?`;
-                        const bumpMajor = await askForConfirmation(bumpMajorPrompt);
+                        const bumpMajor = await askForConfirmation(`Do you want to bump the major version from ${newMajor} to ${newMajor + 1} (otherwise only the minor will be bumped to ${newMinor})?`);
                         if (bumpMajor) {
                             newMinor = 0;
                             newMajor++;
@@ -101,8 +112,7 @@ async function gitCommitAndPush(updateTitle: string, mainDescription: string, se
     const statusResult = spawnSync('git', ['status', '-sb']);
     if (statusResult.stdout.toString().includes('behind')) {
         console.log('There are changes to pull from the remote repository.');
-        const pullPrompt = 'Do you want to pull the changes from the remote repository?';
-        const pullChanges = await askForConfirmation(pullPrompt);
+        const pullChanges = await askForConfirmation('Do you want to pull the changes from the remote repository?');
         if (pullChanges) {
             // Pull changes from the remote repository
             const pullResult = spawnSync('git', ['pull']);
@@ -127,8 +137,7 @@ async function gitCommitAndPush(updateTitle: string, mainDescription: string, se
     }
 
     // Push changes to the remote repository
-    const pushPrompt = 'Do you want to push the changes to the remote repository?';
-    const pushChanges = await askForConfirmation(pushPrompt);
+    const pushChanges = await askForConfirmation('Do you want to push the changes to the remote repository?');
     if (pushChanges) {
         const pushResult = spawnSync('git', ['push']);
         if (pushResult.status !== 0) {
@@ -161,13 +170,12 @@ async function main() {
     const newVersion = await bumpVersion(currentVersion);
     console.log('Final Version:', newVersion);
 
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
-    rl.question('Enter a title for the update: ', (updateTitle) => {
-        rl.question('Enter a brief description of the changes: ', (mainDescription) => {
-            rl.question('Enter a secondary description of the changes: ', async (secondaryDescription) => {
+    const updateTitle = (await askForConfirmation('Enter a title for the update: ', true)) as string;
+    if (updateTitle) {
+        const mainDescription = (await askForConfirmation('Enter a brief description of the changes: ', true)) as string;
+        if (mainDescription) {
+            const secondaryDescription = (await askForConfirmation('Enter a secondary description of the changes: ', true)) as string;
+            if (secondaryDescription) {
                 for (const filePath in bump_files) {
                     try {
                         let content = fs.readFileSync(filePath, 'utf8');
@@ -188,13 +196,12 @@ async function main() {
                     }
                 }
                 console.log(`Updated version from v${currentVersion} to v${newVersion}`);
-                rl.close();
-                const gitPrompt = 'Do you want to publish the new version to GitHub?';
-                const gitChanges = await askForConfirmation(gitPrompt);
+                const gitChanges = await askForConfirmation('Do you want to publish the new version to GitHub?');
+                console.log("yo", gitChanges)
                 if (gitChanges) gitCommitAndPush(updateTitle, mainDescription, secondaryDescription);
-            });
-        });
-    });
+            }
+        }
+    }
 }
 
 main();

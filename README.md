@@ -96,7 +96,7 @@ By doing so, you will ensure a smooth and successful execution of the scripts.
 
 ## Usage
 
-To start using Supe Project Creator, run the following commands:
+To start using Supe Project Creator, run the following command:
 
 ```bash
 deno jsr:@supeprojects/supe-project-creator --demo --name cat-dog-detector
@@ -139,11 +139,9 @@ bun install
 bun start
 ```
 
-After navigating to the project folder and running the command to start the development server with `bun start`, a new browser tab will open, directing you to `http://localhost:80` if it isn't already open. This allows you to immediately view and interact with your project in your web browser.
+After navigating to the project folder and running the command to start the development server with `bun start`, a new browser tab will open, directing you to `http://localhost` if it isn't already open. This allows you to immediately view and interact with your project in your web browser.
 
 This behavior is, of course, configurable in `hotreload/config.ts`, allowing you to customize the port or other settings according to your project's requirements.
-
-3. **Open your browser** and navigate to `http://localhost:80`.
 
 ## Project Structure
 
@@ -160,7 +158,7 @@ To enhance your development experience, we provide a recommended `.code-workspac
 **Opening the Workspace:**
 
 1. Locate the `<project-name>.code-workspace` file in your project directory.
-2. Double-click the file to open it in VS Code, or select "Open Workspace" from the VS Code menu and navigate to the file.
+2. Double-click the file to open it in VS Code, or find "Open Workspace" inside VS Code.
 
 **Benefits of Using the Recommended Workspace:**
 
@@ -258,6 +256,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.3.4 - README File Optimization
+
+- **Better Instructions**: A well-structured README file provides users with easy-to-follow instructions, reducing the likelihood of confusion, frustration, and support requests.
 
 ### Version 1.3.3 - Enhanced Readme and Minor Improvements
 

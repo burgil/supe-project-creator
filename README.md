@@ -6,7 +6,7 @@ A simple tool for creating modern web projects with batteries included.
 
 ## Overview - What is Supe Project Creator?
 
-Supe Project Creator is a comprehensive tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. 
+Supe Project Creator is a simple tool designed to help you build modern web applications quickly and efficiently. It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. 
 
 [JSR](https://jsr.io/@supeprojects/supe-project-creator) - [Source Code](https://github.com/burgil/supe-project-creator) - [Known Issues](https://github.com/burgil/supe-project-creator/issues) - [Docs/Wiki](https://github.com/burgil/supe-project-creator/wiki)
 
@@ -300,6 +300,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.4.9 - Improved README
+
+- **Enhanced README**: The README file was carefully reviewed and everything is now almost perfect
 
 ### Version 1.4.8 - Added lock files and VSCode Workspace
 

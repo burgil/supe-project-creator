@@ -1,8 +1,0 @@
-{
-  "tasks": {
-    "dev": "deno run --watch index.ts"
-  },
-  "imports": {
-    "supe-project-creator": "jsr:@supeprojects/supe-project-creator"
-  }
-}

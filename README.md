@@ -62,7 +62,7 @@ Eliminate unnecessary browser launches and avoid cumbersome manual configuration
 > [!TIP]
 > Wait until v2.0.0 drops!
 
-## Upcoming Features - What is planned for the future of Supe Project Creator?
+## Upcoming Features
 
 ### Roadmap
 
@@ -304,6 +304,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.5.5 - Improved README
+
+- **Enhanced README for better clarity and guidance**: README updated with clearer instructions and examples.
 
 ### Version 1.5.4 - README Improvements and Enhancements
 

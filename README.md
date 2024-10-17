@@ -290,6 +290,10 @@ deno bump.ts
 
 ## Changelog
 
+### Version 1.4.4 - Fixed Version Bumper
+
+- **Fixed Incorrect Answer Crashes the Version Bumper**: The version bumper will not crash anymore when inputting an incorrect answer (y/n)
+
 ### Version 1.4.3 - Improved Version Bumper
 
 - **Smarter Questions**: Questions in the version bumper will now properly handle mistakes

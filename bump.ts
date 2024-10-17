@@ -31,28 +31,31 @@ const MAX_PATCH_VERSION = 10;
 const MAX_MINOR_VERSION = 10;
 
 function askForConfirmation(question: string, noQuestion = false): Promise<boolean | string> {
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
     return new Promise((resolve) => {
-        rl.question(noQuestion ? question : `${question} (y/n): `, (answer) => {
-            rl.close();
-            const incorrectAnswer = "Incorrect Answer! Press CTRL+C in the terminal to terminate the process.";
-            if (noQuestion) {
-                if (!answer) {
-                    console.error(incorrectAnswer)
-                    return askForConfirmation(question, true);
+        const askQuestion = () => {
+            const rl = readline.createInterface({
+                input: process.stdin,
+                output: process.stdout
+            });
+            rl.question(noQuestion ? question : `${question} (y/n): `, (answer) => {
+                rl.close();
+                const incorrectAnswer = "Incorrect Answer! Please try again. Press CTRL+C in the terminal to terminate the process.";
+                if (noQuestion) {
+                    if (!answer) {
+                        console.error(incorrectAnswer)
+                        return askQuestion();
+                    }
+                    resolve(answer);
+                } else {
+                    if (answer.toLowerCase() !== 'y' && answer.toLowerCase() !== 'n') {
+                        console.error(incorrectAnswer)
+                        return askQuestion();
+                    }
+                    resolve(answer.toLowerCase() === 'y');
                 }
-                resolve(answer);
-            } else {
-                if (answer.toLowerCase() !== 'y' && answer.toLowerCase() !== 'n') {
-                    console.error(incorrectAnswer)
-                    return askForConfirmation(question);
-                }
-                resolve(answer.toLowerCase() === 'y');
-            }
-        });
+            });
+        };
+        askQuestion();
     });
 }
 
@@ -197,7 +200,6 @@ async function main() {
                 }
                 console.log(`Updated version from v${currentVersion} to v${newVersion}`);
                 const gitChanges = await askForConfirmation('Do you want to publish the new version to GitHub?');
-                console.log("yo", gitChanges)
                 if (gitChanges) gitCommitAndPush(updateTitle, mainDescription, secondaryDescription);
             }
         }

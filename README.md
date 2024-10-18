@@ -1,4 +1,4 @@
-# Supe Project Creator v1.6.6
+# Supe Project Creator v1.6.7
 
 A simple tool for creating modern web projects with batteries included.
 
@@ -19,7 +19,7 @@ Supe Project Creator is a simple tool designed to help you build modern web appl
 > [!NOTE]
 > The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework, such as Express.JS, FastAPI, Cloudflare Workers, etc.
 
-The tool comes with a **built-in web server**, making it easy to test and deploy your projects locally or in production. One of the standout features is a pre-configured **AI DEMO** that showcases object detection in images, demonstrating the integration of machine learning in web apps.
+The tool comes with a **built-in web server**, making it easy to test and deploy your projects locally or in production. One of the standout features is an optional pre-configured **AI DEMO** that showcases object detection in images, demonstrating the integration of machine learning in web apps.
 
 **Unlock Your Productivity**
 
@@ -28,7 +28,7 @@ By utilizing Supe Project Creator, you can:
 * **Save Time**: Skip tedious configuration tasks and jumpstart your project with a pre-configured template.
 * **Boost Efficiency**: Focus on writing code, not setting up your project structure.
 * **Streamline Your Workflow**: Take advantage of hot reloading and instant feedback to accelerate your development process.
-* **Explore New Possibilities**: Leverage the included AI demo to experiment with machine learning in your web applications.
+* **Explore New Possibilities**: Leverage the included optional AI demo to experiment with machine learning in your web applications, or start with a clean project.
 
 With Supe Project Creator, you can concentrate on what matters most – building innovative and effective web applications.
 
@@ -52,8 +52,8 @@ Enjoy full TypeScript support, including ESNext, ESM, Bun, and Deno, for an effi
 ### 4. **Built-in HTTP/1.1 Web Server**
 Easily serve your project using the built-in web server that supports HTTP/1.1 for development. This allows quick local testing of your project with minimal setup.
 
-### 5. **AI Demo Integration**
-Explore the potential of AI with our pre-configured demo, which features an object detection system that can recognize items in images - ideal for machine learning demonstrations or real-world AI projects.
+### 5. **Optional AI Demo Integration**
+Explore the potential of AI with our pre-configured demo, if you want, which features an object detection system that can recognize items in images - ideal for machine learning demonstrations or real-world AI projects.
 
 ### 6. **Blazing-Fast Performance with Intelligent Workflow**
 Experience ultra-fast startup times that keep your development flow uninterrupted. Our intelligent development tool minimizes unnecessary browser launches and manual configurations, allowing you to focus on coding. Enjoy optimized browser handling that adapts to your workflow, making it easier than ever to create and test your projects in real-time.
@@ -508,6 +508,10 @@ npx github:burgil/supe-project-creator
 ```
 
 ## Changelog
+
+### Version 1.6.7 - Optional AI Demo
+
+- **README Adjustments**: The fact you can also have a clean project was not clear enough, I added hints in the README to indicate that the AI Demo, as the name suggest, is optional.
 
 ### Version 1.6.6 - Added Deno start script
 

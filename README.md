@@ -53,6 +53,8 @@ Easily serve your project using the built-in web server that supports HTTP/1.1 f
 ### 5. **AI Demo Integration**
 Explore the potential of AI with our pre-configured demo, which features an object detection system that can recognize items in images - ideal for machine learning demonstrations or real-world AI projects.
 
+**TODO:** Combine points 6. and 7. and add new features + mention the hotreload
+
 ### 6. **Blazing-Fast Performance**
 Experience fast startup times and intelligent browser handling that optimizes your workflow, allowing you to focus more on development and less on configuration.
 

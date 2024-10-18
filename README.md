@@ -1,10 +1,12 @@
-# Supe Project Creator v1.6.5
+# Supe Project Creator v1.6.6
 
 A simple tool for creating modern web projects with batteries included.
 
 ![Supe Project Creator - AI Demo Project](https://github.com/burgil/burgil/blob/main/public/Supe-Project-Creator-Gif.gif?raw=true)
 
 This is the first package under the @supeprojects scope, with more planned for the future.
+
+**TODO:** add a preview of the usage in the terminal here
 
 ## Overview - What is Supe Project Creator?
 
@@ -34,7 +36,7 @@ With Supe Project Creator, you can concentrate on what matters most – building
 > The package is not production-ready yet.
 
 > [!WARNING]
-> Deno support for this package is currently untested, but it is being actively worked on.
+> Deno support for this package is currently actively worked on.
 
 ## Key Features - What can Supe Project Creator do?
 
@@ -61,33 +63,6 @@ Leverage powerful hot reloading capabilities that instantly refresh your website
 
 > [!TIP]
 > Wait until v2.0.0 drops!
-
-## Upcoming Features
-
-### Roadmap
-
-I'm actively working to enhance Supe Project Creator with new features and learning resources:
-
-*   **Deno Support**: Add support for Deno as a JavaScript runtime environment.
-*   **AI Demo Projects**: Expand the project creator to support other types of AI demo projects, including machine learning and natural language processing examples.
-*   **Enhanced Project Customization**: Allow users to customize project settings, such as dependencies and configurations, more easily.
-*   **Streamlined Project Setup**: Simplify the project setup process, making it faster and more intuitive for users.
-*   **Better Support for Advanced Features**: Improve support for advanced features, such as hot reloading and TypeScript integration.
-*   **HTTP/2 Support**: Add support for HTTP/2 to improve performance and user experience.
-*   **SSL and HTTPS**: Integrate SSL certificates to serve projects over HTTPS.
-*   **Explore HTTP/3**: Investigate and potentially add support for HTTP/3 to future-proof your web applications.
-*   **Improved Installation**: Streamline the installation process for easier and faster project setup.
-*   **Tutorials and Documentation**: Create detailed tutorials and expand documentation to cover project setup, advanced configurations, and common use cases.
-*   **YouTube Videos**: Launch a YouTube channel with video guides covering different aspects of Supe Project Creator.
-*   **GIF and Media Demos**: Provide GIFs and other media assets to visually demonstrate the tool's features and workflows.
-*   **LLM Demo**: Include more AI demos, specifically large language model demos.
-*   **Optional TypeScript Error Notifications**: Introduce optional notifications for TypeScript errors to enhance user experience.
-*   **Dev Plugins Ecosystem**: Establish a plugins ecosystem for developers to extend and customize the project creator.
-*   **Server Integrations**: Offer out-of-the-box server integrations and auto CORS setup for seamless connectivity.
-*   **CLI and Code Integrations**: Enable CLI and code integrations to utilize the project creator as a package.
-*   **Docs and JSDocs Definitions**: Add comprehensive documentation and JSDocs definitions for improved clarity and usability.
-
-**These features are in active development, and your feedback is always welcome!**
 
 ## Prerequisites - What do you need to run Supe Project Creator?
 
@@ -127,8 +102,7 @@ deno jsr:@supeprojects/supe-project-creator -n my-supe-project
 deno jsr:@supeprojects/supe-project-creator --name "C:\Users\%username%\Desktop\my-supe-project"
 ```
 
-> [!TIP]
-> TODO: Add runtime argument `--bun`, `--deno` or `--node`
+**TODO:** Add runtime argument `--bun`, `--deno` or `--node`
 
 If you get any error related to `esbuild` during usage, Try to restart the terminal and try again, To avoid downloading dependencies it uses `bunx` (`NPX` Alternative) to fetch packages like `http-server`, `nodemon` and `esbuild`.
 
@@ -229,7 +203,7 @@ The Supe Project Creator (SPC) can be utilized programmatically within your Type
 Utilizing SPC programmatically allows you to:
 
 - **Automate Project Creation**: Integrate project setup into your build scripts or development tools.
-- **Customize Parameters**: Tailor the initialization process with specific options that suit your project needs. TODO: Add more options
+- **Customize Parameters**: Tailor the initialization process with specific options that suit your project needs. **TODO:** Add more options
 - **Streamlined Workflow**: Enhance your development workflow by reducing manual steps in project creation.
 ### Importing and Installing Supe Project Creator
 
@@ -361,6 +335,33 @@ SOFTWARE.
 ## Released - When Supe Project Creater was released?
 
 - **16 October 2024**
+
+## Upcoming Features
+
+### Roadmap
+
+I'm actively working to enhance Supe Project Creator with new features and learning resources:
+
+*   **Deno Support**: Add support for Deno as a JavaScript runtime environment.
+*   **AI Demo Projects**: Expand the project creator to support other types of AI demo projects, including machine learning and natural language processing examples.
+*   **Enhanced Project Customization**: Allow users to customize project settings, such as dependencies and configurations, more easily.
+*   **Streamlined Project Setup**: Simplify the project setup process, making it faster and more intuitive for users.
+*   **Better Support for Advanced Features**: Improve support for advanced features, such as hot reloading and TypeScript integration.
+*   **HTTP/2 Support**: Add support for HTTP/2 to improve performance and user experience.
+*   **SSL and HTTPS**: Integrate SSL certificates to serve projects over HTTPS.
+*   **Explore HTTP/3**: Investigate and potentially add support for HTTP/3 to future-proof your web applications.
+*   **Improved Installation**: Streamline the installation process for easier and faster project setup.
+*   **Tutorials and Documentation**: Create detailed tutorials and expand documentation to cover project setup, advanced configurations, and common use cases.
+*   **YouTube Videos**: Launch a YouTube channel with video guides covering different aspects of Supe Project Creator.
+*   **GIF and Media Demos**: Provide GIFs and other media assets to visually demonstrate the tool's features and workflows.
+*   **LLM Demo**: Include more AI demos, specifically large language model demos.
+*   **Optional TypeScript Error Notifications**: Introduce optional notifications for TypeScript errors to enhance user experience.
+*   **Dev Plugins Ecosystem**: Establish a plugins ecosystem for developers to extend and customize the project creator.
+*   **Server Integrations**: Offer out-of-the-box server integrations and auto CORS setup for seamless connectivity.
+*   **CLI and Code Integrations**: Enable CLI and code integrations to utilize the project creator as a package.
+*   **Docs and JSDocs Definitions**: Add comprehensive documentation and JSDocs definitions for improved clarity and usability.
+
+**These features are in active development, and your feedback is always welcome!**
 
 ## Contributing and Feedback - How to help develop Supe Project Creator?
 
@@ -507,6 +508,10 @@ npx github:burgil/supe-project-creator
 ```
 
 ## Changelog
+
+### Version 1.6.6 - Added Deno start script
+
+- **Generated projects now support deno**: The generated projects use to only support bun, after a lot of hard work I'm approaching the final stages in implementing Deno into the project, this time I fixed the generated start.ts file in new projects created with Deno, Completing the loop required to run SCP on Deno, This still needs to be tested carefully so for now please use bun.
 
 ### Version 1.6.5 - Reorganized README Sections
 

@@ -3,6 +3,7 @@ import process from 'node:process';
 import { join, basename, resolve } from 'node:path';
 const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely detected language on GitHub
 
+// TODO - The first line of the JSDocs needs to show more details related to the function
 /**
  * # Supe Project Creator
  *
@@ -67,7 +68,7 @@ export default function SupeProjectCreator(argv: string[], runtime: 'bun' | 'den
     // Variables:
     let CleanProject = true;
     let projectName = 'example-project';
-    const supeVersion = '1.6.5';
+    const supeVersion = '1.6.6';
     const supeVersionDate = '2024-10-16';
     if (argv.length === 0) argv.push('--help');
 
@@ -730,7 +731,8 @@ ${CleanProject ? '' : `
 };
 `);
 
-    const bunStartScript = `import { $ } from "bun";
+    if (runtime === 'bun') {
+        fs.writeFileSync(join(hotreloadDir, 'start.ts'), `import { $ } from "bun";
 import { basename } from "node:path";
 import { existsSync } from "node:fs";
 import process from "node:process";
@@ -773,12 +775,54 @@ await Promise.all([
 ])
 
 // End of file - Nothing will run below. Use CTRL+C in the terminal to terminate (due to awaiting running servers...)
-`;
-    if (runtime === 'bun') {
-        fs.writeFileSync(join(hotreloadDir, 'start.ts'), bunStartScript);
+`);
     } else if (runtime === 'deno') {
         fs.writeFileSync(join(hotreloadDir, 'start.ts'), `
 console.error("Deno support is under construction, Check again in the upcoming version!");
+
+import { $ } from "npm:bun"; // TODO check if bun, the package, works in deno - https://www.npmjs.com/package/bun
+import { basename } from "node:path";
+import { existsSync } from "node:fs";
+import process from "node:process";
+import config from "./config";
+const packageJSON = await Bun.file('package.json').json();
+
+if (!packageJSON.module.endsWith('.ts')) {
+    console.error(\`Could not load module. Expected a .ts file, but received \${packageJSON.module}\`);
+    process.exit();
+}
+
+if (!existsSync(packageJSON.module)) {
+    console.error(\`Could not find "\${packageJSON.module}" defined in the package.json "module" member\`);
+    process.exit();
+}
+
+const bundle = (input: string, output: string) => \`\${input} --outfile=\${output} --bundle --platform=browser --format=esm --target=\${config.target}\${config.minify ? ' --minify' : ''}\`;
+const index = bundle(packageJSON.module, \`\${config.paths.publicFolder}/\${basename(packageJSON.module).replace('.ts', '.js')}\`);
+
+await $\`echo ${CLI_COMMENT}\`;
+
+setTimeout(async () => {
+    console.log(\`\\x1b[32mHello\\x1b[0m \\x1b[34mWorld!\\x1b[0m\nThank you for using Supe Project Creator v${supeVersion}\`);
+    await $\`echo Press CTRL+C in the terminal to terminate the process.\`
+}, 2000);
+
+await Promise.all([
+    // Bundle index.ts:
+    $\`deno npm:esbuild \${index}\`,
+    // Bundle hotreload and start hotreload server:
+    $\`deno npm:esbuild \${bundle(\`\${config.paths.hotreloadFolder}/\${config.paths.hotreload.client}\`, \`\${config.paths.publicFolder}/\${config.paths.hotreload.output}\`)} && bun \${config.paths.hotreloadFolder}/\${config.paths.hotreload.server}\`,
+    // Serve public folder:
+    $\`deno npm:http-server \${config.paths.publicFolder} -p \${config.port}\${!config.httpLogs ? ' --silent' : ''}\`,
+    // Watch for changes in public and hotreload - On reload: Bundle index.ts + Refresh Page:
+    $\`deno npm:nodemon --ext \${config.watchExtensions} --watch \${config.paths.publicFolder} --watch \${config.paths.hotreloadFolder} --watch \${config.paths.srcFolder} --on-change-only --exec 'bunx esbuild \${index}\${config.refresh.changes ? \` && bun \${config.paths.hotreloadFolder}/\${config.paths.hotreload.refresh}\` : ''}'\`,
+    // Watch for errors - Detect TypeScript errors without cleaning the console:
+    $\`tsc -b --watch --preserveWatchOutput\`, // TODO test if 'deno check' can replace tsc watch command
+    // All commands in here run in parallel
+    $\`echo You are using Supe Project Creator v${supeVersion}\`,
+])
+
+// End of file - Nothing will run below. Use CTRL+C in the terminal to terminate (due to awaiting running servers...)
 `);
     } else if (runtime === 'node') {
         fs.writeFileSync(join(hotreloadDir, 'start.ts'), `

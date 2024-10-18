@@ -1,4 +1,4 @@
-# Supe Project Creator v1.6.2
+# Supe Project Creator v1.6.3
 
 A simple tool for creating modern web projects with batteries included.
 
@@ -220,108 +220,6 @@ Supe Project Creator organizes your project using the following structure:
 > - **Streamlined view**: Concentrate on your project's essential files, without clutter from `node_modules` and other irrelevant directories.
 > - **Improved performance**: By excluding unnecessary files, you'll experience faster loading times and more efficient search results.
 
-## License
-
-```
-MIT License
-
-Copyright (c) 2024 Burgil
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-## Contributors - Who helped build Supe Project Creator?
-
-- **Burgil**
-
-## Released - When Supe Project Creater was released?
-
-- **16 October 2024**
-
-## Contributing and Feedback - How to help develop Supe Project Creator?
-
-Contributions are welcome from the community! Whether it's a new feature idea, bug fix, or documentation improvement, I'd love to hear from you.
-
-### Ways to Contribute
-
-- **Open Issues**: Check our issue tracker for open issues, such as "beginner-friendly" or "feature request."
-- **Submit Pull Requests**: Submit your changes via a pull request, and our team will review and merge them.
-- **Documentation Improvements**: Help enhance our documentation by adding guides or correcting errors.
-- **Community Feedback**: Share your ideas and suggestions in the discussions section or on social media.
-
-### Types of Contributions
-
-- **Code**: Bug fixes, new features, and performance improvements.
-- **Design**: UI/UX design contributions.
-- **Translation**: Help translate our documentation into different languages.
-
-### Contribution Guidelines
-
-- **Code Style**: Follow standard TypeScript and Bun conventions.
-- **Commit Messages**: Use clear and descriptive commit messages.
-- **PR Labels**: Tag pull requests with relevant labels for easier review.
-
-**Getting Started**
----------------
-
-1.  **Fork the Repository**: Fork our repository to create a copy of the code.
-2.  **Create a Branch**: Create a new branch for your changes.
-3.  **Make Changes**: Make your changes and commit them.
-4.  **Lint & Bump**: Bump the version using `bun bump` and lint the project with `deno lint` to find important issues.
-5.  **Submit a PR**: Submit a pull request with your changes.
-
-I appreciate your contributions and look forward to hearing from you!
-
-**Bump Version Script**
----------------
-
-As a contributor to this project, you may need to update the version number of your own fork or local copy. The following steps outline how to do so.
-
-The `bump.ts` script is executed by either `bun` or `deno` to increment the version number of a project, by updating the relevant files such as `package.json`.
-
-Automations. Algorithms. Everywhere.
-
-![Bump Version Script](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot1.png?raw=true)
-
-**Inspecting the Final Commit of the Automation Script:**
----------------
-
-The following screenshots demonstrate the changes made by the version bump script:
-
-![Bump Version Script Commit Example - README.md](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot2.png?raw=true) ![Bump Version Script Commit Example - index.ts](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot3.png?raw=true) ![Bump Version Script Commit Example - jsr.json](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot4.png?raw=true) ![Bump Version Script Commit Example - package.json](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot5.png?raw=true)
-
-**Running the Bump Version Script**
----------------
-
-To run the bump version script in your own local environment, use one of the following commands:
-
-- To run with `bun`, execute: 
-```bash
-bun bump
-```
-
-- To run with `deno`, execute: 
-```bash
-deno bump.ts
-```
-**Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
-
 ## Programmatic Usage
 
 The Supe Project Creator (SPC) can be utilized programmatically within your TypeScript or JavaScript applications. This allows you to create projects dynamically and customize the initialization process according to your needs.
@@ -430,6 +328,108 @@ console.log("Testing SPC in Bun...");
 mod([]); // Shows the help menu
 ```
 
+## License
+
+```
+MIT License
+
+Copyright (c) 2024 Burgil
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+## Contributors - Who helped build Supe Project Creator?
+
+- **Burgil**
+
+## Released - When Supe Project Creater was released?
+
+- **16 October 2024**
+
+## Contributing and Feedback - How to help develop Supe Project Creator?
+
+Contributions are welcome from the community! Whether it's a new feature idea, bug fix, or documentation improvement, I'd love to hear from you.
+
+### Ways to Contribute
+
+- **Open Issues**: Check our issue tracker for open issues, such as "beginner-friendly" or "feature request."
+- **Submit Pull Requests**: Submit your changes via a pull request, and our team will review and merge them.
+- **Documentation Improvements**: Help enhance our documentation by adding guides or correcting errors.
+- **Community Feedback**: Share your ideas and suggestions in the discussions section or on social media.
+
+### Types of Contributions
+
+- **Code**: Bug fixes, new features, and performance improvements.
+- **Design**: UI/UX design contributions.
+- **Translation**: Help translate our documentation into different languages.
+
+### Contribution Guidelines
+
+- **Code Style**: Follow standard TypeScript and Bun conventions.
+- **Commit Messages**: Use clear and descriptive commit messages.
+- **PR Labels**: Tag pull requests with relevant labels for easier review.
+
+**Getting Started**
+---------------
+
+1.  **Fork the Repository**: Fork our repository to create a copy of the code.
+2.  **Create a Branch**: Create a new branch for your changes.
+3.  **Make Changes**: Make your changes and commit them.
+4.  **Lint & Bump**: Bump the version using `bun bump` and lint the project with `deno lint` to find important issues.
+5.  **Submit a PR**: Submit a pull request with your changes.
+
+I appreciate your contributions and look forward to hearing from you!
+
+**Bump Version Script**
+---------------
+
+As a contributor to this project, you may need to update the version number of your own fork or local copy. The following steps outline how to do so.
+
+The `bump.ts` script is executed by either `bun` or `deno` to increment the version number of a project, by updating the relevant files such as `package.json`.
+
+Automations. Algorithms. Everywhere.
+
+![Bump Version Script](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot1.png?raw=true)
+
+**Inspecting the Final Commit of the Automation Script:**
+---------------
+
+The following screenshots demonstrate the changes made by the version bump script:
+
+![Bump Version Script Commit Example - README.md](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot2.png?raw=true) ![Bump Version Script Commit Example - index.ts](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot3.png?raw=true) ![Bump Version Script Commit Example - jsr.json](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot4.png?raw=true) ![Bump Version Script Commit Example - package.json](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot5.png?raw=true)
+
+**Running the Bump Version Script**
+---------------
+
+To run the bump version script in your own local environment, use one of the following commands:
+
+- To run with `bun`, execute: 
+```bash
+bun bump
+```
+
+- To run with `deno`, execute: 
+```bash
+deno bump.ts
+```
+**Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
+
 ### Old Examples
 
 - **Create a new project with a custom name at a specific path:**
@@ -507,6 +507,10 @@ npx github:burgil/supe-project-creator
 ```
 
 ## Changelog
+
+### Version 1.6.3 - Reorganized Sections
+
+- **Section Order Updated**: Moved the Programmatic Usage section above the Contribution section in the README for better logical flow and accessibility, making it easier for users to find relevant information.
 
 ### Version 1.6.2 - Improved Readability
 

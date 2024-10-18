@@ -1,4 +1,4 @@
-# Supe Project Creator v1.5.8
+# Supe Project Creator v1.5.9
 
 A simple tool for creating modern web projects with batteries included.
 
@@ -322,7 +322,195 @@ deno bump.ts
 ```
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
+## Programmatic Usage
+
+The Supe Project Creator (SPC) can be utilized programmatically within your TypeScript or JavaScript applications. This allows you to create projects dynamically and customize the initialization process according to your needs.
+
+### Benefits of Programmatic Use
+
+Utilizing SPC programmatically allows you to:
+
+- **Automate Project Creation**: Integrate project setup into your build scripts or development tools.
+- **Customize Parameters**: Tailor the initialization process with specific options that suit your project needs. TODO: Add more options
+- **Streamlined Workflow**: Enhance your development workflow by reducing manual steps in project creation.
+### Importing and Installing Supe Project Creator
+
+#### Programmatic Use Example
+
+```ts
+import SPC from 'jsr:@supeprojects/supe-project-creator';
+
+console.log("Testing SPC programmatically...");
+
+// Display the help menu
+SPC([]);
+
+// Create a new clean project named "my-example-project"
+SPC(['--name', 'my-example-project']);
+
+// Create a project with specific runtime and additional options (May soon be replaced with an argument instead of a variable)
+SPC(['--name', 'my-custom-project'], 'deno');
+
+// Generate a project and immediately start the development server - Not implemented yet! TODO: Implement --start script
+// SPC(['--name', 'my-fast-project', '--start']);
+```
+
+### Programmatic Use Parameters
+
+- `argv: string[]`: An array of command-line arguments that control the behavior of the project creation process. This includes options like `--name` for naming the project, and in the future, it might have a `--runtime` option to specify the environment (e.g., `bun`, `deno`, or `node`) or `--bun`, `--deno`, and `--node`.
+- `runtime: 'bun' | 'deno' | 'node'`: The runtime environment for the project creation process. It defaults to `'bun'`. You can specify which environment to use by passing one of these values.
+
+For more detailed information on available options and flags, refer to the [CLI Options](#cli-options) section of the documentation.
+
+Depending on the runtime environment you're using, you can import the `Supe Project Creator` (SPC) in different ways. Below are examples for **Deno**, **Node**, and **Bun**.
+
+With these commands, you can easily set up and utilize the Supe Project Creator in your Deno, Node.js, or Bun environments. This flexibility allows you to choose the runtime that best fits your project needs.
+
+#### Deno
+
+To add the `Supe Project Creator` package in Deno, you can import it directly without any installation if you use the `jsr:` prefix in your import:
+
+```ts
+import * as mod from "jsr:@supeprojects/supe-project-creator";
+
+// Example usage
+console.log("Testing SPC in Deno...");
+mod([]); // Shows the help menu
+```
+
+Alternatively, if you prefer to add it, use the following command:
+
+```bash
+deno add jsr:@supeprojects/supe-project-creator
+```
+
+Then, you can import it like this:
+
+```ts
+import * as mod from "@supeprojects/supe-project-creator";
+
+// Example usage
+console.log("Testing SPC in Deno...");
+mod([]); // Shows the help menu
+```
+
+#### Node.js
+
+For Node.js, you can install the package using `npx`:
+
+```bash
+npx jsr add @supeprojects/supe-project-creator
+```
+
+Then, import it in your code:
+
+```ts
+import * as mod from "@supeprojects/supe-project-creator";
+
+// Example usage
+console.log("Testing SPC in Node...");
+mod([]); // Shows the help menu
+```
+
+#### Bun
+
+To add the package in Bun, use the following command:
+
+```bash
+bunx jsr add @supeprojects/supe-project-creator
+```
+
+Import the module in your Bun project:
+
+```ts
+import * as mod from "@supeprojects/supe-project-creator";
+
+// Example usage
+console.log("Testing SPC in Bun...");
+mod([]); // Shows the help menu
+```
+
+### Old Examples
+
+- **Create a new project with a custom name at a specific path:**
+
+```bash
+bun ./node_modules/@supeprojects/supe-project-creator -n "C:\Users\%username%\Desktop\my-supe-project"
+```
+
+- **Create a new project folder with a custom name in the current directory:**
+
+```bash
+bun ./node_modules/@supeprojects/supe-project-creator -n my-supe-project
+```
+
+- **Create a demo project:**
+
+```bash
+bun ./node_modules/@supeprojects/supe-project-creator --demo --name cat-dog-detector
+```
+
+## Old Usage - How to run with Bun instead of Deno?
+
+> [!IMPORTANT]
+> JSR currently does not support NPX or BUNX-style direct execution, but `--global` installation may be available soon. Feel free to suggest a better approach if you find one.
+
+To start using Supe Project Creator, run the following commands:
+
+```bash
+mkdir supe-project-creator
+cd supe-project-creator
+bun init -y
+bunx jsr add @supeprojects/supe-project-creator@latest
+```
+
+### Displaying Available Options
+
+To view the available options for Supe Project Creator, run the following command:
+
+#### Using Bun
+```bash
+bun ./node_modules/@supeprojects/supe-project-creator --help
+```
+
+#### Using Deno
+```bash
+deno ./node_modules/@supeprojects/supe-project-creator --help
+```
+**Note:** Deno support is currently untested, but it will be fully supported in the future.
+
+#### Using Node
+```bash
+node ./node_modules/@supeprojects/supe-project-creator --help
+```
+**Note:** Node currently has limitations due to missing built-in TypeScript compatibility, but the above command will still work.
+
+### Future Command (🤞):
+```bash
+jsr supe-project-creator [options]
+
+# Windows Example:
+$env:npm_config_registry="https://your.custom.registry/"; npx -p @yourcompany/tools foo
+# Linux Example:
+npm_config_registry=https://your.custom.registry/ npx -p @yourcompany/tools foo
+
+# Almost Working!:
+$env:npm_config_registry="https://npm.jsr.io/@jsr/"
+npx supeprojects__supe-project-creator
+
+$env:npm_config_registry="https://npm.jsr.io/@jsr/"
+bunx supeprojects__supe-project-creator
+
+# Without JSR: (Temporary solution until another method is discovered)
+bunx burgil/supe-project-creator
+npx github:burgil/supe-project-creator
+```
+
 ## Changelog
+
+### Version 1.5.9 - Moved the Programmatic Use section
+
+- **README Changes**: Moved the new Programmatic Use section above the change log
 
 ### Version 1.5.8 - Added Runtime and Import Clarifications
 
@@ -563,187 +751,3 @@ deno bump.ts
 *Initial Release*
 
 Note: Since this is the first version of the changelog, there are no previous versions to report on. Future updates will include detailed information about changes, bug fixes, and new features.
-
-## Programmatic Usage
-
-The Supe Project Creator (SPC) can be utilized programmatically within your TypeScript or JavaScript applications. This allows you to create projects dynamically and customize the initialization process according to your needs.
-
-### Benefits of Programmatic Use
-
-Utilizing SPC programmatically allows you to:
-
-- **Automate Project Creation**: Integrate project setup into your build scripts or development tools.
-- **Customize Parameters**: Tailor the initialization process with specific options that suit your project needs. TODO: Add more options
-- **Streamlined Workflow**: Enhance your development workflow by reducing manual steps in project creation.
-### Importing and Installing Supe Project Creator
-
-#### Programmatic Use Example
-
-```ts
-import SPC from 'jsr:@supeprojects/supe-project-creator';
-
-console.log("Testing SPC programmatically...");
-
-// Display the help menu
-SPC([]);
-
-// Create a new clean project named "my-example-project"
-SPC(['--name', 'my-example-project']);
-
-// Create a project with specific runtime and additional options (May soon be replaced with an argument instead of a variable)
-SPC(['--name', 'my-custom-project'], 'deno');
-
-// Generate a project and immediately start the development server - Not implemented yet! TODO: Implement --start script
-// SPC(['--name', 'my-fast-project', '--start']);
-```
-
-### Programmatic Use Parameters
-
-- `argv: string[]`: An array of command-line arguments that control the behavior of the project creation process. This includes options like `--name` for naming the project, and in the future, it might have a `--runtime` option to specify the environment (e.g., `bun`, `deno`, or `node`) or `--bun`, `--deno`, and `--node`.
-- `runtime: 'bun' | 'deno' | 'node'`: The runtime environment for the project creation process. It defaults to `'bun'`. You can specify which environment to use by passing one of these values.
-
-For more detailed information on available options and flags, refer to the [CLI Options](#cli-options) section of the documentation.
-
-Depending on the runtime environment you're using, you can import the `Supe Project Creator` (SPC) in different ways. Below are examples for **Deno**, **Node**, and **Bun**.
-
-With these commands, you can easily set up and utilize the Supe Project Creator in your Deno, Node.js, or Bun environments. This flexibility allows you to choose the runtime that best fits your project needs.
-
-#### Deno
-
-To add the `Supe Project Creator` package in Deno, you can import it directly without any installation if you use the `jsr:` prefix in your import:
-
-```ts
-import * as mod from "jsr:@supeprojects/supe-project-creator";
-
-// Example usage
-console.log("Testing SPC in Deno...");
-mod([]); // Shows the help menu
-```
-
-Alternatively, if you prefer to add it, use the following command:
-
-```bash
-deno add jsr:@supeprojects/supe-project-creator
-```
-
-Then, you can import it like this:
-
-```ts
-import * as mod from "@supeprojects/supe-project-creator";
-
-// Example usage
-console.log("Testing SPC in Deno...");
-mod([]); // Shows the help menu
-```
-
-#### Node.js
-
-For Node.js, you can install the package using `npx`:
-
-```bash
-npx jsr add @supeprojects/supe-project-creator
-```
-
-Then, import it in your code:
-
-```ts
-import * as mod from "@supeprojects/supe-project-creator";
-
-// Example usage
-console.log("Testing SPC in Node...");
-mod([]); // Shows the help menu
-```
-
-#### Bun
-
-To add the package in Bun, use the following command:
-
-```bash
-bunx jsr add @supeprojects/supe-project-creator
-```
-
-Import the module in your Bun project:
-
-```ts
-import * as mod from "@supeprojects/supe-project-creator";
-
-// Example usage
-console.log("Testing SPC in Bun...");
-mod([]); // Shows the help menu
-```
-
-### Old Examples
-
-- **Create a new project with a custom name at a specific path:**
-
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator -n "C:\Users\%username%\Desktop\my-supe-project"
-```
-
-- **Create a new project folder with a custom name in the current directory:**
-
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator -n my-supe-project
-```
-
-- **Create a demo project:**
-
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator --demo --name cat-dog-detector
-```
-
-## Old Usage - How to run with Bun instead of Deno?
-
-> [!IMPORTANT]
-> JSR currently does not support NPX or BUNX-style direct execution, but `--global` installation may be available soon. Feel free to suggest a better approach if you find one.
-
-To start using Supe Project Creator, run the following commands:
-
-```bash
-mkdir supe-project-creator
-cd supe-project-creator
-bun init -y
-bunx jsr add @supeprojects/supe-project-creator@latest
-```
-
-### Displaying Available Options
-
-To view the available options for Supe Project Creator, run the following command:
-
-#### Using Bun
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator --help
-```
-
-#### Using Deno
-```bash
-deno ./node_modules/@supeprojects/supe-project-creator --help
-```
-**Note:** Deno support is currently untested, but it will be fully supported in the future.
-
-#### Using Node
-```bash
-node ./node_modules/@supeprojects/supe-project-creator --help
-```
-**Note:** Node currently has limitations due to missing built-in TypeScript compatibility, but the above command will still work.
-
-### Future Command (🤞):
-```bash
-jsr supe-project-creator [options]
-
-# Windows Example:
-$env:npm_config_registry="https://your.custom.registry/"; npx -p @yourcompany/tools foo
-# Linux Example:
-npm_config_registry=https://your.custom.registry/ npx -p @yourcompany/tools foo
-
-# Almost Working!:
-$env:npm_config_registry="https://npm.jsr.io/@jsr/"
-npx supeprojects__supe-project-creator
-
-$env:npm_config_registry="https://npm.jsr.io/@jsr/"
-bunx supeprojects__supe-project-creator
-
-# Without JSR: (Temporary solution until another method is discovered)
-bunx burgil/supe-project-creator
-npx github:burgil/supe-project-creator
-```

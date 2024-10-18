@@ -1,4 +1,4 @@
-# Supe Project Creator v1.6.8
+# Supe Project Creator v1.6.9
 
 A simple tool for creating modern web projects with batteries included.
 
@@ -89,17 +89,17 @@ To start using Supe Project Creator, simply run the following command:
 
 ### Create an AI Demo Project in the Current Working Directory:
 ```bash
-deno jsr:@supeprojects/supe-project-creator --demo -n cat-dog-detector
+deno jsr:@supeprojects/supe-project-creator@1.6.9 --demo -n cat-dog-detector
 ```
 
 ### Create a Clean Project in the Current Working Directory:
 ```bash
-deno jsr:@supeprojects/supe-project-creator -n my-supe-project
+deno jsr:@supeprojects/supe-project-creator@1.6.9 -n my-supe-project
 ```
 
 ### Create a Clean Project in a Specific Directory:
 ```bash
-deno jsr:@supeprojects/supe-project-creator --name "C:\Users\%username%\Desktop\my-supe-project"
+deno jsr:@supeprojects/supe-project-creator@1.6.9 --name "C:\Users\%username%\Desktop\my-supe-project"
 ```
 
 **TODO:** Add runtime argument `--bun`, `--deno` or `--node`
@@ -165,7 +165,7 @@ This behavior is, of course, configurable in `hotreload/config.ts`, allowing you
 To view the available options for Supe Project Creator, run the following command:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator --help
+deno jsr:@supeprojects/supe-project-creator@1.6.9 --help
 ```
 
 - `-h`, `--help`: Displays help information.
@@ -210,7 +210,7 @@ Utilizing SPC programmatically allows you to:
 #### Programmatic Use Example
 
 ```ts
-import SPC from 'jsr:@supeprojects/supe-project-creator';
+import SPC from 'jsr:@supeprojects/supe-project-creator@1.6.9';
 
 console.log("Testing SPC programmatically...");
 
@@ -243,7 +243,7 @@ With these commands, you can easily set up and utilize the Supe Project Creator 
 To add the `Supe Project Creator` package in Deno, you can import it directly without any installation if you use the `jsr:` prefix in your import:
 
 ```ts
-import * as mod from "jsr:@supeprojects/supe-project-creator";
+import * as mod from "jsr:@supeprojects/supe-project-creator@1.6.9";
 
 // Example usage
 console.log("Testing SPC in Deno...");
@@ -253,7 +253,7 @@ mod([]); // Shows the help menu
 Alternatively, if you prefer to add it, use the following command:
 
 ```bash
-deno add jsr:@supeprojects/supe-project-creator
+deno add jsr:@supeprojects/supe-project-creator@1.6.9
 ```
 
 Then, you can import it like this:
@@ -392,7 +392,7 @@ Contributions are welcome from the community! Whether it's a new feature idea, b
 1.  **Fork the Repository**: Fork our repository to create a copy of the code.
 2.  **Create a Branch**: Create a new branch for your changes.
 3.  **Make Changes**: Make your changes and commit them.
-4.  **Lint & Bump**: Bump the version using `bump.ts` and lint the project with `deno lint` to find important issues.
+4.  **Lint & Bump**: Bump the version using `deno run bump` and lint the project with `deno lint` to find important issues.
 5.  **Submit a PR**: Submit a pull request with your changes.
 
 I appreciate your contributions and look forward to hearing from you!
@@ -402,9 +402,9 @@ I appreciate your contributions and look forward to hearing from you!
 
 As a contributor to this project, you may need to update the version number of your own fork or local copy. The following steps outline how to do so.
 
-The `bump.ts` script is executed by either `bun` or `deno` to increment the version number of a project, by updating the relevant files such as `package.json`.
+The `bump.ts` script is executed by ~~either `bun`~~ or `deno` to increment the version number of a project, by updating the relevant files such as `deno.json`, `README.md`, `jsr.json` and etc.
 
-Automations. Algorithms. Everywhere.
+*Automations. Algorithms. Everywhere.*
 
 ![Bump Version Script](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot1.png?raw=true)
 
@@ -427,11 +427,15 @@ bun bump
 
 - To run with `deno`, execute: 
 ```bash
-deno run --allow-read --allow-write --allow-env --allow-run bump.ts
+deno run bump
 ```
 **Note:** ~~Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.~~ The solution was to replace the `readline.createInterface` and the `rl.question` with simply a `prompt`! See [this](https://docs.deno.com/examples/prompts/) and [this](https://github.com/denoland/deno/issues/18184#issuecomment-2422842488) for more info...
 
 ## Changelog
+
+### Version 1.6.9 - Fixed Installation Command
+
+- **No more outdated versions**: The `deno run jsr:` command was using the old version you have cached and there is no `@latest` flag so the `bump.ts` script will now take care of this
 
 ### Version 1.6.8 - Essential Fixes and Enhancements Patch
 
@@ -551,7 +555,7 @@ deno run --allow-read --allow-write --allow-env --allow-run bump.ts
 
 ### Version 1.3.9 - Improved Bump Script
 
-- **Version Control Support for the Bump Script**: When `bump.ts` is used the script will prompt to push into GitHub at the end, but if there are any pending changes it will ask you if you want to pull them first and let you know if there were conflicts while pushing, Otherwise it will use the bump message to commit a detailed commit into GitHub
+- **Version Control Support for the Bump Script**: When `deno run bump` is used the script will prompt to push into GitHub at the end, but if there are any pending changes it will ask you if you want to pull them first and let you know if there were conflicts while pushing, Otherwise it will use the bump message to commit a detailed commit into GitHub
 
 ### Version 1.3.8 - Fixed Docs
 

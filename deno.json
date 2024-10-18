@@ -1,11 +1,11 @@
 {
   "name": "@supeprojects/supe-project-creator",
-  "version": "1.6.8",
+  "version": "1.6.9",
   "license": "MIT",
   "exports": "./index.ts",
   "tasks": {
     "dev": "deno run --watch index.ts",
     "start": "deno lint && deno index.ts",
-    "bump": "deno lint && deno bump.ts"
+    "bump": "deno lint && deno --allow-read --allow-write --allow-env --allow-run bump.ts"
   }
 }

@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import * as readline from 'node:readline';
 import process from "node:process";
 import { spawnSync } from 'node:child_process';
 
@@ -30,6 +29,10 @@ const bump_files: {
             search: '# Supe Project Creator v{currentVersion}',
             replacement: '# Supe Project Creator v{newVersion}',
         },
+        {
+            search: 'jsr:@supeprojects/supe-project-creator@{currentVersion}',
+            replacement: 'jsr:@supeprojects/supe-project-creator@{newVersion}'
+        }
     ],
 };
 const packageJsonPath = './deno.json';
@@ -200,7 +203,7 @@ async function main() {
                     .replace('{mainDescription}', mainDescription || 'MainDescription')
                     .replace('{secondaryDescription}', secondaryDescription || 'SecondaryDescription');
                 const find = bump_file.search.replace('{currentVersion}', currentVersion);
-                content = content.replace(find, replacement);
+                content = content.replaceAll(find, replacement);
             }
             fs.writeFileSync(filePath, content);
             console.log('\x1b[32m%s\x1b[0m', `Updated version in ${filePath}`);

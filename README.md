@@ -1,4 +1,4 @@
-# Supe Project Creator v1.5.9
+# Supe Project Creator v1.6.0
 
 A simple tool for creating modern web projects with batteries included.
 
@@ -53,13 +53,11 @@ Easily serve your project using the built-in web server that supports HTTP/1.1 f
 ### 5. **AI Demo Integration**
 Explore the potential of AI with our pre-configured demo, which features an object detection system that can recognize items in images - ideal for machine learning demonstrations or real-world AI projects.
 
-**TODO:** Combine points 6. and 7. and add new features + mention the hotreload
+### 6. **Blazing-Fast Performance with Intelligent Workflow**
+Experience ultra-fast startup times and seamless hot reloading that keep your development flow uninterrupted. Our intelligent development tool minimizes unnecessary browser launches and manual configurations, allowing you to focus on coding. Enjoy optimized browser handling that adapts to your workflow, making it easier than ever to create and test your projects in real-time.
 
-### 6. **Blazing-Fast Performance**
-Experience fast startup times and intelligent browser handling that optimizes your workflow, allowing you to focus more on development and less on configuration.
-
-### 7. **Intelligent Development Workflow**
-Eliminate unnecessary browser launches and avoid cumbersome manual configurations with an intelligent development tool designed to streamline the entire process.
+### 7. **Instant Hot Reloading for Real-Time Development**
+Leverage powerful hot reloading capabilities that instantly refresh your project as you make changes. This feature allows you to see updates in real-time, enhancing your productivity by eliminating the need for manual refreshes. Enjoy a smooth development experience with immediate feedback, so you can iterate quickly and efficiently.
 
 > [!TIP]
 > Wait until v2.0.0 drops!
@@ -509,6 +507,10 @@ npx github:burgil/supe-project-creator
 ```
 
 ## Changelog
+
+### Version 1.6.0 - Updated Key Features
+
+- **Enhanced Documentation**: Revised the Key Features section to improve clarity and detail. Combined points on performance and intelligent workflow, and introduced a dedicated point for hot reloading.
 
 ### Version 1.5.9 - Moved the Programmatic Use section
 

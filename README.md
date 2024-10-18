@@ -1,4 +1,4 @@
-# Supe Project Creator v1.5.6
+# Supe Project Creator v1.5.7
 
 A simple tool for creating modern web projects with batteries included.
 
@@ -207,19 +207,18 @@ Supe Project Creator organizes your project using the following structure:
 - `public`: Public-facing files, including `index.html`.
 - `hotreload`: Configuration and scripts for hot reloading.
 
-## Recommended VSCode Workspace Configuration
-
-To enhance your development experience, Use the provided recommended `.code-workspace` file named after your project. This configuration excludes unnecessary files from view, allowing you to focus on your code.
-
-**Opening the VSCode Workspace:**
-
-1. Locate the `<project-name>.code-workspace` file in your project directory.
-2. Double-click the file to open it in VS Code, or find "Open Workspace" inside VS Code.
-
-**Benefits of Using the Recommended VSCode Workspace:**
-
-* Streamlined view: Concentrate on your project's essential files, without clutter from `node_modules` and other irrelevant directories.
-* Improved performance: By excluding unnecessary files, you'll experience faster loading times and more efficient search results.
+> [!TIP]
+> ### Recommended VSCode Workspace Configuration
+>
+> To enhance your development experience, use the provided recommended `.code-workspace` file named after your project. This configuration excludes unnecessary files from view, allowing you to focus on your code.
+>
+> **Opening the VSCode Workspace:**
+> 1. Locate the `<project-name>.code-workspace` file in your project directory.
+> 2. Double-click the file to open it in VS Code, or find "Open Workspace" inside VS Code.
+>
+> **Benefits of Using the Recommended VSCode Workspace:**
+> - **Streamlined view**: Concentrate on your project's essential files, without clutter from `node_modules` and other irrelevant directories.
+> - **Improved performance**: By excluding unnecessary files, you'll experience faster loading times and more efficient search results.
 
 ## License
 
@@ -324,6 +323,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.5.7 - Updated VSCode Workspace Configuration Guidance
+
+- **Revised README to include a dedicated tip for using the recommended VSCode workspace file**: Transformed the VSCode workspace configuration section into a clear tip, emphasizing its benefits for enhancing development experience and streamlining project management by excluding unnecessary files.
 
 ### Version 1.5.6 - Enhanced Project Initialization with Deno Support and Improved Documentation
 

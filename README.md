@@ -1,4 +1,4 @@
-# Supe Project Creator v1.6.4
+# Supe Project Creator v1.6.5
 
 A simple tool for creating modern web projects with batteries included.
 
@@ -430,26 +430,6 @@ deno bump.ts
 ```
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
-### Old Examples
-
-- **Create a new project with a custom name at a specific path:**
-
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator -n "C:\Users\%username%\Desktop\my-supe-project"
-```
-
-- **Create a new project folder with a custom name in the current directory:**
-
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator -n my-supe-project
-```
-
-- **Create a demo project:**
-
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator --demo --name cat-dog-detector
-```
-
 ## Old Usage - How to run with Bun instead of Deno?
 
 > [!IMPORTANT]
@@ -485,6 +465,26 @@ node ./node_modules/@supeprojects/supe-project-creator --help
 ```
 **Note:** Node currently has limitations due to missing built-in TypeScript compatibility, but the above command will still work.
 
+### Old Examples
+
+- **Create a new project with a custom name at a specific path:**
+
+```bash
+bun ./node_modules/@supeprojects/supe-project-creator -n "C:\Users\%username%\Desktop\my-supe-project"
+```
+
+- **Create a new project folder with a custom name in the current directory:**
+
+```bash
+bun ./node_modules/@supeprojects/supe-project-creator -n my-supe-project
+```
+
+- **Create a demo project:**
+
+```bash
+bun ./node_modules/@supeprojects/supe-project-creator --demo --name cat-dog-detector
+```
+
 ### Future Command (🤞):
 ```bash
 jsr supe-project-creator [options]
@@ -507,6 +507,10 @@ npx github:burgil/supe-project-creator
 ```
 
 ## Changelog
+
+### Version 1.6.5 - Reorganized README Sections
+
+- **Improved Section Layout**: Reorganized existing sections in the README to enhance structure and readability
 
 ### Version 1.6.4 - Fixed JSR Document Navigation Bug
 

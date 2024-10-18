@@ -1,6 +1,6 @@
 import fs from 'node:fs';
-import path from 'node:path';
 import process from 'node:process';
+import { join, basename, resolve } from 'node:path';
 const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely detected language on GitHub
 
 /**
@@ -57,7 +57,7 @@ const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely d
  *
  * ## TODO
  *
- * - Add Deno Support
+ * - Finish adding Deno support
  *
  * @param {string[]} argv - Command line arguments provided by the user. These control the behavior of the project creation.
  * @param {'bun' | 'deno' | 'node'} [runtime='bun'] - The runtime environment for the project creation process. Defaults to 'bun'.
@@ -67,11 +67,11 @@ export default function SupeProjectCreator(argv: string[], runtime: 'bun' | 'den
     // Variables:
     let CleanProject = true;
     let projectName = 'example-project';
-    const supeVersion = '1.5.5';
+    const supeVersion = '1.5.6';
     const supeVersionDate = '2024-10-16';
     if (argv.length === 0) argv.push('--help');
 
-    if (runtime === 'node' || runtime === 'deno') {
+    if (runtime === 'node') {
         console.error(`The '${runtime}' is not supported yet. Follow up for changes in the GitHub repository!`);
         // process.exit(); // Support is being actively explored, Uncommenting this leads to type errors
     }
@@ -97,11 +97,16 @@ export default function SupeProjectCreator(argv: string[], runtime: 'bun' | 'den
         } else if (arg === '-n' || arg === '--name') {
             const nextArg = argv[argv.indexOf(arg) + 1];
             if (nextArg && !nextArg.startsWith('-')) {
-                const validProjectName = /^[a-z0-9_-]+$/.test(nextArg);
-                if (validProjectName) {
+                const denoPattern = /^@[a-z0-9-]+\/[a-z0-9-]+$/;
+                const validProjectNamePattern = /^[a-z0-9_-]+$/;
+                const isDenoProjectName = denoPattern.test(nextArg);
+                const isValidProjectName = validProjectNamePattern.test(nextArg);
+                if (isValidProjectName || isDenoProjectName) {
                     projectName = nextArg.toLowerCase();
                 } else {
-                    console.error('Error: Project name can only contain lowercase letters, numbers, hyphens, and underscores.');
+                    console.error(
+                        'Error: Project name must be either a valid lowercase alphanumeric name with hyphens and underscores, or follow the Deno pattern (@namespace/project).'
+                    );
                     process.exit(1);
                 }
             } else {
@@ -117,50 +122,81 @@ export default function SupeProjectCreator(argv: string[], runtime: 'bun' | 'den
     }
 
     const outDir = projectName;
-    projectName = path.basename(projectName);
+    projectName = basename(projectName);
     if (!fs.existsSync(outDir)) {
         fs.mkdirSync(outDir);
     } else {
         console.error(`Error: Folder already exist ${outDir}`);
         process.exit(1);
     }
-    const hotreloadDir = path.join(outDir, 'hotreload');
+    const hotreloadDir = join(outDir, 'hotreload');
     if (!fs.existsSync(hotreloadDir)) fs.mkdirSync(hotreloadDir);
-    const publicDir = path.join(outDir, 'public');
+    const publicDir = join(outDir, 'public');
     if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir);
-    const srcDir = path.join(outDir, 'src');
+    const srcDir = join(outDir, 'src');
     if (!fs.existsSync(srcDir)) fs.mkdirSync(srcDir);
 
     // Cross Runtime compatibility:
     const packageJSON = runtime === 'deno' ? 'deno.json' : 'package.json';
 
-    let packageOutput = '{\n';
-    packageOutput += `\t"name": "${projectName}",\n`;
-    packageOutput += '\t"version": "0.0.1",\n';
-    packageOutput += '\t"license": "",\n';
-    packageOutput += `\t"${runtime === 'deno' ? 'exports' : 'module'}": "./index.ts",\n`;
-    if (runtime !== 'deno') packageOutput += '\t"type": "module",\n';
-    packageOutput += `\t"${runtime === 'deno' ? 'tasks' : 'scripts'}": {
-        "start": "${runtime} hotreload/start.ts"
-    },\n`;
-    packageOutput += `\t"${runtime === 'deno' ? 'imports' : 'devDependencies'}": {\n`;
-    if (!CleanProject) packageOutput += '\t\t"@mediapipe/tasks-vision": "^0.10.17",\n';
-    packageOutput += `\t\t"@types/${runtime}": "latest",\n`;
-    if (runtime !== 'node') packageOutput += '\t\t"@types/node": "latest"\n';
-    if (runtime === 'deno') {
-        packageOutput += '\t}\n';
-    } else {
-        packageOutput += '\t},\n';
-    }
-    if (runtime !== 'deno') packageOutput += `\t"peerDependencies": {
-        "typescript": "latest"
-    }\n`;
-    packageOutput += '}\n';
-
     // TODO: Ask what license should be used
-    fs.writeFileSync(path.join(outDir, packageJSON), packageOutput);
+    let packageOutput = '';
+    if (runtime === 'deno') {
+        packageOutput = `{
+  "name": "${projectName}",
+  "version": "0.0.1",
+  "license": "",
+  "exports": "./src/index.ts",
+  "tasks": {
+    "start": "deno hotreload/start.ts"
+  },
+  "imports": {`;
+        if (!CleanProject) packageOutput += `
+    "@mediapipe/tasks-vision": "^0.10.17"`;
+        packageOutput += `
+  },
+  "compilerOptions": {
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable",
+      "deno.ns"
+    ],
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false
+  }
+}
+`;
+    } else if (runtime === 'bun' || runtime === 'node') {
+        packageOutput = `{
+	"name": "${projectName}",
+	"version": "0.0.1",
+	"license": "",
+	"module": "./src/index.ts",
+	"type": "module",
+	"scripts": {
+        "start": "bun hotreload/start.ts"
+    },
+	"devDependencies": {`;
+        if (!CleanProject) packageOutput += `
+		"@mediapipe/tasks-vision": "^0.10.17",`;
+        packageOutput += `
+		"@types/bun": "latest",
+		"@types/node": "latest"
+	},
+	"peerDependencies": {
+        "typescript": "latest"
+    }
+}
+`;
+    }
+    fs.writeFileSync(join(outDir, packageJSON), packageOutput);
 
-    fs.writeFileSync(path.join(outDir, 'README.md'), `# ${projectName}
+    fs.writeFileSync(join(outDir, 'README.md'), `# ${projectName}
 
 ## This project was created using Supe Project Creator v${supeVersion}
 
@@ -180,7 +216,7 @@ ${runtime} install
 2. To run:
 
 \`\`\`bash
-${runtime} start
+${runtime === 'bun' ? 'bun start' : ''}${runtime === 'deno' ? 'deno run start' : ''}${runtime === 'node' ? 'npm start' : ''}
 \`\`\`
 
 3. Everything else:
@@ -189,7 +225,7 @@ You have full control over all the source files of almost everything you see, Th
 
 `);
 
-    fs.writeFileSync(path.join(outDir, 'tsconfig.json'), `{
+    if (runtime !== 'deno') fs.writeFileSync(join(outDir, 'tsconfig.json'), `{
   "include": ["src/**/*", "hotreload/**/*"],
   "compilerOptions": {
     // Enable latest features
@@ -219,7 +255,7 @@ You have full control over all the source files of almost everything you see, Th
 }
 `);
 
-    fs.writeFileSync(path.join(outDir, `${projectName}.code-workspace`), `{
+    fs.writeFileSync(join(outDir, `${projectName}.code-workspace`), `{
 	"folders": [
 		{
 			"name": "▪${projectName}◾", // Yang and Yin. With great power comes great responsibility. wield your creation for the greater good, and never let it be used to harm or exploit others.
@@ -229,11 +265,10 @@ You have full control over all the source files of almost everything you see, Th
 	"settings": {
 		"files.exclude": {
 			"${packageJSON}": false,
-			"tsconfig.json": false, // TODO remove in deno? did not seem to work first-try
-			"${projectName}.code-workspace": false,
+			"${projectName}.code-workspace": false,${runtime !== 'deno' ? '\n\t\t\t"tsconfig.json": false,' : ''}
 			// --
 			"README.md": true,
-			${runtime === 'bun' ? '"bun.lockb": true,' : ''}${runtime === 'deno' ? '"deno.lock": true,' : ''}
+			${runtime === 'bun' ? '"bun.lockb": true,' : ''}${runtime === 'deno' ? '"deno.lock": true,' : ''}${runtime === 'node' ? '"package-lock.json": true,' : ''}
 			".gitignore": true,
 			"node_modules": true,
 			"tsconfig.tsbuildinfo": true, // useless artifact, we can make it build into node_modules in the future
@@ -242,7 +277,7 @@ You have full control over all the source files of almost everything you see, Th
 }
 `);
 
-    fs.writeFileSync(path.join(outDir, '.gitignore'), `# Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
+    fs.writeFileSync(join(outDir, '.gitignore'), `# Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
 # Logs
 
@@ -419,7 +454,7 @@ dist
 .DS_Store
 `);
 
-    fs.writeFileSync(path.join(srcDir, 'index.ts'), CleanProject ? '' : `import { ObjectDetector, FilesetResolver, type ObjectDetectorResult } from "@mediapipe/tasks-vision"; // 19.4MB
+    fs.writeFileSync(join(srcDir, 'index.ts'), CleanProject ? '' : `import { ObjectDetector, FilesetResolver, type ObjectDetectorResult } from "@mediapipe/tasks-vision"; // 19.4MB
 
 let fileIndex = 0;
 document.getElementById('fileInput')?.addEventListener('change', handleFileInput); // Keep first to allow uploads during loading times
@@ -542,7 +577,7 @@ function handleFileInput(event: Event) {
 }
 `);
 
-    fs.writeFileSync(path.join(publicDir, 'index.html'), `<!DOCTYPE html>
+    fs.writeFileSync(join(publicDir, 'index.html'), `<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -583,7 +618,7 @@ function handleFileInput(event: Event) {
 </html>
 `);
 
-    fs.writeFileSync(path.join(publicDir, 'style.css'), `/* General Styles */
+    fs.writeFileSync(join(publicDir, 'style.css'), `/* General Styles */
 img {
 	width: 100%;
 }
@@ -661,60 +696,8 @@ ${CleanProject ? '' : `
 	}
 }`}
 `);
-    const bunStartScript = `import { $ } from "bun";
-import config from "./config";
-import process from "node:process";
-const packageJSON = await Bun.file('package.json').json();
 
-if (!packageJSON.module.endsWith('.ts')) {
-    console.error(\`Could not load module. Expected a .ts file, but received \${packageJSON.module}\`);
-    process.exit();
-}
-
-const bundle = (input: string, output: string) => \`\${input} --outfile=\${output} --bundle --platform=browser --format=esm --target=\${config.target}\${config.minify ? ' --minify' : ''}\`
-const index = bundle(\`\${config.paths.srcFolder}/\${packageJSON.module}\`, \`\${config.paths.publicFolder}/\${packageJSON.module.replace('.ts', '.js')}\`)
-
-await $\`echo ${CLI_COMMENT}\`;
-
-setTimeout(async () => {
-    console.log(\`\\x1b[32mHello\\x1b[0m \\x1b[34mWorld!\\x1b[0m\nThank you for using Supe Project Creator v${supeVersion}\`);
-    await $\`echo Press CTRL+C in the terminal to terminate the process.\`
-}, 2000);
-
-await Promise.all([
-    // Bundle index.ts:
-    $\`bunx esbuild \${index}\`,
-    // Bundle hotreload and start hotreload server:
-    $\`bunx esbuild \${bundle(\`\${config.paths.hotreloadFolder}/\${config.paths.hotreload.client}\`, \`\${config.paths.publicFolder}/\${config.paths.hotreload.output}\`)} && bun \${config.paths.hotreloadFolder}/\${config.paths.hotreload.server}\`,
-    // Serve public folder:
-    $\`bunx http-server \${config.paths.publicFolder} -p \${config.port}\${!config.httpLogs ? ' --silent' : ''}\`,
-    // Watch for changes in public and hotreload - On reload: Bundle index.ts + Refresh Page:
-    $\`bunx nodemon --ext \${config.watchExtensions} --watch \${config.paths.publicFolder} --watch \${config.paths.hotreloadFolder} --watch \${config.paths.srcFolder} --on-change-only --exec 'bunx esbuild \${index}\${config.refresh.changes ? \` && bun \${config.paths.hotreloadFolder}/\${config.paths.hotreload.refresh}\` : ''}'\`,
-    // Watch for errors - Detect TypeScript errors without cleaning the console:
-    $\`tsc -b --watch --preserveWatchOutput\`,
-    // All commands in here run in parallel
-    $\`echo You are using Supe Project Creator v${supeVersion}\`,
-])
-
-// End of file - Nothing will run below. Use CTRL+C in the terminal to terminate (due to awaiting running servers...)
-
-`;
-    if (runtime === 'bun') {
-        fs.writeFileSync(path.join(hotreloadDir, 'start.ts'), bunStartScript);
-    } else if (runtime === 'deno') {
-        fs.writeFileSync(path.join(hotreloadDir, 'start.ts'), `
-console.error("Deno support is under construction, Check again in the upcoming version!");
-`);
-    } else if (runtime === 'node') {
-        fs.writeFileSync(path.join(hotreloadDir, 'start.ts'), `
-console.error("Node support is under construction, Check again in the upcoming version!");
-`);
-    } else {
-        console.log(`Unsupported runtime: ${runtime}`);
-        process.exit();
-    }
-
-    fs.writeFileSync(path.join(hotreloadDir, 'config.ts'), `export default {
+    fs.writeFileSync(join(hotreloadDir, 'config.ts'), `export default {
     port: 80,
     hotreloadPort: 49142,
     debug: false,
@@ -747,7 +730,66 @@ console.error("Node support is under construction, Check again in the upcoming v
 };
 `);
 
-    fs.writeFileSync(path.join(hotreloadDir, 'client.ts'), `import config from "./config";
+    const bunStartScript = `import { $ } from "bun";
+import { basename } from "node:path";
+import { existsSync } from "node:fs";
+import process from "node:process";
+import config from "./config";
+const packageJSON = await Bun.file('package.json').json();
+
+if (!packageJSON.module.endsWith('.ts')) {
+    console.error(\`Could not load module. Expected a .ts file, but received \${packageJSON.module}\`);
+    process.exit();
+}
+
+if (!existsSync(packageJSON.module)) {
+    console.error(\`Could not find "\${packageJSON.module}" defined in the package.json "module" member\`);
+    process.exit();
+}
+
+const bundle = (input: string, output: string) => \`\${input} --outfile=\${output} --bundle --platform=browser --format=esm --target=\${config.target}\${config.minify ? ' --minify' : ''}\`;
+const index = bundle(packageJSON.module, \`\${config.paths.publicFolder}/\${basename(packageJSON.module).replace('.ts', '.js')}\`);
+
+await $\`echo ${CLI_COMMENT}\`;
+
+setTimeout(async () => {
+    console.log(\`\\x1b[32mHello\\x1b[0m \\x1b[34mWorld!\\x1b[0m\nThank you for using Supe Project Creator v${supeVersion}\`);
+    await $\`echo Press CTRL+C in the terminal to terminate the process.\`
+}, 2000);
+
+await Promise.all([
+    // Bundle index.ts:
+    $\`bunx esbuild \${index}\`,
+    // Bundle hotreload and start hotreload server:
+    $\`bunx esbuild \${bundle(\`\${config.paths.hotreloadFolder}/\${config.paths.hotreload.client}\`, \`\${config.paths.publicFolder}/\${config.paths.hotreload.output}\`)} && bun \${config.paths.hotreloadFolder}/\${config.paths.hotreload.server}\`,
+    // Serve public folder:
+    $\`bunx http-server \${config.paths.publicFolder} -p \${config.port}\${!config.httpLogs ? ' --silent' : ''}\`,
+    // Watch for changes in public and hotreload - On reload: Bundle index.ts + Refresh Page:
+    $\`bunx nodemon --ext \${config.watchExtensions} --watch \${config.paths.publicFolder} --watch \${config.paths.hotreloadFolder} --watch \${config.paths.srcFolder} --on-change-only --exec 'bunx esbuild \${index}\${config.refresh.changes ? \` && bun \${config.paths.hotreloadFolder}/\${config.paths.hotreload.refresh}\` : ''}'\`,
+    // Watch for errors - Detect TypeScript errors without cleaning the console:
+    $\`tsc -b --watch --preserveWatchOutput\`,
+    // All commands in here run in parallel
+    $\`echo You are using Supe Project Creator v${supeVersion}\`,
+])
+
+// End of file - Nothing will run below. Use CTRL+C in the terminal to terminate (due to awaiting running servers...)
+`;
+    if (runtime === 'bun') {
+        fs.writeFileSync(join(hotreloadDir, 'start.ts'), bunStartScript);
+    } else if (runtime === 'deno') {
+        fs.writeFileSync(join(hotreloadDir, 'start.ts'), `
+console.error("Deno support is under construction, Check again in the upcoming version!");
+`);
+    } else if (runtime === 'node') {
+        fs.writeFileSync(join(hotreloadDir, 'start.ts'), `
+console.error("Node support is under construction, Check again in the upcoming version!");
+`);
+    } else {
+        console.log(`Unsupported runtime: ${runtime}`);
+        process.exit();
+    }
+
+    fs.writeFileSync(join(hotreloadDir, 'client.ts'), `import config from "./config";
 
 function createWebSocket() {
   const ws = new WebSocket(\`\${config.secure ? 'wss' : 'ws'}://\${config.address}:\${config.hotreloadPort}\`);
@@ -785,7 +827,7 @@ if (config.autoFixCSS) {
 }
 `);
 
-    fs.writeFileSync(path.join(hotreloadDir, 'server.ts'), `import type Message from "ws"
+    fs.writeFileSync(join(hotreloadDir, 'server.ts'), `import type Message from "ws"
 import { WebSocketServer } from 'ws';
 import { exec } from 'node:child_process';
 import os from 'node:os';
@@ -841,7 +883,7 @@ if (config.browser) {
 }
 `);
 
-    fs.writeFileSync(path.join(hotreloadDir, 'refresh.ts'), `import config from "./config";
+    fs.writeFileSync(join(hotreloadDir, 'refresh.ts'), `import config from "./config";
 import process from "node:process";
 
 if (!config.hotreload) process.exit();
@@ -866,11 +908,11 @@ const timer = setInterval(() => {
 }, 100);
 `);
 
-    console.log('\x1b[32m%s\x1b[0m', `Project has been created successfully at: ${path.resolve(outDir)}`);
+    console.log('\x1b[32m%s\x1b[0m', `Project has been created successfully at: ${resolve(outDir)}`);
     console.log('\x1b[36m%s\x1b[0m', '\nTo get started:');
     console.log('\x1b[36m%s\x1b[0m', `  cd ${projectName}`);
     console.log('\x1b[36m%s\x1b[0m', `  ${runtime} install`);
-    console.log('\x1b[36m%s\x1b[0m', `  ${runtime} start`);
+    console.log('\x1b[36m%s\x1b[0m', `  ${runtime === 'bun' ? 'bun start' : ''}${runtime === 'deno' ? 'deno run start' : ''}${runtime === 'node' ? 'npm start' : ''}`);
 }
 
 // Function to render options
@@ -919,7 +961,7 @@ function detectRuntime() {
 }
 
 // P/CLI - A half package half command line interface hybrid with cross-runtime support
-const runtime = detectRuntime();
+const runtime = detectRuntime(); // TODO: remove runtime detection
 const DEBUG = false;
 if (DEBUG) console.log(`\x1b[32mSupe Project Creator is running in the\x1b[0m \x1b[36m${runtime}\x1b[0m \x1b[32mruntime\x1b[0m ${require.main === module ? '\x1b[32mas a\x1b[0m \x1b[36mmodule\x1b[0m' : '\x1b[32mfrom a\x1b[0m \x1b[36mCLI\x1b[0m'}`);
 let _isCLI = false;
@@ -927,6 +969,7 @@ let _isModule = false;
 if (require.main === module) {
     if (DEBUG) console.log("Running from CLI");
     _isCLI = true;
+    // TODO: Remove selection and replace with CLI arguments
     // Enable raw mode to capture input
     process.stdin.setRawMode(true);
     process.stdin.resume();

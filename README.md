@@ -1,4 +1,4 @@
-# Supe Project Creator
+# Supe Project Creator v1.5.6
 
 A simple tool for creating modern web projects with batteries included.
 
@@ -127,6 +127,9 @@ deno jsr:@supeprojects/supe-project-creator -n my-supe-project
 deno jsr:@supeprojects/supe-project-creator --name "C:\Users\%username%\Desktop\my-supe-project"
 ```
 
+> [!TIP]
+> TODO: Add runtime argument `--bun`, `--deno` or `--node`
+
 If you get any error related to `esbuild` during usage, Try to restart the terminal and try again, To avoid downloading dependencies it uses `bunx` (`NPX` Alternative) to fetch packages like `http-server`, `nodemon` and `esbuild`.
 
 > [!IMPORTANT]
@@ -166,6 +169,23 @@ After navigating to the project folder and running the command to start the deve
 
 This behavior is, of course, configurable in `hotreload/config.ts`, allowing you to customize the port or other settings according to your project's requirements.
 
+> [!TIP]
+> ### Recommended Extensions for Visual Studio Code
+>
+> - **Deno**: The official Deno extension for Visual Studio Code provides features like syntax highlighting, code completion, linting, and debugging support for Deno projects.  
+>   [Install Deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
+>
+> - **Biome**: A fast and flexible linter, formatter, and style checker for JavaScript, TypeScript, JSON, and more, ensuring clean and consistent code formatting.  
+>   [Install Biome](https://marketplace.visualstudio.com/items?itemName=biomejs.biome)
+>
+> - **JavaScript and TypeScript Nightly**: Access nightly builds of the TypeScript language service, allowing you to use the latest features and fixes.  
+>   [Install JavaScript and TypeScript Nightly](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-next)
+>
+> #### Manual Installation Steps:
+> 1. Open VSCode and navigate to Extensions (`Ctrl + Shift + X`).
+> 2. Search for the name of the desired extension (e.g., "Deno", "Biome", or "JavaScript and TypeScript Nightly").
+> 3. Select the extension and click **Install**.
+
 ## Help Options
 
 To view the available options for Supe Project Creator, run the following command:
@@ -187,7 +207,7 @@ Supe Project Creator organizes your project using the following structure:
 - `public`: Public-facing files, including `index.html`.
 - `hotreload`: Configuration and scripts for hot reloading.
 
-### Recommended VSCode Workspace Configuration
+## Recommended VSCode Workspace Configuration
 
 To enhance your development experience, Use the provided recommended `.code-workspace` file named after your project. This configuration excludes unnecessary files from view, allowing you to focus on your code.
 
@@ -304,6 +324,10 @@ deno bump.ts
 **Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
 
 ## Changelog
+
+### Version 1.5.6 - Enhanced Project Initialization with Deno Support and Improved Documentation
+
+- **Updated project creator tool with improved Deno compatibility, TypeScript support, and recommended VSCode extensions**: Enhanced project creation with better support for Deno project naming, improved handling of deno.json and package.json, plus fixed bugs for a smoother experience.
 
 ### Version 1.5.5 - Improved README
 

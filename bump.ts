@@ -6,31 +6,37 @@ import { spawnSync } from 'node:child_process';
 const bump_files: {
     [key: string]: {
         search: string;
-        replace: string;
-    };
+        replacement: string;
+    }[];
 } = {
-    "index.ts": {
-        search: "const supeVersion = 'currentVersion'",
-        replace: "const supeVersion = 'newVersion'",
-    },
-    "jsr.json": {
-        search: '"version": "currentVersion"',
-        replace: '"version": "newVersion"',
-    },
-    "package.json": {
-        search: '"version": "currentVersion"',
-        replace: '"version": "newVersion"',
-    },
-    "README.md": { // TODO: Ask for required information
-        search: '## Changelog',
-        replace: '## Changelog\n\n### Version newVersion - updateTitle\n\n- **mainDescription**: secondaryDescription',
-    },
+    "index.ts": [{
+        search: "const supeVersion = '{currentVersion}'",
+        replacement: "const supeVersion = '{newVersion}'",
+    }],
+    "jsr.json": [{
+        search: '"version": "{currentVersion}"',
+        replacement: '"version": "{newVersion}"',
+    }],
+    "package.json": [{
+        search: '"version": "{currentVersion}"',
+        replacement: '"version": "{newVersion}"',
+    }],
+    "README.md": [
+        {
+            search: '## Changelog',
+            replacement: '## Changelog\n\n### Version {newVersion} - {updateTitle}\n\n- **{mainDescription}**: {secondaryDescription}',
+        },
+        {
+            search: '# Supe Project Creator v{currentVersion}',
+            replacement: '# Supe Project Creator v{newVersion}',
+        },
+    ],
 };
 const packageJsonPath = './package.json';
 const MAX_PATCH_VERSION = 10;
 const MAX_MINOR_VERSION = 10;
 
-function askForConfirmation(question: string, noQuestion = false): Promise<boolean | string> {
+function askForConfirmation(question: string, noQuestion = false): Promise<string> {
     return new Promise((resolve) => {
         const askQuestion = () => {
             const rl = readline.createInterface({
@@ -51,7 +57,7 @@ function askForConfirmation(question: string, noQuestion = false): Promise<boole
                         console.error(incorrectAnswer)
                         return askQuestion();
                     }
-                    resolve(answer.toLowerCase() === 'y');
+                    resolve(answer.toLowerCase() === 'y' ? 'yes' : '');
                 }
             });
         };
@@ -66,7 +72,7 @@ async function bumpVersion(currentVersion: string, bumpType = 'auto'): Promise<s
     let newMajor = major;
     console.log('\x1b[32m%s\x1b[0m', 'Current Version:', currentVersion);
     console.log('\x1b[32m%s\x1b[0m', 'New Version:', `${newMajor}.${newMinor}.${newPatch}`);
-    // TODO: Add an option to force specific semantic bump
+    // TODO: Add an option to force specific semantic bump using command line arguments
     switch (bumpType) {
         case 'patch':
             // Increment patch version
@@ -179,18 +185,21 @@ async function main() {
     const newVersion = await bumpVersion(currentVersion);
     console.log('\x1b[32m%s\x1b[0m', 'Final Version:', newVersion);
 
-    const updateTitle = (await askForConfirmation('Enter a title for the update: ', true)) as string;
-    const mainDescription = (await askForConfirmation('Enter a brief description of the changes: ', true)) as string;
-    const secondaryDescription = (await askForConfirmation('Enter a secondary description of the changes: ', true)) as string;
+    const updateTitle = await askForConfirmation('Enter a title for the update: ', true);
+    const mainDescription = await askForConfirmation('Enter a brief description of the changes: ', true);
+    const secondaryDescription = await askForConfirmation('Enter a secondary description of the changes: ', true);
     for (const filePath in bump_files) {
         try {
             let content = fs.readFileSync(filePath, 'utf8');
-            const replacement = bump_files[filePath].replace
-                .replace('newVersion', newVersion)
-                .replace('updateTitle', updateTitle || 'UpdateTitle')
-                .replace('mainDescription', mainDescription || 'MainDescription')
-                .replace('secondaryDescription', secondaryDescription || 'SecondaryDescription');
-            content = content.replace(bump_files[filePath].search.replace('currentVersion', currentVersion), replacement);
+            for (const bump_file of bump_files[filePath]) {
+                const replacement = bump_file.replacement
+                    .replace('{newVersion}', newVersion)
+                    .replace('{updateTitle}', updateTitle || 'UpdateTitle')
+                    .replace('{mainDescription}', mainDescription || 'MainDescription')
+                    .replace('{secondaryDescription}', secondaryDescription || 'SecondaryDescription');
+                const find = bump_file.search.replace('{currentVersion}', currentVersion);
+                content = content.replace(find, replacement);
+            }
             fs.writeFileSync(filePath, content);
             console.log('\x1b[32m%s\x1b[0m', `Updated version in ${filePath}`);
         } catch (error) {

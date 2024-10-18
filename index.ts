@@ -67,7 +67,7 @@ export default function SupeProjectCreator(argv: string[], runtime: 'bun' | 'den
     // Variables:
     let CleanProject = true;
     let projectName = 'example-project';
-    const supeVersion = '1.6.1';
+    const supeVersion = '1.6.2';
     const supeVersionDate = '2024-10-16';
     if (argv.length === 0) argv.push('--help');
 

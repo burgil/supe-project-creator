@@ -1,4 +1,4 @@
-# Supe Project Creator v1.6.0
+# Supe Project Creator v1.6.1
 
 A simple tool for creating modern web projects with batteries included.
 
@@ -57,7 +57,7 @@ Explore the potential of AI with our pre-configured demo, which features an obje
 Experience ultra-fast startup times and seamless hot reloading that keep your development flow uninterrupted. Our intelligent development tool minimizes unnecessary browser launches and manual configurations, allowing you to focus on coding. Enjoy optimized browser handling that adapts to your workflow, making it easier than ever to create and test your projects in real-time.
 
 ### 7. **Instant Hot Reloading for Real-Time Development**
-Leverage powerful hot reloading capabilities that instantly refresh your project as you make changes. This feature allows you to see updates in real-time, enhancing your productivity by eliminating the need for manual refreshes. Enjoy a smooth development experience with immediate feedback, so you can iterate quickly and efficiently.
+Leverage powerful hot reloading capabilities that instantly refresh your website as you make changes. This feature allows you to see updates in real-time, enhancing your productivity by eliminating the need for manual refreshes. Enjoy a smooth development experience with immediate feedback, so you can iterate quickly and efficiently.
 
 > [!TIP]
 > Wait until v2.0.0 drops!
@@ -507,6 +507,10 @@ npx github:burgil/supe-project-creator
 ```
 
 ## Changelog
+
+### Version 1.6.1 - Fixed Typo
+
+- **Typographical Error Corrected**: Addressed and corrected a typo in the README for improved clarity and professionalism.
 
 ### Version 1.6.0 - Updated Key Features
 

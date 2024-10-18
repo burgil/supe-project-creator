@@ -1,4 +1,4 @@
-# Supe Project Creator v1.6.3
+# Supe Project Creator v1.6.4
 
 A simple tool for creating modern web projects with batteries included.
 
@@ -170,7 +170,7 @@ After navigating to the project folder and running the command to start the deve
 This behavior is, of course, configurable in `hotreload/config.ts`, allowing you to customize the port or other settings according to your project's requirements.
 
 > [!TIP]
-> ### Recommended Extensions for Visual Studio Code
+> **Recommended Extensions for Visual Studio Code**
 >
 > - **Deno**: The official Deno extension for Visual Studio Code provides features like syntax highlighting, code completion, linting, and debugging support for Deno projects.  
 >   [Install Deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
@@ -181,7 +181,7 @@ This behavior is, of course, configurable in `hotreload/config.ts`, allowing you
 > - **JavaScript and TypeScript Nightly**: Access nightly builds of the TypeScript language service, allowing you to use the latest features and fixes.  
 >   [Install JavaScript and TypeScript Nightly](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-next)
 >
-> #### Manual Installation Steps:
+> **Manual Installation Steps:**
 > 1. Open VSCode and navigate to Extensions (`Ctrl + Shift + X`).
 > 2. Search for the name of the desired extension (e.g., "Deno", "Biome", or "JavaScript and TypeScript Nightly").
 > 3. Select the extension and click **Install**.
@@ -208,7 +208,7 @@ Supe Project Creator organizes your project using the following structure:
 - `hotreload`: Configuration and scripts for hot reloading.
 
 > [!TIP]
-> ### Recommended VSCode Workspace Configuration
+> **Recommended VSCode Workspace Configuration:**
 >
 > To enhance your development experience, use the provided recommended `.code-workspace` file named after your project. This configuration excludes unnecessary files from view, allowing you to focus on your code.
 >
@@ -507,6 +507,10 @@ npx github:burgil/supe-project-creator
 ```
 
 ## Changelog
+
+### Version 1.6.4 - Fixed JSR Document Navigation Bug
+
+- **Navigation Issue Resolved**: Corrected a bug in JSR document navigation that misread sections inside Tips, ensuring users can accurately navigate to all relevant sections.
 
 ### Version 1.6.3 - Reorganized Sections
 

@@ -17,7 +17,7 @@ const bump_files: {
         search: '"version": "{currentVersion}"',
         replacement: '"version": "{newVersion}"',
     }],
-    "package.json": [{
+    "deno.json": [{
         search: '"version": "{currentVersion}"',
         replacement: '"version": "{newVersion}"',
     }],
@@ -32,34 +32,36 @@ const bump_files: {
         },
     ],
 };
-const packageJsonPath = './package.json';
+const packageJsonPath = './deno.json';
 const MAX_PATCH_VERSION = 10;
 const MAX_MINOR_VERSION = 10;
 
 function askForConfirmation(question: string, noQuestion = false): Promise<string> {
     return new Promise((resolve) => {
         const askQuestion = () => {
-            const rl = readline.createInterface({
-                input: process.stdin,
-                output: process.stdout
-            });
-            rl.question(`\x1b[36m${noQuestion ? question : `${question} \x1b[32m(y/n)\x1b[0m: `}\x1b[0m`, (answer) => {
-                rl.close();
-                const incorrectAnswer = "Incorrect Answer! Please try again. Press CTRL+C in the terminal to terminate the process.";
-                if (noQuestion) {
-                    if (!answer) {
-                        console.error(incorrectAnswer)
-                        return askQuestion();
-                    }
-                    resolve(answer);
-                } else {
-                    if (answer.toLowerCase() !== 'y' && answer.toLowerCase() !== 'n') {
-                        console.error(incorrectAnswer)
-                        return askQuestion();
-                    }
-                    resolve(answer.toLowerCase() === 'y' ? 'yes' : '');
+            const questionPrompt = noQuestion ? question : `${question} (y/n):`;
+            const answer = prompt(questionPrompt);
+            const incorrectAnswer = "Incorrect Answer! Please try again. Press CTRL+C in the terminal to terminate the process.";
+            if (noQuestion) {
+                if (!answer) {
+                    console.error(incorrectAnswer)
+                    return askQuestion();
                 }
-            });
+                resolve(answer);
+            } else {
+                if (answer?.toLowerCase() !== 'y' && answer?.toLowerCase() !== 'n') {
+                    console.error(incorrectAnswer)
+                    return askQuestion();
+                }
+                resolve(answer?.toLowerCase() === 'y' ? 'yes' : '');
+            }
+            // const rl = readline.createInterface({
+            //     input: process.stdin,
+            //     output: Deno.stdout
+            // });
+            // rl.question(questionPrompt, (answer) => {
+            //     rl.close();
+            // });
         };
         askQuestion();
     });
@@ -171,9 +173,9 @@ async function main() {
         currentVersion = packageJson.version;
     } catch (error) {
         if (error instanceof Error) {
-            console.error(`Error reading package.json: ${error.message}`);
+            console.error(`Error reading ${packageJsonPath}: ${error.message}`);
         } else {
-            console.error(`Unknown error reading package.json: ${error}`);
+            console.error(`Unknown error reading ${packageJsonPath}: ${error}`);
         }
     }
 
@@ -185,9 +187,9 @@ async function main() {
     const newVersion = await bumpVersion(currentVersion);
     console.log('\x1b[32m%s\x1b[0m', 'Final Version:', newVersion);
 
-    const updateTitle = await askForConfirmation('Enter a title for the update: ', true);
-    const mainDescription = await askForConfirmation('Enter a brief description of the changes: ', true);
-    const secondaryDescription = await askForConfirmation('Enter a secondary description of the changes: ', true);
+    const updateTitle = await askForConfirmation('Enter a title for the update:', true);
+    const mainDescription = await askForConfirmation('Enter a brief description of the changes:', true);
+    const secondaryDescription = await askForConfirmation('Enter a secondary description of the changes:', true);
     for (const filePath in bump_files) {
         try {
             let content = fs.readFileSync(filePath, 'utf8');

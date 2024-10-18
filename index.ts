@@ -5,45 +5,11 @@ const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely d
 
 // TODO - The first line of the JSDocs needs to show more details related to the function
 /**
- * # Supe Project Creator
- *
- * A simple tool for creating modern web projects with batteries included.
- *
- * [JSR](https://jsr.io/@supeprojects/supe-project-creator)
- *
- * ## Overview
- *
- * Supe Project Creator is a simple tool designed to help you build modern web applications quickly and efficiently. 
- * It generates project templates using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow.
- * But there's a catch - the generated project has no dependencies, offering a fresh start. All the source code that runs the project will be 
- * waiting for you in the generated project folder, no strings attached. It's as simple as you can get.
- *
- * **NOTE**: The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework,
- * such as Express.JS, FastAPI, Cloudflare Workers, etc.
- * 
- * **For a bit of technical detail:** how it does all of that is thanks to the built-in TypeScript compilers in the new runtimes. To avoid downloading dependencies, it uses `bunx` (an `npx` alternative) to fetch packages like `http-server`, `nodemon`, and `esbuild`.
- *
- * ## License
- *
- * MIT
- *
- * ## Credits
- *
- * Made by Burgil
+ * Initializes a new Supe Project with customizable options based on command line arguments and runtime environment.
  *
  * ## Usage
  *
  * To use Supe Project Creator, simply run the `SupeProjectCreator` function with the desired command line arguments.
- *
- * @example CLI Usage
- * 
- * ```bash
- * deno jsr:@supeprojects/supe-project-creator -n my-supe-project
- * ```
- * or
- * ```bash
- * deno jsr:@supeprojects/supe-project-creator --demo -n cat-dog-detector
- * ```
  *
  * @example Programmatic Usage
  * 
@@ -56,9 +22,15 @@ const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely d
  * SPC(['--name', 'my-example-project']); // Creates a new clean project
  * ```
  *
- * ## TODO
- *
- * - Finish adding Deno support
+ * @example CLI Usage
+ * 
+ * ```bash
+ * deno jsr:@supeprojects/supe-project-creator -n my-supe-project
+ * ```
+ * or
+ * ```bash
+ * deno jsr:@supeprojects/supe-project-creator --demo -n cat-dog-detector
+ * ```
  *
  * @param {string[]} argv - Command line arguments provided by the user. These control the behavior of the project creation.
  * @param {'bun' | 'deno' | 'node'} [runtime='bun'] - The runtime environment for the project creation process. Defaults to 'bun'.
@@ -68,7 +40,7 @@ export default function SupeProjectCreator(argv: string[], runtime: 'bun' | 'den
     // Variables:
     let CleanProject = true;
     let projectName = 'example-project';
-    const supeVersion = '1.6.7';
+    const supeVersion = '1.6.8';
     const supeVersionDate = '2024-10-16';
     if (argv.length === 0) argv.push('--help');
 
@@ -997,22 +969,10 @@ function capitalizeFirstChar(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function detectRuntime() {
-    if (typeof Deno !== 'undefined') return 'deno';
-    if (typeof Bun !== 'undefined') return 'bun';
-    if (typeof process !== 'undefined' && process.versions && process.versions.node) return 'node';
-    return 'unknown';
-}
-
 // P/CLI - A half package half command line interface hybrid with cross-runtime support
-const runtime = detectRuntime(); // TODO: remove runtime detection
-const DEBUG = false;
-if (DEBUG) console.log(`\x1b[32mSupe Project Creator is running in the\x1b[0m \x1b[36m${runtime}\x1b[0m \x1b[32mruntime\x1b[0m ${require.main === module ? '\x1b[32mas a\x1b[0m \x1b[36mmodule\x1b[0m' : '\x1b[32mfrom a\x1b[0m \x1b[36mCLI\x1b[0m'}`);
-let _isCLI = false;
-let _isModule = false;
-if (require.main === module) {
+const DEBUG = true;
+if (import.meta.main) {
     if (DEBUG) console.log("Running from CLI");
-    _isCLI = true;
     // TODO: Remove selection and replace with CLI arguments
     // Enable raw mode to capture input
     process.stdin.setRawMode(true);
@@ -1021,9 +981,6 @@ if (require.main === module) {
     // Options to navigate
     const options: ('bun' | 'deno' | 'node')[] = ['bun', 'deno', 'node'];
     let currentIndex = 0;
-    if (runtime === 'bun') currentIndex = 0;
-    if (runtime === 'deno') currentIndex = 1;
-    if (runtime === 'node') currentIndex = 2;
     // Initial rendering of the options
     renderOptions(options, currentIndex);
     // Capture and handle keypresses
@@ -1032,5 +989,4 @@ if (require.main === module) {
     });
 } else {
     if (DEBUG) console.log("Imported as a module");
-    _isModule = true;
 }

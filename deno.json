@@ -1,0 +1,11 @@
+{
+  "name": "@supeprojects/supe-project-creator",
+  "version": "1.6.8",
+  "license": "MIT",
+  "exports": "./index.ts",
+  "tasks": {
+    "dev": "deno run --watch index.ts",
+    "start": "deno lint && deno index.ts",
+    "bump": "deno lint && deno bump.ts"
+  }
+}

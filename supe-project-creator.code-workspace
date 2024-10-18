@@ -11,7 +11,7 @@
 			"supe-project-creator.code-workspace": false,
 			// --
 			"package.json": false,
-			"bun.lockb": true,
+			"bun.lockb": false,
 			"deno.json": false,
 			"deno.lock": false,
 			// --

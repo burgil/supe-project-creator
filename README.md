@@ -1,4 +1,4 @@
-# Supe Project Creator v1.6.7
+# Supe Project Creator v1.6.8
 
 A simple tool for creating modern web projects with batteries included.
 
@@ -107,7 +107,7 @@ deno jsr:@supeprojects/supe-project-creator --name "C:\Users\%username%\Desktop\
 If you get any error related to `esbuild` during usage, Try to restart the terminal and try again, To avoid downloading dependencies it uses `bunx` (`NPX` Alternative) to fetch packages like `http-server`, `nodemon` and `esbuild`.
 
 > [!IMPORTANT]
-> Supe Project Creator does not require a separate installation step. Simply execute the command above to create a new project instantly. In future releases, it will also be available as a package, allowing you to write custom code that generates projects programmatically. (**Work in Progress**). To test this feature, run `bun test` in your terminal.
+> Supe Project Creator does not require a separate installation step. Simply execute the command above to create a new project instantly.
 
 After creating a new project using the Supe Project Creator, you will first need to navigate to the newly created project directory before proceeding with the setup:
 
@@ -127,21 +127,21 @@ Once you're inside the project directory, you can then follow the steps to insta
 
 ```bash
 bun install
-# or
-deno install # (Deno is not tested yet)
+# or..
+deno install
 ```
 
 2. **Start the Development Server**:
 
 ```bash
 bun start
-# or
-deno start # (Deno is not tested yet)
+# or..
+deno run start
 ```
 
-After navigating to the project folder and running the command to start the development server with `bun start`, a new browser tab will open, directing you to `http://localhost` if it isn't already open. This allows you to immediately view and interact with your project in your web browser.
+Now a new browser tab will open, directing you to `http://localhost` if it isn't already open. This allows you to immediately view and interact with your project in your web browser.
 
-This behavior is, of course, configurable in `hotreload/config.ts`, allowing you to customize the port or other settings according to your project's requirements.
+This behavior is, of course, configurable in `hotreload/config.ts`, allowing you to customize the browser launch, hot reload, port or other settings according to your project's requirements.
 
 > [!TIP]
 > **Recommended Extensions for Visual Studio Code**
@@ -342,24 +342,24 @@ SOFTWARE.
 
 I'm actively working to enhance Supe Project Creator with new features and learning resources:
 
-*   **Deno Support**: Add support for Deno as a JavaScript runtime environment.
-*   **AI Demo Projects**: Expand the project creator to support other types of AI demo projects, including machine learning and natural language processing examples.
-*   **Enhanced Project Customization**: Allow users to customize project settings, such as dependencies and configurations, more easily.
-*   **Streamlined Project Setup**: Simplify the project setup process, making it faster and more intuitive for users.
-*   **Better Support for Advanced Features**: Improve support for advanced features, such as hot reloading and TypeScript integration.
-*   **HTTP/2 Support**: Add support for HTTP/2 to improve performance and user experience.
-*   **SSL and HTTPS**: Integrate SSL certificates to serve projects over HTTPS.
-*   **Explore HTTP/3**: Investigate and potentially add support for HTTP/3 to future-proof your web applications.
-*   **Improved Installation**: Streamline the installation process for easier and faster project setup.
-*   **Tutorials and Documentation**: Create detailed tutorials and expand documentation to cover project setup, advanced configurations, and common use cases.
-*   **YouTube Videos**: Launch a YouTube channel with video guides covering different aspects of Supe Project Creator.
-*   **GIF and Media Demos**: Provide GIFs and other media assets to visually demonstrate the tool's features and workflows.
-*   **LLM Demo**: Include more AI demos, specifically large language model demos.
-*   **Optional TypeScript Error Notifications**: Introduce optional notifications for TypeScript errors to enhance user experience.
-*   **Dev Plugins Ecosystem**: Establish a plugins ecosystem for developers to extend and customize the project creator.
-*   **Server Integrations**: Offer out-of-the-box server integrations and auto CORS setup for seamless connectivity.
-*   **CLI and Code Integrations**: Enable CLI and code integrations to utilize the project creator as a package.
-*   **Docs and JSDocs Definitions**: Add comprehensive documentation and JSDocs definitions for improved clarity and usability.
+* [v]   ~~**Deno Support**: Add support for Deno as a JavaScript runtime environment.~~
+* [x]   **AI Demo Projects**: Expand the project creator to support other types of AI demo projects, including machine learning and natural language processing examples.
+* [v]   ~~**Enhanced Project Customization**: Allow users to customize project settings, such as dependencies and configurations, more easily.~~
+* [v]   ~~**Streamlined Project Setup**: Simplify the project setup process, making it faster and more intuitive for users.~~
+* [v]   ~~**Better Support for Advanced Features**: Improve support for advanced features, such as hot reloading and TypeScript integration.~~
+* [x]   **HTTP/2 Support**: Add support for HTTP/2 to improve performance and user experience.
+* [x]   **SSL and HTTPS**: Integrate SSL certificates to serve projects over HTTPS.
+* [x]   **Explore HTTP/3**: Investigate and potentially add support for HTTP/3 to future-proof your web applications.
+* [v]   ~~**Improved Installation**: Streamline the installation process for easier and faster project setup.~~
+* [v]   ~~**Tutorials and Documentation**: Create detailed tutorials and expand documentation to cover project setup, advanced configurations, and common use cases.~~
+* [x]   **YouTube Videos**: Launch a YouTube channel with video guides covering different aspects of Supe Project Creator.
+* [v]   ~~**GIF and Media Demos**: Provide GIFs and other media assets to visually demonstrate the tool's features and workflows.~~
+* [x]   **LLM Demo**: Include more AI demos, specifically large language model demos.
+* [x]   **Optional TypeScript Error Notifications**: Introduce optional notifications for TypeScript errors to enhance user experience.
+* [x]   **Dev Plugins Ecosystem**: Establish a plugins ecosystem for developers to extend and customize the project creator.
+* [x]   **Server Integrations**: Offer out-of-the-box server integrations and auto CORS setup for seamless connectivity.
+* [v]   ~~**Code Integrations**: Enable code integrations to utilize the project creator as a package.~~
+* [v]   ~~**Docs and JSDocs Definitions**: Add comprehensive documentation and JSDocs definitions for improved clarity and usability.~~
 
 **These features are in active development, and your feedback is always welcome!**
 
@@ -392,7 +392,7 @@ Contributions are welcome from the community! Whether it's a new feature idea, b
 1.  **Fork the Repository**: Fork our repository to create a copy of the code.
 2.  **Create a Branch**: Create a new branch for your changes.
 3.  **Make Changes**: Make your changes and commit them.
-4.  **Lint & Bump**: Bump the version using `bun bump` and lint the project with `deno lint` to find important issues.
+4.  **Lint & Bump**: Bump the version using `bump.ts` and lint the project with `deno lint` to find important issues.
 5.  **Submit a PR**: Submit a pull request with your changes.
 
 I appreciate your contributions and look forward to hearing from you!
@@ -420,94 +420,22 @@ The following screenshots demonstrate the changes made by the version bump scrip
 
 To run the bump version script in your own local environment, use one of the following commands:
 
-- To run with `bun`, execute: 
+~~- To run with `bun`, execute: ~~
 ```bash
 bun bump
 ```
 
 - To run with `deno`, execute: 
 ```bash
-deno bump.ts
+deno run --allow-read --allow-write --allow-env --allow-run bump.ts
 ```
-**Note:** Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.
-
-## Old Usage - How to run with Bun instead of Deno?
-
-> [!IMPORTANT]
-> JSR currently does not support NPX or BUNX-style direct execution, but `--global` installation may be available soon. Feel free to suggest a better approach if you find one.
-
-To start using Supe Project Creator, run the following commands:
-
-```bash
-mkdir supe-project-creator
-cd supe-project-creator
-bun init -y
-bunx jsr add @supeprojects/supe-project-creator@latest
-```
-
-### Displaying Available Options
-
-To view the available options for Supe Project Creator, run the following command:
-
-#### Using Bun
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator --help
-```
-
-#### Using Deno
-```bash
-deno ./node_modules/@supeprojects/supe-project-creator --help
-```
-**Note:** Deno support is currently untested, but it will be fully supported in the future.
-
-#### Using Node
-```bash
-node ./node_modules/@supeprojects/supe-project-creator --help
-```
-**Note:** Node currently has limitations due to missing built-in TypeScript compatibility, but the above command will still work.
-
-### Old Examples
-
-- **Create a new project with a custom name at a specific path:**
-
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator -n "C:\Users\%username%\Desktop\my-supe-project"
-```
-
-- **Create a new project folder with a custom name in the current directory:**
-
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator -n my-supe-project
-```
-
-- **Create a demo project:**
-
-```bash
-bun ./node_modules/@supeprojects/supe-project-creator --demo --name cat-dog-detector
-```
-
-### Future Command (🤞):
-```bash
-jsr supe-project-creator [options]
-
-# Windows Example:
-$env:npm_config_registry="https://your.custom.registry/"; npx -p @yourcompany/tools foo
-# Linux Example:
-npm_config_registry=https://your.custom.registry/ npx -p @yourcompany/tools foo
-
-# Almost Working!:
-$env:npm_config_registry="https://npm.jsr.io/@jsr/"
-npx supeprojects__supe-project-creator
-
-$env:npm_config_registry="https://npm.jsr.io/@jsr/"
-bunx supeprojects__supe-project-creator
-
-# Without JSR: (Temporary solution until another method is discovered)
-bunx burgil/supe-project-creator
-npx github:burgil/supe-project-creator
-```
+**Note:** ~~Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.~~ The solution was to replace the `readline.createInterface` and the `rl.question` with simply a `prompt`! See [this](https://docs.deno.com/examples/prompts/) and [this](https://github.com/denoland/deno/issues/18184#issuecomment-2422842488) for more info...
 
 ## Changelog
+
+### Version 1.6.8 - Essential Fixes and Enhancements Patch
+
+- **This patch addresses key issues and improves the development experience with enhanced documentation and configuration management**: Fixed "require is not defined", migrated to `deno.json`, improved JSDocs, removed runtime detection, and resolved Deno version bump issue.
 
 ### Version 1.6.7 - Optional AI Demo
 
@@ -569,9 +497,9 @@ npx github:burgil/supe-project-creator
 
 - **Added basic Deno support, improved JSDoc documentation, and resolved linting issues in generated projects**: Supe Project Creator now supports Deno alongside Node.js and Bun. JSDoc documentation has been enhanced, including the addition of a new `runtime` variable. Linting issues in the generated Deno and Bun projects have also been fixed, ensuring cleaner, error-free code.
 
-### Version 1.5.2 - README Enhancements, bun start Command, and New Test Script
+### Version 1.5.2 - README Enhancements, and New Test Script
 
-- **Improved README, added bun start command, and introduced a tests.ts script for testing.**: The README has been updated for clearer guidance. We've added the bun start command to streamline project execution and included a tests.ts script to help users begin testing their project right away.
+- **Improved README, and introduced a tests.ts script for testing.**: The README has been updated for clearer guidance.
 
 ### Version 1.5.1 - Require Project Name and Deno Compatibility
 
@@ -623,7 +551,7 @@ npx github:burgil/supe-project-creator
 
 ### Version 1.3.9 - Improved Bump Script
 
-- **Version Control Support for the Bump Script**: When `bun bump` is used the script will prompt to push into GitHub at the end, but if there are any pending changes it will ask you if you want to pull them first and let you know if there were conflicts while pushing, Otherwise it will use the bump message to commit a detailed commit into GitHub
+- **Version Control Support for the Bump Script**: When `bump.ts` is used the script will prompt to push into GitHub at the end, but if there are any pending changes it will ask you if you want to pull them first and let you know if there were conflicts while pushing, Otherwise it will use the bump message to commit a detailed commit into GitHub
 
 ### Version 1.3.8 - Fixed Docs
 

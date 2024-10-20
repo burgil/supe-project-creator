@@ -20,11 +20,7 @@ const bump_files: {
         search: '"version": "{currentVersion}"',
         replacement: '"version": "{newVersion}"',
     }],
-    "CHANGELOG.md": [
-        {
-            search: '## Changelog',
-            replacement: '## Changelog\n\n### Version {newVersion} - {updateTitle}\n\n- **{mainDescription}**: {secondaryDescription}',
-        },
+    "README.md": [
         {
             search: '# Supe Project Creator v{currentVersion}',
             replacement: '# Supe Project Creator v{newVersion}',
@@ -32,6 +28,12 @@ const bump_files: {
         {
             search: 'jsr:@supeprojects/supe-project-creator@{currentVersion}',
             replacement: 'jsr:@supeprojects/supe-project-creator@{newVersion}'
+        }
+    ],
+    "CHANGELOG.md": [
+        {
+            search: '## Changelog',
+            replacement: '## Changelog\n\n### Version {newVersion} - {updateTitle}\n\n- **{mainDescription}**: {secondaryDescription}',
         }
     ],
 };

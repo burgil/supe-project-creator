@@ -15,7 +15,7 @@
 			"deno.json": false,
 			"deno.lock": false,
 			// --
-			"jsr.json": true,
+			"jsr.json": false,
 			// --
 			"CODE_OF_CONDUCT.md": true,
 			"LICENSE": true,

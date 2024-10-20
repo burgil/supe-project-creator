@@ -1,4 +1,4 @@
-# Supe Project Creator v1.7.7
+# Supe Project Creator v1.7.8
 
 A simple tool for creating simple web projects with batteries included.
 
@@ -29,53 +29,37 @@ The tool comes with a **built-in web server**, making it easy to test and deploy
 > [!CAUTION]
 > The package is not production-ready yet.
 
-**Why choose Supe Project Creator out of all the project creators out there?**
+## Key Features - What can Supe Project Creator do?
+
+**Why choose Supe Project Creator over all the other project creators out there?**
 
 By utilizing Supe Project Creator, you can:
 
-* **Keep it Simple**: For people who want to start a fresh project with nothing, but still have everything.
+* **Keep it Simple**: For people who want to start a fresh project with nothing, but still have everything. No dependencies will be in the generated project `package.json`/`deno.json` files, additionally all the source code that powers your app will be right there, allowing you to **truly** fully customize your application and take it in any direction.
 * **Save Time**: Skip tedious configuration tasks and jumpstart your project with a pre-configured template.
 * **Boost Efficiency**: Focus on writing code, not setting up your project structure.
 * **Streamline Your Workflow**: Take advantage of hot reloading and instant feedback to accelerate your development process.
 * **Explore New Possibilities**: Leverage the included optional AI demo to experiment with machine learning in your web applications, or start with a clean project.
+* **Lightning-Fast Project Setup**: Quickly create new projects with our intuitive scaffolding tool. Start with a pre-configured project structure, hot reloading, and optimized development tools.
+* **Customizable and Configurable**: Adapt your project setup to your specific needs with flexible options and configurations. No reliance on third-party modules - you maintain full control over your environment.
+* **Comprehensive TypeScript Support**: Enjoy full TypeScript support, including ESNext, ESM, Bun, and Deno, for an efficient, strongly-typed development process. The tool also features built-in error tracking and real-time updates.
+* **Built-in HTTP Web Server**: Easily serve your project using the built-in web server that supports HTTP for development. This allows quick local testing of your project with minimal setup.
+* **Optional AI Demo Integration**: Explore the potential of AI with our pre-configured demo, if you want, which features an object detection system that can recognize items in images - ideal for machine learning demonstrations or real-world AI projects.
+* **Blazing-Fast Performance with Intelligent Workflow**: Experience ultra-fast startup times that keep your development flow uninterrupted. Our intelligent development tool minimizes unnecessary browser launches and manual configurations, allowing you to focus on coding. Enjoy optimized browser handling that adapts to your workflow, making it easier than ever to create and test your projects in real-time.
+* **Instant Hot Reloading for Real-Time Development**: Leverage powerful hot reloading capabilities that instantly refresh your website as you make changes. This feature allows you to see updates in real-time, enhancing your productivity by eliminating the need for manual refreshes. Enjoy a smooth development experience with immediate feedback, so you can iterate quickly and efficiently.
 
 With Supe Project Creator, you can concentrate on what matters most – building innovative and effective web applications.
-
-## Key Features - What can Supe Project Creator do?
-
-### 1. **Lightning-Fast Project Setup**
-Quickly create new projects with our intuitive scaffolding tool. Start with a pre-configured project structure, hot reloading, and optimized development tools.
-
-### 2. **Customizable and Configurable**
-Adapt your project setup to your specific needs with flexible options and configurations. No reliance on third-party modules - you maintain full control over your environment.
-
-### 3. **Comprehensive TypeScript Support**
-Enjoy full TypeScript support, including ESNext, ESM, Bun, and Deno, for an efficient, strongly-typed development process. The tool also features built-in error tracking and real-time updates.
-
-### 4. **Built-in HTTP Web Server**
-Easily serve your project using the built-in web server that supports HTTP for development. This allows quick local testing of your project with minimal setup.
-
-### 5. **Optional AI Demo Integration**
-Explore the potential of AI with our pre-configured demo, if you want, which features an object detection system that can recognize items in images - ideal for machine learning demonstrations or real-world AI projects.
-
-### 6. **Blazing-Fast Performance with Intelligent Workflow**
-Experience ultra-fast startup times that keep your development flow uninterrupted. Our intelligent development tool minimizes unnecessary browser launches and manual configurations, allowing you to focus on coding. Enjoy optimized browser handling that adapts to your workflow, making it easier than ever to create and test your projects in real-time.
-
-### 7. **Instant Hot Reloading for Real-Time Development**
-Leverage powerful hot reloading capabilities that instantly refresh your website as you make changes. This feature allows you to see updates in real-time, enhancing your productivity by eliminating the need for manual refreshes. Enjoy a smooth development experience with immediate feedback, so you can iterate quickly and efficiently.
 
 ## Prerequisites - What do you need to run Supe Project Creator?
 
 Before executing any scripts, please take a moment to:
 
 1. **Read this entire document** to understand the necessary steps and requirements.
-2. **Verify that you have installed** the required dependencies:
-	* `bun`
-	* `deno 2`
-	* `node`
+2. **Verify that you have installed** the required runtime: `bun` | `deno 2` | `node`
 
 > [!WARNING]
 > Deno support for this package is currently actively worked on.
+> Node support will probably never work due to a missing built-in TypeScript compiler.
 
 ## 🛠 Getting Started - Usage - Quickstart - Tutorial
 
@@ -84,7 +68,7 @@ To start using Supe Project Creator, simply run the following command:
 ### Create a Clean Project in the Current Working Directory:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.7.7 -n my-supe-project --runtime deno
+deno jsr:@supeprojects/supe-project-creator@1.7.8 -n my-supe-project --runtime deno
 ```
 
 ```bash
@@ -94,7 +78,7 @@ cd my-supe-project
 ### Create an AI Demo Project in the Current Working Directory:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.7.7 --demo -n cat-dog-detector -r deno
+deno jsr:@supeprojects/supe-project-creator@1.7.8 --demo -n cat-dog-detector -r deno
 ```
 
 ```bash
@@ -148,7 +132,7 @@ This behavior is, of course, configurable in `hotreload/config.ts`, allowing you
 To view the available options for Supe Project Creator, run the following command:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.7.7 --help
+deno jsr:@supeprojects/supe-project-creator@1.7.8 --help
 ```
 
 - `-h`, `--help`: Displays help information.
@@ -194,7 +178,7 @@ Utilizing SPC programmatically allows you to:
 #### Programmatic Use Example
 
 ```ts
-import SPC from 'jsr:@supeprojects/supe-project-creator@1.7.7';
+import SPC from 'jsr:@supeprojects/supe-project-creator@1.7.8';
 
 console.log("Testing SPC programmatically...");
 
@@ -226,7 +210,7 @@ With these commands, you can easily set up and utilize the Supe Project Creator 
 To add the `Supe Project Creator` package in Deno, you can import it directly without any installation if you use the `jsr:` prefix in your import:
 
 ```ts
-import * as SPC from "jsr:@supeprojects/supe-project-creator@1.7.7";
+import * as SPC from "jsr:@supeprojects/supe-project-creator@1.7.8";
 
 // Example usage
 console.log("Testing SPC in Deno...");
@@ -236,7 +220,7 @@ SPC([]); // Shows the help menu
 Alternatively, if you prefer to add it, use the following command:
 
 ```bash
-deno add jsr:@supeprojects/supe-project-creator@1.7.7
+deno add jsr:@supeprojects/supe-project-creator@1.7.8
 ```
 
 Then, you can import it like this:

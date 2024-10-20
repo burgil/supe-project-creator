@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.7.8 - Improved Key Features
+
+- **Last improvements to the README**: The readme key features was improved to better reflect what SCP is all about, Upcoming: V2!
+
 ### Version 1.7.7 - Final README touches before V2
 
 - **Readme is now readable**: Finished upgrading the readme, now finally testing the final generated project on both deno and bun, Bun already worked before, And later maybe even node will work.

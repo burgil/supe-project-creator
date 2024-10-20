@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.8.0 - Fixed critical arguments and Deno project name pattern validation
+
+- **Critical Fixes**: Deno project names will now enforce the use of at sign according to the official regex pattern and critical arguments will now work properly
+
 ### Version 1.7.9 - Tested Deno Generated Projects
 
 - **Deno is almost compatible**: The new Deno 2 runtime is almost ready to be used with Supe Project Builder, Added missing info in the help menu about the new runtime CLI option, and completely rewrote the start.ts file for Deno and the hotreload/server.ts for Deno (Applies to newly generated projects)

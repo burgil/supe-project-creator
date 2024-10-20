@@ -20,17 +20,17 @@ const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely d
  *
  * SPC([]); // Shows the help menu
  * SPC(['--help']); // Also shows the help menu
- * SPC(['--name', 'my-example-project', '--runtime', 'deno']); // Creates a new clean project
+ * SPC(['--name', '@example/my-example-project', '--runtime', 'deno']); // Creates a new clean project
  * ```
  *
  * @example CLI Usage
  * 
  * ```bash
- * deno jsr:@supeprojects/supe-project-creator -n my-supe-project -r deno
+ * deno jsr:@supeprojects/supe-project-creator -n @example/my-supe-project -r deno
  * ```
  * or
  * ```bash
- * deno jsr:@supeprojects/supe-project-creator --demo -n cat-dog-detector --runtime deno
+ * deno jsr:@supeprojects/supe-project-creator --demo -n @example/cat-dog-detector --runtime deno
  * ```
  *
  * @param {string[]} argv - Command line arguments provided by the user. These control the behavior of the project creation.
@@ -40,7 +40,7 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = '';
-    const supeVersion = '1.7.9';
+    const supeVersion = '1.8.0';
     const supeVersionDate = '2024-10-16';
     let runtime: 'deno' | 'bun' | 'node' | 'none' = 'none';
     if (argv.length === 0) argv.push('--help');
@@ -96,7 +96,10 @@ export default function SupeProjectCreator(argv: string[]): void {
                 console.error('Error: Missing project name');
                 process.exit(1);
             }
-        } else if (arg.startsWith('-')) {
+        } else if (arg.startsWith('-') // Ignore critical arguments
+            && !(arg === '-v' || arg === '--version')
+            && !(arg === '-h' || arg === '--help')
+            && !(arg === '-r' || arg === '--runtime')) {
             console.error(`Error: Unknown option ${arg}`);
             process.exit(1);
         }

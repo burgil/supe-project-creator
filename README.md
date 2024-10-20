@@ -1,4 +1,4 @@
-# Supe Project Creator v1.7.9
+# Supe Project Creator v1.8.0
 
 A simple tool for creating simple web projects with batteries included.
 
@@ -20,10 +20,6 @@ The tool comes with a **built-in web server**, making it easy to test and deploy
 [JSR](https://jsr.io/@supeprojects/supe-project-creator) - [GitHub](https://github.com/burgil/supe-project-creator) - [Known Issues](https://github.com/burgil/supe-project-creator/issues) - [Wiki](https://github.com/burgil/supe-project-creator/wiki) - [Changelog](https://github.com/burgil/supe-project-creator/blob/main/CHANGELOG.md) - [Roadmap](https://github.com/burgil/supe-project-creator/blob/main/ROADMAP.md)
 
 [Contributing](https://github.com/burgil/supe-project-creator/blob/main/CONTRIBUTING.md) - [Code of Conduct](https://github.com/burgil/supe-project-creator/blob/main/CODE_OF_CONDUCT.md) - [License](https://github.com/burgil/supe-project-creator/blob/main/LICENSE)
-
-**TODO:**
-
-<a href="https://example.com/" target="_blank">Websites usually open in the same tab, if this link with target blank works on both JSR and GitHub in the next version then all other links will use it too in the upcoming versions</a>
 
 > [!NOTE]
 > The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework, such as Express.JS, FastAPI, Cloudflare Workers, etc.
@@ -72,7 +68,7 @@ To start using Supe Project Creator, simply run the following command:
 ### Create a Clean Project in the Current Working Directory:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.7.9 -n my-supe-project --runtime deno
+deno jsr:@supeprojects/supe-project-creator@1.8.0 -n @example/my-supe-project --runtime deno
 ```
 
 ```bash
@@ -82,7 +78,7 @@ cd my-supe-project
 ### Create an AI Demo Project in the Current Working Directory:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.7.9 --demo -n cat-dog-detector -r deno
+deno jsr:@supeprojects/supe-project-creator@1.8.0 --demo -n @example/cat-dog-detector -r deno
 ```
 
 ```bash
@@ -136,7 +132,7 @@ This behavior is, of course, configurable in `hotreload/config.ts`, allowing you
 To view the available options for Supe Project Creator, run the following command:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.7.9 --help
+deno jsr:@supeprojects/supe-project-creator@1.8.0 --help
 ```
 
 - `-h`, `--help`: Displays help information.
@@ -182,7 +178,7 @@ Utilizing SPC programmatically allows you to:
 #### Programmatic Use Example
 
 ```ts
-import SPC from 'jsr:@supeprojects/supe-project-creator@1.7.9';
+import SPC from 'jsr:@supeprojects/supe-project-creator@1.8.0';
 
 console.log("Testing SPC programmatically...");
 
@@ -190,18 +186,18 @@ console.log("Testing SPC programmatically...");
 SPC([]);
 
 // Create a new clean project named "my-example-project"
-SPC(['--name', 'my-example-project', '--runtime', 'deno']);
+SPC(['--name', '@example/my-example-project', '--runtime', 'deno']);
 
 // Create a project with specific runtime and additional options (May soon be replaced with an argument instead of a variable)
-SPC(['--name', 'my-custom-project', '--runtime', 'deno']);
+SPC(['--name', '@example/my-custom-project', '--runtime', 'deno']);
 
 // Generate a project and immediately start the development server - Not implemented yet! TODO: Implement --start script
-// SPC(['--name', 'my-fast-project', '--start', '--runtime', 'deno']);
+// SPC(['--name', '@example/my-fast-project', '--start', '--runtime', 'deno']);
 ```
 
 ### Programmatic Use Parameters
 
-- `argv: string[]`: An array of command-line arguments that control the behavior of the project creation process. This includes options like `--name` for naming the project, and in the future, it might have a `--runtime` option to specify the environment (e.g., `bun`, `deno`, or `node`) or `--bun`, `--deno`, and `--node`.
+- `argv: string[]`: An array of command-line arguments that control the behavior of the project creation process. This includes options like `--name` for naming the project, and the `--runtime` option to specify the environment (e.g., `bun`, `deno`, or `node`).
 
 For more detailed information on available options and flags, refer to the [CLI Options](#cli-options) section of the documentation.
 
@@ -214,7 +210,7 @@ With these commands, you can easily set up and utilize the Supe Project Creator 
 To add the `Supe Project Creator` package in Deno, you can import it directly without any installation if you use the `jsr:` prefix in your import:
 
 ```ts
-import * as SPC from "jsr:@supeprojects/supe-project-creator@1.7.9";
+import * as SPC from "jsr:@supeprojects/supe-project-creator@1.8.0";
 
 // Example usage
 console.log("Testing SPC in Deno...");
@@ -224,7 +220,7 @@ SPC([]); // Shows the help menu
 Alternatively, if you prefer to add it, use the following command:
 
 ```bash
-deno add jsr:@supeprojects/supe-project-creator@1.7.9
+deno add jsr:@supeprojects/supe-project-creator@1.8.0
 ```
 
 Then, you can import it like this:

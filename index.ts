@@ -39,7 +39,7 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = '';
-    const supeVersion = '1.7.1';
+    const supeVersion = '1.7.2';
     const supeVersionDate = '2024-10-16';
     let runtime = '';
     runtime = 'deno'; // WIP

@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.7.2 - Removed Example Files
+
+- **Ops**: Removed the example project pushed in the last version
+
 ### Version 1.6.9 - Fixed Installation Command
 
 - **No more outdated versions**: The `deno run jsr:` command was using the old version you have cached and there is no `@latest` flag so the `bump.ts` script will now take care of this

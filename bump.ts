@@ -20,7 +20,7 @@ const bump_files: {
         search: '"version": "{currentVersion}"',
         replacement: '"version": "{newVersion}"',
     }],
-    "README.md": [
+    "CHANGELOG.md": [
         {
             search: '## Changelog',
             replacement: '## Changelog\n\n### Version {newVersion} - {updateTitle}\n\n- **{mainDescription}**: {secondaryDescription}',

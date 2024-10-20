@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.7.7 - Final README touches before V2
+
+- **Readme is now readable**: Finished upgrading the readme, now finally testing the final generated project on both deno and bun, Bun already worked before, And later maybe even node will work.
+
 ### Version 1.7.6 - Preparing for V2
 
 - **Reorganized VSCode Workspace, Improved Readme, Simplified Comments**: Some comments were made simple, The readme file readability was improved, and the VSCode workspace now contain all the new files

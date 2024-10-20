@@ -40,7 +40,7 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = '';
-    const supeVersion = '1.7.6';
+    const supeVersion = '1.7.7';
     const supeVersionDate = '2024-10-16';
     let runtime: 'deno' | 'bun' | 'node' | 'none' = 'none';
     if (argv.length === 0) argv.push('--help');
@@ -942,12 +942,7 @@ const timer = setInterval(() => {
     console.log('\x1b[36m%s\x1b[0m', `  ${runtime === 'bun' ? 'bun start' : ''}${runtime === 'deno' ? 'deno run start' : ''}${runtime === 'node' ? 'npm start' : ''}`);
 }
 
-// P/CLI - A half package half command line interface hybrid with cross-runtime support
-const DEBUG = true;
-if (import.meta.main) {
-    if (DEBUG) console.log("Running from CLI");
+if (import.meta.main) { // Running from CLI
     const argv: string[] = process.argv.slice(2); // Parse command line arguments
     SupeProjectCreator(argv);
-} else {
-    if (DEBUG) console.log("Imported as a module");
-}
+} // Imported as a module

@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.7.9 - Tested Deno Generated Projects
+
+- **Deno is almost compatible**: The new Deno 2 runtime is almost ready to be used with Supe Project Builder, Added missing info in the help menu about the new runtime CLI option, and completely rewrote the start.ts file for Deno and the hotreload/server.ts for Deno (Applies to newly generated projects)
+
 ### Version 1.7.8 - Improved Key Features
 
 - **Last improvements to the README**: The readme key features was improved to better reflect what SCP is all about, Upcoming: V2!

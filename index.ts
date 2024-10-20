@@ -40,12 +40,12 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = '';
-    const supeVersion = '1.7.8';
+    const supeVersion = '1.7.9';
     const supeVersionDate = '2024-10-16';
     let runtime: 'deno' | 'bun' | 'node' | 'none' = 'none';
     if (argv.length === 0) argv.push('--help');
 
-    // Loop through each argument
+    // Loop through each critical argument
     for (const arg of argv) {
         if (arg === '-v' || arg === '--version') {
             console.log(`Supe Project Creator - Version: ${supeVersion} - ${supeVersionDate}`);
@@ -58,11 +58,10 @@ export default function SupeProjectCreator(argv: string[]): void {
             console.log('\x1b[36m%s\x1b[0m', 'Options:');
             console.log('  -v, --version        Display version number');
             console.log('  -h, --help           Display this help message');
-            console.log('  -n, --name <string>  Set project name (default: example-project)');
+            console.log('  -n, --name <string>  Set project name (required)');
+            console.log('  -r, --runtime <deno|bun|node>  Specifies the JavaScript runtime environment (required)');
             console.log('  -d, --demo          Demo project (default: false)');
             process.exit(0);
-        } else if (arg === '-d' || arg === '--demo') {
-            CleanProject = false;
         } else if (arg === '-r' || arg === '--runtime') {
             const nextArg = argv[argv.indexOf(arg) + 1];
             if (nextArg === 'deno') {
@@ -77,17 +76,20 @@ export default function SupeProjectCreator(argv: string[]): void {
                 console.error('Error: Project name must be either a valid lowercase alphanumeric name with hyphens and underscores, or follow the Deno pattern (@namespace/project).');
                 process.exit(1);
             }
+        }
+    }
+    // Loop through each argument - Runtime must be set before project name pattern detection
+    for (const arg of argv) {
+        if (arg === '-d' || arg === '--demo') {
+            CleanProject = false;
         } else if (arg === '-n' || arg === '--name') {
             const nextArg = argv[argv.indexOf(arg) + 1];
             if (nextArg && !nextArg.startsWith('-')) {
-                const denoPattern = /^@[a-z0-9-]+\/[a-z0-9-]+$/;
-                const validProjectNamePattern = /^[a-z0-9_-]+$/;
-                const isDenoProjectName = denoPattern.test(nextArg);
-                const isValidProjectName = validProjectNamePattern.test(nextArg);
-                if (isValidProjectName || isDenoProjectName) {
+                const isValidProjectName = runtime === 'deno' ? /^@[a-z0-9-]+\/[a-z0-9-]+$/.test(nextArg) : /^[a-z0-9_-]+$/.test(nextArg);
+                if (isValidProjectName) {
                     projectName = nextArg.toLowerCase();
                 } else {
-                    console.error('Error: Project name must be either a valid lowercase alphanumeric name with hyphens and underscores, or follow the Deno pattern (@namespace/project).');
+                    console.error(`Error: Project name must be either a valid lowercase alphanumeric name with hyphens and underscores${runtime === 'deno' ? ', and follow the Deno pattern (@namespace/project).' : '.'}`);
                     process.exit(1);
                 }
             } else {
@@ -132,11 +134,15 @@ export default function SupeProjectCreator(argv: string[]): void {
   "license": "",
   "exports": "./src/index.ts",
   "tasks": {
-    "start": "deno hotreload/start.ts"
+    "tsc": "tsc",
+    "start": "deno --allow-read --allow-run hotreload/start.ts"
   },
-  "imports": {`;
+  "nodeModulesDir": "auto",
+  "imports": {
+    "@types/node": "npm:@types/node@^22.7.7",
+    "typescript": "npm:typescript@^5.6.3",`;
         if (!CleanProject) packageOutput += `
-    "@mediapipe/tasks-vision": "^0.10.17"`;
+    "@mediapipe/tasks-vision": "npm:@mediapipe/tasks-vision@^0.10.17"`;
         packageOutput += `
   },
   "compilerOptions": {
@@ -438,8 +444,12 @@ dist
 .DS_Store
 `);
 
-    fs.writeFileSync(join(srcDir, 'index.ts'), CleanProject ? '' : `import { ObjectDetector, FilesetResolver, type ObjectDetectorResult } from "@mediapipe/tasks-vision"; // 19.4MB
+    fs.writeFileSync(join(srcDir, 'index.ts'), CleanProject ? '' : `// Entry point for bundling
+${runtime === 'deno' ? `import type { ObjectDetectorResult } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.17/vision.d.ts";
+import { ObjectDetector, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.17/vision_bundle.mjs";`
+            : 'import { ObjectDetector, FilesetResolver, type ObjectDetectorResult } from "@mediapipe/tasks-vision";'}
 
+// AI Demo - Object Detection:
 let fileIndex = 0;
 document.getElementById('fileInput')?.addEventListener('change', handleFileInput); // Keep first to allow uploads during loading times
 const vision = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"); // 9MB
@@ -734,6 +744,7 @@ if (!existsSync(packageJSON.module)) {
 
 const bundle = (input: string, output: string) => \`\${input} --outfile=\${output} --bundle --platform=browser --format=esm --target=\${config.target}\${config.minify ? ' --minify' : ''}\`;
 const index = bundle(packageJSON.module, \`\${config.paths.publicFolder}/\${basename(packageJSON.module).replace('.ts', '.js')}\`);
+const hotreload = bundle(\`\${config.paths.hotreloadFolder}/\${config.paths.hotreload.client}\`, \`\${config.paths.publicFolder}/\${config.paths.hotreload.output}\`);
 
 await $\`echo ${CLI_COMMENT}\`;
 
@@ -746,7 +757,7 @@ await Promise.all([
     // Bundle index.ts:
     $\`bunx esbuild \${index}\`,
     // Bundle hotreload and start hotreload server:
-    $\`bunx esbuild \${bundle(\`\${config.paths.hotreloadFolder}/\${config.paths.hotreload.client}\`, \`\${config.paths.publicFolder}/\${config.paths.hotreload.output}\`)} && bun \${config.paths.hotreloadFolder}/\${config.paths.hotreload.server}\`,
+    $\`bunx esbuild \${hotreload} && bun \${config.paths.hotreloadFolder}/\${config.paths.hotreload.server}\`,
     // Serve public folder:
     $\`bunx http-server \${config.paths.publicFolder} -p \${config.port}\${!config.httpLogs ? ' --silent' : ''}\`,
     // Watch for changes in public and hotreload - On reload: Bundle index.ts + Refresh Page:
@@ -760,50 +771,85 @@ await Promise.all([
 // End of file - Nothing will run below. Use CTRL+C in the terminal to terminate (due to awaiting running servers...)
 `);
     } else if (runtime === 'deno') {
-        fs.writeFileSync(join(hotreloadDir, 'start.ts'), `
-console.error("Deno support is under construction, Check again in the upcoming version!");
+        fs.writeFileSync(join(hotreloadDir, 'start.ts'), `console.error("Deno support is under construction, Check again in the upcoming version!");
 
-import { $ } from "npm:bun"; // TODO check if bun, the package, works in deno - https://www.npmjs.com/package/bun
 import { basename } from "node:path";
 import { existsSync } from "node:fs";
 import process from "node:process";
-import config from "./config";
-const packageJSON = await Bun.file('package.json').json();
+import config from "./config.ts";
+import denoJSON from "../deno.json" with { type: "json" };
 
-if (!packageJSON.module.endsWith('.ts')) {
-    console.error(\`Could not load module. Expected a .ts file, but received \${packageJSON.module}\`);
+if (!denoJSON.exports.endsWith('.ts')) {
+    console.error(\`Could not load exports. Expected a .ts file, but received \${denoJSON.exports}\`);
     process.exit();
 }
 
-if (!existsSync(packageJSON.module)) {
-    console.error(\`Could not find "\${packageJSON.module}" defined in the package.json "module" member\`);
+if (!existsSync(denoJSON.exports)) {
+    console.error(\`Could not find "\${denoJSON.exports}" defined in the deno.json "exports" member\`);
     process.exit();
 }
 
-const bundle = (input: string, output: string) => \`\${input} --outfile=\${output} --bundle --platform=browser --format=esm --target=\${config.target}\${config.minify ? ' --minify' : ''}\`;
-const index = bundle(packageJSON.module, \`\${config.paths.publicFolder}/\${basename(packageJSON.module).replace('.ts', '.js')}\`);
+function bundle(input: string, output: string): string[] {
+    const bundled = [input, \`--outfile=\${output}\`, '--bundle', '--platform=browser', '--format=esm', \`--target=\${config.target}\`];
+    if (config.minify) bundled.push('--minify');
+    return bundled;
+}
 
-await $\`echo ${CLI_COMMENT}\`;
+const denoPath = Deno.execPath();
+async function command(...args: string[]) {
+    console.log('$ deno', args.join(' '));
+    // If deno is used, replace it with it's actual path - More info: https://docs.deno.com/api/deno/~/Deno.Command
+    const command = new Deno.Command(denoPath, {
+        args: args.filter(Boolean), // Remove empty elements from an array in Javascript
+        // stdin: "piped",
+        // stdout: "piped",
+    });
+    const child = command.spawn();
+    await child.status;
+}
 
-setTimeout(async () => {
-    console.log(\`\\x1b[32mHello\\x1b[0m \\x1b[34mWorld!\\x1b[0m\nThank you for using Supe Project Creator v${supeVersion}\`);
-    await $\`echo Press CTRL+C in the terminal to terminate the process.\`
+const index = bundle(denoJSON.exports, \`\${config.paths.publicFolder}/\${basename(denoJSON.exports).replace('.ts', '.js')}\`);
+const hotreload = bundle(\`\${config.paths.hotreloadFolder}/\${config.paths.hotreload.client}\`, \`\${config.paths.publicFolder}/\${config.paths.hotreload.output}\`);
+
+setTimeout(() => {
+    console.log(\`\x1b[32mHello\x1b[0m \x1b[34mWorld!\x1b[0m
+Thank you for using Supe Project Creator v1.7.8
+Press CTRL+C in the terminal to terminate the process.\`);
 }, 2000);
 
+// Currently this is a temporary fix to hanging behavior in the terminal when running "deno run npm:http-server public -p 80"
+// UPDATE: --allow-all was replaced with specific permissions to keep up with Deno demands.
+// This is here to alert users that the only way I got it working is by using the --allow-all (-A) argument
+const esbuild_permissions = ['--allow-write=.', '--allow-env', '--allow-read', '--allow-run'];
+const hotreload_permissions = ['--allow-net', '--allow-env', '--allow-read', '--allow-run'];
+const httpserver_permissions = ['--allow-net', '--allow-env', '--allow-sys', '--allow-read'];
+const answer = prompt(\`┏ ⚠️  Supe Project Creator requests full access in "start.ts" and "hotreload/server.ts" for "npm:http-server" and "npm:esbuild" to work.
+┠─ Learn more at: https://docs.deno.com/go/--allow-all
+┠─ Currently this is a temporary fix to hanging behavior in the terminal when running "deno run npm:http-server public -p 80"
+┠─ ESBuild Permissions: \${esbuild_permissions.join(', ').replaceAll('--', '')}
+┠─ HotReload Permissions: \${hotreload_permissions.join(', ').replaceAll('--', '')}
+┠─ HTTPServer Permissions: \${httpserver_permissions.join(', ').replaceAll('--', '')}
+┗ Allow All? [y/n/A] (y = yes, allow; n = no, deny; A = allow all permissions) >\`);
+if (answer !== 'A') {
+    console.error("⚠️  You declined the permissions, The program will exit, All the code it runs is in start.ts and hotreload/server.ts, the only packages used are esbuild, http-server, nodemon and typescript.");
+    process.exit();
+}
+
+// All commands in here run in parallel
+// Bundle index.ts:
+command(...esbuild_permissions, 'npm:esbuild', ...index);
+// Bundle hotreload:
+await command(...esbuild_permissions, 'npm:esbuild', ...hotreload);
 await Promise.all([
-    // Bundle index.ts:
-    $\`deno npm:esbuild \${index}\`,
-    // Bundle hotreload and start hotreload server:
-    $\`deno npm:esbuild \${bundle(\`\${config.paths.hotreloadFolder}/\${config.paths.hotreload.client}\`, \`\${config.paths.publicFolder}/\${config.paths.hotreload.output}\`)} && bun \${config.paths.hotreloadFolder}/\${config.paths.hotreload.server}\`,
+    // start hotreload server
+    command(...hotreload_permissions, \`\${config.paths.hotreloadFolder}/\${config.paths.hotreload.server}\`),
     // Serve public folder:
-    $\`deno npm:http-server \${config.paths.publicFolder} -p \${config.port}\${!config.httpLogs ? ' --silent' : ''}\`,
-    // Watch for changes in public and hotreload - On reload: Bundle index.ts + Refresh Page:
-    $\`deno npm:nodemon --ext \${config.watchExtensions} --watch \${config.paths.publicFolder} --watch \${config.paths.hotreloadFolder} --watch \${config.paths.srcFolder} --on-change-only --exec 'bunx esbuild \${index}\${config.refresh.changes ? \` && bun \${config.paths.hotreloadFolder}/\${config.paths.hotreload.refresh}\` : ''}'\`,
-    // Watch for errors - Detect TypeScript errors without cleaning the console:
-    $\`tsc -b --watch --preserveWatchOutput\`, // TODO test if 'deno check' can replace tsc watch command
-    // All commands in here run in parallel
-    $\`echo You are using Supe Project Creator v${supeVersion}\`,
-])
+    command(...httpserver_permissions, 'npm:http-server', config.paths.publicFolder, '-p', config.port.toString(), !config.httpLogs ? '--silent' : ''),
+]);
+// Watch for changes in public and hotreload - On reload: Bundle index.ts + Refresh Page:
+// command(denoPath, \`npm:nodemon --ext \${config.watchExtensions} --watch \${config.paths.publicFolder} --watch \${config.paths.hotreloadFolder} --watch \${config.paths.srcFolder} --on-change-only --exec 'deno npm:esbuild \${index}\${config.refresh.changes ? \` && deno \${config.paths.hotreloadFolder}/\${config.paths.hotreload.refresh}\` : ''}'\`),
+// Watch for errors - Detect TypeScript errors without cleaning the console:
+// command(denoPath, 'run tsc -b --watch --preserveWatchOutput'), // TODO test if 'deno check' can replace tsc watch command
 
 // End of file - Nothing will run below. Use CTRL+C in the terminal to terminate (due to awaiting running servers...)
 `);
@@ -854,7 +900,63 @@ if (config.autoFixCSS) {
 }
 `);
 
-    fs.writeFileSync(join(hotreloadDir, 'server.ts'), `import type Message from "ws"
+    if (runtime === 'deno') {
+        fs.writeFileSync(join(hotreloadDir, 'server.ts'), `import { exec } from 'node:child_process';
+import os from 'node:os';
+import config from "./config.ts";
+
+let connected = false;
+const clients: WebSocket[] = [];
+Deno.serve({ port: config.hotreloadPort, hostname: config.address }, (req) => {
+    if (req.headers.get("upgrade") !== "websocket") return new Response(null, { status: 501 });
+    const { socket, response } = Deno.upgradeWebSocket(req);
+    clients.push(socket);
+    socket.addEventListener("open", () => {
+        connected = true;
+        if (config.debug) console.log('Client connected');
+    });
+    socket.addEventListener("message", (event) => {
+        if (typeof event.data !== 'string') return;
+        if (config.debug) console.log('Client sent a message:', event.data);
+        if (event.data === 'reload') return triggerReload();
+        if (event.data === "ping") socket.send("pong");
+    });
+    return response;
+});
+if (config.debug) console.log(\`Hot Reload WebSocket server is running on \${config.secure ? 'wss' : 'ws'}://\${config.address}:\${config.hotreloadPort}\`);
+
+export function triggerReload() {
+    for (const client of clients) {
+        if (client.readyState === 1) client.send('reload');
+    }
+    if (config.debug) console.log('Reload signal sent to all clients');
+}
+
+const url = \`\${config.secure ? 'https' : 'http'}://\${config.address}\${config.port !== 80 ? \`:\${config.port}\` : ''}\`;
+console.log(\`Server is running: \${url}\`);
+if (config.browser) {
+    setTimeout(() => {
+        if (!connected) {
+            try {
+                const commands: { [key: string]: string } = {
+                    darwin: \`open \${url}\`,
+                    win32: \`start \${url}\`,
+                    default: \`xdg-open \${url}\`
+                };
+                exec(commands[os.platform()] || commands.default);
+                console.log("Launched Browser!");
+            } catch (error) {
+                if (config.debug) console.error(\`Error launching browser: \${error}\`);
+            }
+        } else {
+            console.log("Browser was already running.");
+            if (config.refresh.restart) triggerReload();
+        }
+    }, config.browserDelay);
+}
+`);
+    } else {
+        fs.writeFileSync(join(hotreloadDir, 'server.ts'), `import type Message from "ws"
 import { WebSocketServer } from 'ws';
 import { exec } from 'node:child_process';
 import os from 'node:os';
@@ -898,17 +1000,18 @@ if (config.browser) {
                     default: \`xdg-open \${url}\`
                 };
                 exec(commands[os.platform()] || commands.default);
-                if (config.debug) console.log("Launched Browser!");
+                console.log("Launched Browser!");
             } catch (error) {
                 if (config.debug) console.error(\`Error launching browser: \${error}\`);
             }
         } else {
-            if (config.debug) console.log("Browser was already running.");
+            console.log("Browser was already running.");
             if (config.refresh.restart) triggerReload();
         }
     }, config.browserDelay);
 }
 `);
+    }
 
     fs.writeFileSync(join(hotreloadDir, 'refresh.ts'), `import config from "./config";
 import process from "node:process";

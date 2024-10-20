@@ -1,4 +1,4 @@
-# Supe Project Creator v1.8.0
+# Supe Project Creator v1.8.1
 
 A simple tool for creating simple web projects with batteries included.
 
@@ -68,7 +68,7 @@ To start using Supe Project Creator, simply run the following command:
 ### Create a Clean Project in the Current Working Directory:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.8.0 -n @example/my-supe-project --runtime deno
+deno jsr:@supeprojects/supe-project-creator@1.8.1 -n @example/my-supe-project --runtime deno
 ```
 
 ```bash
@@ -78,7 +78,7 @@ cd my-supe-project
 ### Create an AI Demo Project in the Current Working Directory:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.8.0 --demo -n @example/cat-dog-detector -r deno
+deno jsr:@supeprojects/supe-project-creator@1.8.1 --demo -n @example/cat-dog-detector -r deno
 ```
 
 ```bash
@@ -132,7 +132,7 @@ This behavior is, of course, configurable in `hotreload/config.ts`, allowing you
 To view the available options for Supe Project Creator, run the following command:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.8.0 --help
+deno jsr:@supeprojects/supe-project-creator@1.8.1 --help
 ```
 
 - `-h`, `--help`: Displays help information.
@@ -178,7 +178,7 @@ Utilizing SPC programmatically allows you to:
 #### Programmatic Use Example
 
 ```ts
-import SPC from 'jsr:@supeprojects/supe-project-creator@1.8.0';
+import SPC from 'jsr:@supeprojects/supe-project-creator@1.8.1';
 
 console.log("Testing SPC programmatically...");
 
@@ -210,7 +210,7 @@ With these commands, you can easily set up and utilize the Supe Project Creator 
 To add the `Supe Project Creator` package in Deno, you can import it directly without any installation if you use the `jsr:` prefix in your import:
 
 ```ts
-import * as SPC from "jsr:@supeprojects/supe-project-creator@1.8.0";
+import * as SPC from "jsr:@supeprojects/supe-project-creator@1.8.1";
 
 // Example usage
 console.log("Testing SPC in Deno...");
@@ -220,7 +220,7 @@ SPC([]); // Shows the help menu
 Alternatively, if you prefer to add it, use the following command:
 
 ```bash
-deno add jsr:@supeprojects/supe-project-creator@1.8.0
+deno add jsr:@supeprojects/supe-project-creator@1.8.1
 ```
 
 Then, you can import it like this:

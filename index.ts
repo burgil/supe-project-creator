@@ -40,7 +40,7 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = '';
-    const supeVersion = '1.8.0';
+    const supeVersion = '1.8.1';
     const supeVersionDate = '2024-10-16';
     let runtime: 'deno' | 'bun' | 'node' | 'none' = 'none';
     if (argv.length === 0) argv.push('--help');
@@ -87,7 +87,7 @@ export default function SupeProjectCreator(argv: string[]): void {
             if (nextArg && !nextArg.startsWith('-')) {
                 const isValidProjectName = runtime === 'deno' ? /^@[a-z0-9-]+\/[a-z0-9-]+$/.test(nextArg) : /^[a-z0-9_-]+$/.test(nextArg);
                 if (isValidProjectName) {
-                    projectName = nextArg.toLowerCase();
+                    projectName = nextArg.replaceAll('/', '+').toLowerCase();
                 } else {
                     console.error(`Error: Project name must be either a valid lowercase alphanumeric name with hyphens and underscores${runtime === 'deno' ? ', and follow the Deno pattern (@namespace/project).' : '.'}`);
                     process.exit(1);

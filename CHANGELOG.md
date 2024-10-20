@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.8.1 - Fixed Failed MKDir
+
+- **The slash in the project name can not be used as a folder name**: Replaced the slash with a plus as seen in .deno node modules
+
 ### Version 1.8.0 - Fixed critical arguments and Deno project name pattern validation
 
 - **Critical Fixes**: Deno project names will now enforce the use of at sign according to the official regex pattern and critical arguments will now work properly

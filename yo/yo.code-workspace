@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "▪yo◾", // Yang and Yin. With great power comes great responsibility. wield your creation for the greater good, and never let it be used to harm or exploit others.
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"package.json": false,
+			"yo.code-workspace": false,
+			"tsconfig.json": false,
+			// --
+			"README.md": true,
+			"bun.lockb": true,
+			".gitignore": true,
+			"node_modules": true,
+			"tsconfig.tsbuildinfo": true, // useless artifact, we can make it build into node_modules in the future
+		}
+	}
+}

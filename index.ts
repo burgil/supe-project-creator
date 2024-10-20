@@ -33,14 +33,14 @@ const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely d
  * ```
  *
  * @param {string[]} argv - Command line arguments provided by the user. These control the behavior of the project creation.
- * @param {'bun' | 'deno' | 'node'} [runtime='bun'] - The runtime environment for the project creation process. Defaults to 'bun'.
+ * @param {'bun' | 'deno' | 'node'} runtime - The runtime environment for the project creation process.
  * @returns {void}
  */
-export default function SupeProjectCreator(argv: string[], runtime: 'bun' | 'deno' | 'node' = 'bun'): void {
+export default function SupeProjectCreator(argv: string[], runtime: 'bun' | 'deno' | 'node'): void {
     // Variables:
     let CleanProject = true;
-    let projectName = 'example-project';
-    const supeVersion = '1.6.9';
+    let projectName = '';
+    const supeVersion = '1.7.0';
     const supeVersionDate = '2024-10-16';
     if (argv.length === 0) argv.push('--help');
 

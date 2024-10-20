@@ -1,0 +1,17 @@
+{
+	"name": "yo",
+	"version": "0.0.1",
+	"license": "",
+	"module": "./src/index.ts",
+	"type": "module",
+	"scripts": {
+        "start": "bun hotreload/start.ts"
+    },
+	"devDependencies": {
+		"@types/bun": "latest",
+		"@types/node": "latest"
+	},
+	"peerDependencies": {
+        "typescript": "latest"
+    }
+}

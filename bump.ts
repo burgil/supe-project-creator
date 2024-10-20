@@ -94,13 +94,13 @@ async function bumpVersion(currentVersion: string, bumpType = 'auto'): Promise<s
         default:
             if (newPatch >= MAX_PATCH_VERSION) {
                 console.log('\x1b[34m%s\x1b[0m', 'Proposed Minor Version:', `${newMajor}.${newMinor + 1}.0`);
-                const bumpMinor = await askForConfirmation(`Do you want to bump the minor version from ${newMinor} to ${newMinor + 1} \x1b[34m(otherwise only the patch will be bumped to ${newPatch})\x1b[0m?`);
+                const bumpMinor = await askForConfirmation(`Do you want to bump the minor version from ${newMinor} to ${newMinor + 1} (otherwise only the patch will be bumped to ${newPatch})?`);
                 if (bumpMinor) {
                     newPatch = 0;
                     newMinor++;
                     if (newMinor >= MAX_MINOR_VERSION) {
                         console.log('\x1b[34m%s\x1b[0m', 'Proposed Major Version:', `${newMajor + 1}.0.${newPatch}`);
-                        const bumpMajor = await askForConfirmation(`Do you want to bump the major version from ${newMajor} to ${newMajor + 1} \x1b[34m(otherwise only the minor will be bumped to ${newMinor})\x1b[0m?`);
+                        const bumpMajor = await askForConfirmation(`Do you want to bump the major version from ${newMajor} to ${newMajor + 1}(otherwise only the minor will be bumped to ${newMinor})?`);
                         if (bumpMajor) {
                             newMinor = 0;
                             newMajor++;

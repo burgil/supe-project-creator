@@ -1,6 +1,6 @@
-# Supe Project Creator v1.6.9
+# Supe Project Creator v1.7.0
 
-A simple tool for creating modern web projects with batteries included.
+A simple tool for creating simple web projects with batteries included.
 
 ![Supe Project Creator - AI Demo Project](https://github.com/burgil/burgil/blob/main/public/Supe-Project-Creator-Gif.gif?raw=true)
 
@@ -10,7 +10,7 @@ This is the first package under the @supeprojects scope, with more planned for t
 
 ## Overview - What is Supe Project Creator?
 
-Supe Project Creator is a simple tool designed to help you build modern web applications quickly and efficiently. It generates project templates boilerplate using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. But there's a catch - the generated project has no dependencies, a fresh start. All the source code that runs the project will be waiting for you in the generated project folder, no strings attached. It's as simple as you can get.
+Supe Project Creator is a simple tool designed to help you build simple web applications quickly and efficiently. It generates project templates boilerplate using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. But there's a catch - the generated project has no dependencies, a fresh start. All the source code that runs the project will be waiting for you in the generated project folder, no strings attached. It's as simple as you can get.
 
 [JSR](https://jsr.io/@supeprojects/supe-project-creator) - [Source Code](https://github.com/burgil/supe-project-creator) - [Known Issues](https://github.com/burgil/supe-project-creator/issues) - [Docs/Wiki](https://github.com/burgil/supe-project-creator/wiki)
 
@@ -73,13 +73,6 @@ Before executing any scripts, please take a moment to:
 	* `bun`
 	* `deno 2`
 	* `node`
-3. **Verify ESBuild Functionality** in Your Environment:
-	* Run the command `bunx esbuild --version` to check the installed version. At the time of writing, the expected output is `0.24.0`.
-	* You can also check this with `deno`, Run the command `deno npm:esbuild --version`, the expected output is:
-	`✅ Granted all env access.`
-	`✅ Granted all read access.`
-	`✅ Granted all run access.`
-	`0.24.0`
 
 By doing so, you will ensure a smooth and successful execution of the scripts.
 
@@ -89,41 +82,22 @@ To start using Supe Project Creator, simply run the following command:
 
 ### Create an AI Demo Project in the Current Working Directory:
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.6.9 --demo -n cat-dog-detector
+deno jsr:@supeprojects/supe-project-creator@1.7.0 --demo -n cat-dog-detector -r deno
+cd cat-dog-detector
 ```
 
 ### Create a Clean Project in the Current Working Directory:
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.6.9 -n my-supe-project
+deno jsr:@supeprojects/supe-project-creator@1.7.0 -n my-supe-project --runtime deno
+cd my-supe-project
 ```
-
-### Create a Clean Project in a Specific Directory:
-```bash
-deno jsr:@supeprojects/supe-project-creator@1.6.9 --name "C:\Users\%username%\Desktop\my-supe-project"
-```
-
-**TODO:** Add runtime argument `--bun`, `--deno` or `--node`
-
-If you get any error related to `esbuild` during usage, Try to restart the terminal and try again, To avoid downloading dependencies it uses `bunx` (`NPX` Alternative) to fetch packages like `http-server`, `nodemon` and `esbuild`.
 
 > [!IMPORTANT]
 > Supe Project Creator does not require a separate installation step. Simply execute the command above to create a new project instantly.
 
-After creating a new project using the Supe Project Creator, you will first need to navigate to the newly created project directory before proceeding with the setup:
-
-#### For a project created in a specific directory:
-```bash
-cd "C:\Users\%username%\Desktop\my-supe-project"
-```
-
-#### For a project created in the current working directory (e.g., AI demo):
-```bash
-cd cat-dog-detector
-```
+1. **Install Dependencies**:
 
 Once you're inside the project directory, you can then follow the steps to install dependencies and start the development server:
-
-1. **Install Dependencies**:
 
 ```bash
 bun install
@@ -165,12 +139,13 @@ This behavior is, of course, configurable in `hotreload/config.ts`, allowing you
 To view the available options for Supe Project Creator, run the following command:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.6.9 --help
+deno jsr:@supeprojects/supe-project-creator@1.7.0 --help
 ```
 
 - `-h`, `--help`: Displays help information.
 - `-v`, `--version`: Displays the version number.
-- `-n`, `--name <string>`: Sets the project name (default: `"example-project"`).
+- `-n`, `--name <string>`: Sets the project name (required).
+- `-r`, `--runtime <deno|bun|node>`: Specifies the JavaScript runtime environment (required).
 - `-d`, `--demo`: Creates a demo project (default: `false`).
 
 ## Project Structure - What Supe Project Creator generated projects have?
@@ -203,22 +178,22 @@ The Supe Project Creator (SPC) can be utilized programmatically within your Type
 Utilizing SPC programmatically allows you to:
 
 - **Automate Project Creation**: Integrate project setup into your build scripts or development tools.
-- **Customize Parameters**: Tailor the initialization process with specific options that suit your project needs. **TODO:** Add more options
 - **Streamlined Workflow**: Enhance your development workflow by reducing manual steps in project creation.
+
 ### Importing and Installing Supe Project Creator
 
 #### Programmatic Use Example
 
 ```ts
-import SPC from 'jsr:@supeprojects/supe-project-creator@1.6.9';
+import SPC from 'jsr:@supeprojects/supe-project-creator@1.7.0';
 
 console.log("Testing SPC programmatically...");
 
 // Display the help menu
-SPC([]);
+SPC([], 'deno');
 
 // Create a new clean project named "my-example-project"
-SPC(['--name', 'my-example-project']);
+SPC(['--name', 'my-example-project'], 'deno');
 
 // Create a project with specific runtime and additional options (May soon be replaced with an argument instead of a variable)
 SPC(['--name', 'my-custom-project'], 'deno');
@@ -230,7 +205,7 @@ SPC(['--name', 'my-custom-project'], 'deno');
 ### Programmatic Use Parameters
 
 - `argv: string[]`: An array of command-line arguments that control the behavior of the project creation process. This includes options like `--name` for naming the project, and in the future, it might have a `--runtime` option to specify the environment (e.g., `bun`, `deno`, or `node`) or `--bun`, `--deno`, and `--node`.
-- `runtime: 'bun' | 'deno' | 'node'`: The runtime environment for the project creation process. It defaults to `'bun'`. You can specify which environment to use by passing one of these values.
+- `runtime: 'bun' | 'deno' | 'node'`: The runtime environment for the project creation process. You need to specify which environment to use by passing one of these values.
 
 For more detailed information on available options and flags, refer to the [CLI Options](#cli-options) section of the documentation.
 
@@ -243,45 +218,27 @@ With these commands, you can easily set up and utilize the Supe Project Creator 
 To add the `Supe Project Creator` package in Deno, you can import it directly without any installation if you use the `jsr:` prefix in your import:
 
 ```ts
-import * as mod from "jsr:@supeprojects/supe-project-creator@1.6.9";
+import * as SPC from "jsr:@supeprojects/supe-project-creator@1.7.0";
 
 // Example usage
 console.log("Testing SPC in Deno...");
-mod([]); // Shows the help menu
+SPC([], 'deno'); // Shows the help menu
 ```
 
 Alternatively, if you prefer to add it, use the following command:
 
 ```bash
-deno add jsr:@supeprojects/supe-project-creator@1.6.9
+deno add jsr:@supeprojects/supe-project-creator@1.7.0
 ```
 
 Then, you can import it like this:
 
 ```ts
-import * as mod from "@supeprojects/supe-project-creator";
+import * as SPC from "@supeprojects/supe-project-creator";
 
 // Example usage
 console.log("Testing SPC in Deno...");
-mod([]); // Shows the help menu
-```
-
-#### Node.js
-
-For Node.js, you can install the package using `npx`:
-
-```bash
-npx jsr add @supeprojects/supe-project-creator
-```
-
-Then, import it in your code:
-
-```ts
-import * as mod from "@supeprojects/supe-project-creator";
-
-// Example usage
-console.log("Testing SPC in Node...");
-mod([]); // Shows the help menu
+SPC([], 'deno'); // Shows the help menu
 ```
 
 #### Bun
@@ -295,11 +252,29 @@ bunx jsr add @supeprojects/supe-project-creator
 Import the module in your Bun project:
 
 ```ts
-import * as mod from "@supeprojects/supe-project-creator";
+import * as SPC from "@supeprojects/supe-project-creator";
 
 // Example usage
 console.log("Testing SPC in Bun...");
-mod([]); // Shows the help menu
+SPC([], 'bun'); // Shows the help menu
+```
+
+#### Node.js
+
+For Node.js, you can install the package using `npx`:
+
+```bash
+npx jsr add @supeprojects/supe-project-creator
+```
+
+Then, import it in your code:
+
+```ts
+import * as SPC from "@supeprojects/supe-project-creator";
+
+// Example usage
+console.log("Testing SPC in Node...");
+SPC([], 'node'); // Shows the help menu
 ```
 
 ## License
@@ -335,384 +310,3 @@ SOFTWARE.
 ## Released - When Supe Project Creater was released?
 
 - **16 October 2024**
-
-## Upcoming Features
-
-### Roadmap
-
-I'm actively working to enhance Supe Project Creator with new features and learning resources:
-
-* [v]   ~~**Deno Support**: Add support for Deno as a JavaScript runtime environment.~~
-* [x]   **AI Demo Projects**: Expand the project creator to support other types of AI demo projects, including machine learning and natural language processing examples.
-* [v]   ~~**Enhanced Project Customization**: Allow users to customize project settings, such as dependencies and configurations, more easily.~~
-* [v]   ~~**Streamlined Project Setup**: Simplify the project setup process, making it faster and more intuitive for users.~~
-* [v]   ~~**Better Support for Advanced Features**: Improve support for advanced features, such as hot reloading and TypeScript integration.~~
-* [x]   **HTTP/2 Support**: Add support for HTTP/2 to improve performance and user experience.
-* [x]   **SSL and HTTPS**: Integrate SSL certificates to serve projects over HTTPS.
-* [x]   **Explore HTTP/3**: Investigate and potentially add support for HTTP/3 to future-proof your web applications.
-* [v]   ~~**Improved Installation**: Streamline the installation process for easier and faster project setup.~~
-* [v]   ~~**Tutorials and Documentation**: Create detailed tutorials and expand documentation to cover project setup, advanced configurations, and common use cases.~~
-* [x]   **YouTube Videos**: Launch a YouTube channel with video guides covering different aspects of Supe Project Creator.
-* [v]   ~~**GIF and Media Demos**: Provide GIFs and other media assets to visually demonstrate the tool's features and workflows.~~
-* [x]   **LLM Demo**: Include more AI demos, specifically large language model demos.
-* [x]   **Optional TypeScript Error Notifications**: Introduce optional notifications for TypeScript errors to enhance user experience.
-* [x]   **Dev Plugins Ecosystem**: Establish a plugins ecosystem for developers to extend and customize the project creator.
-* [x]   **Server Integrations**: Offer out-of-the-box server integrations and auto CORS setup for seamless connectivity.
-* [v]   ~~**Code Integrations**: Enable code integrations to utilize the project creator as a package.~~
-* [v]   ~~**Docs and JSDocs Definitions**: Add comprehensive documentation and JSDocs definitions for improved clarity and usability.~~
-
-**These features are in active development, and your feedback is always welcome!**
-
-## Contributing and Feedback - How to help develop Supe Project Creator?
-
-Contributions are welcome from the community! Whether it's a new feature idea, bug fix, or documentation improvement, I'd love to hear from you.
-
-### Ways to Contribute
-
-- **Open Issues**: Check our issue tracker for open issues, such as "beginner-friendly" or "feature request."
-- **Submit Pull Requests**: Submit your changes via a pull request, and our team will review and merge them.
-- **Documentation Improvements**: Help enhance our documentation by adding guides or correcting errors.
-- **Community Feedback**: Share your ideas and suggestions in the discussions section or on social media.
-
-### Types of Contributions
-
-- **Code**: Bug fixes, new features, and performance improvements.
-- **Design**: UI/UX design contributions.
-- **Translation**: Help translate our documentation into different languages.
-
-### Contribution Guidelines
-
-- **Code Style**: Follow standard TypeScript and Bun conventions.
-- **Commit Messages**: Use clear and descriptive commit messages.
-- **PR Labels**: Tag pull requests with relevant labels for easier review.
-
-**Getting Started**
----------------
-
-1.  **Fork the Repository**: Fork our repository to create a copy of the code.
-2.  **Create a Branch**: Create a new branch for your changes.
-3.  **Make Changes**: Make your changes and commit them.
-4.  **Lint & Bump**: Bump the version using `deno run bump` and lint the project with `deno lint` to find important issues.
-5.  **Submit a PR**: Submit a pull request with your changes.
-
-I appreciate your contributions and look forward to hearing from you!
-
-**Bump Version Script**
----------------
-
-As a contributor to this project, you may need to update the version number of your own fork or local copy. The following steps outline how to do so.
-
-The `bump.ts` script is executed by ~~either `bun`~~ or `deno` to increment the version number of a project, by updating the relevant files such as `deno.json`, `README.md`, `jsr.json` and etc.
-
-*Automations. Algorithms. Everywhere.*
-
-![Bump Version Script](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot1.png?raw=true)
-
-**Inspecting the Final Commit of the Automation Script:**
----------------
-
-The following screenshots demonstrate the changes made by the version bump script:
-
-![Bump Version Script Commit Example - README.md](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot2.png?raw=true) ![Bump Version Script Commit Example - index.ts](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot3.png?raw=true) ![Bump Version Script Commit Example - jsr.json](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot4.png?raw=true) ![Bump Version Script Commit Example - package.json](https://github.com/burgil/burgil/blob/main/public/version-bump-script-screenshots/version-bump-script-screenshot5.png?raw=true)
-
-**Running the Bump Version Script**
----------------
-
-To run the bump version script in your own local environment, use one of the following commands:
-
-~~- To run with `bun`, execute: ~~
-```bash
-bun bump
-```
-
-- To run with `deno`, execute: 
-```bash
-deno run bump
-```
-**Note:** ~~Currently, `deno` bumping is not functioning as expected. It prompts for permissions, but then hangs on the readline input.~~ The solution was to replace the `readline.createInterface` and the `rl.question` with simply a `prompt`! See [this](https://docs.deno.com/examples/prompts/) and [this](https://github.com/denoland/deno/issues/18184#issuecomment-2422842488) for more info...
-
-## Changelog
-
-### Version 1.6.9 - Fixed Installation Command
-
-- **No more outdated versions**: The `deno run jsr:` command was using the old version you have cached and there is no `@latest` flag so the `bump.ts` script will now take care of this
-
-### Version 1.6.8 - Essential Fixes and Enhancements Patch
-
-- **This patch addresses key issues and improves the development experience with enhanced documentation and configuration management**: Fixed "require is not defined", migrated to `deno.json`, improved JSDocs, removed runtime detection, and resolved Deno version bump issue.
-
-### Version 1.6.7 - Optional AI Demo
-
-- **README Adjustments**: The fact you can also have a clean project was not clear enough, I added hints in the README to indicate that the AI Demo, as the name suggest, is optional.
-
-### Version 1.6.6 - Added Deno start script
-
-- **Generated projects now support deno**: The generated projects use to only support bun, after a lot of hard work I'm approaching the final stages in implementing Deno into the project, this time I fixed the generated start.ts file in new projects created with Deno, Completing the loop required to run SCP on Deno, This still needs to be tested carefully so for now please use bun.
-
-### Version 1.6.5 - Reorganized README Sections
-
-- **Improved Section Layout**: Reorganized existing sections in the README to enhance structure and readability
-
-### Version 1.6.4 - Fixed JSR Document Navigation Bug
-
-- **Navigation Issue Resolved**: Corrected a bug in JSR document navigation that misread sections inside Tips, ensuring users can accurately navigate to all relevant sections.
-
-### Version 1.6.3 - Reorganized Sections
-
-- **Section Order Updated**: Moved the Programmatic Usage section above the Contribution section in the README for better logical flow and accessibility, making it easier for users to find relevant information.
-
-### Version 1.6.2 - Improved Readability
-
-- **Enhanced Clarity**: Made adjustments throughout the README to improve readability and flow, ensuring that information is presented more clearly for users.
-
-### Version 1.6.1 - Fixed Typo
-
-- **Typographical Error Corrected**: Addressed and corrected a typo in the README for improved clarity and professionalism.
-
-### Version 1.6.0 - Updated Key Features
-
-- **Enhanced Documentation**: Revised the Key Features section to improve clarity and detail. Combined points on performance and intelligent workflow, and introduced a dedicated point for hot reloading.
-
-### Version 1.5.9 - Moved the Programmatic Use section
-
-- **README Changes**: Moved the new Programmatic Use section above the change log
-
-### Version 1.5.8 - Added Runtime and Import Clarifications
-
-- **Updated README to clarify the `runtime` parameter and Deno importing instructions**: Provided a detailed description of the `runtime` parameter options
-
-### Version 1.5.7 - Updated VSCode Workspace Configuration Guidance
-
-- **Revised README to include a dedicated tip for using the recommended VSCode workspace file**: Transformed the VSCode workspace configuration section into a clear tip, emphasizing its benefits for enhancing development experience and streamlining project management by excluding unnecessary files.
-
-### Version 1.5.6 - Enhanced Project Initialization with Deno Support and Improved Documentation
-
-- **Updated project creator tool with improved Deno compatibility, TypeScript support, and recommended VSCode extensions**: Enhanced project creation with better support for Deno project naming, improved handling of deno.json and package.json, plus fixed bugs for a smoother experience.
-
-### Version 1.5.5 - Improved README
-
-- **Enhanced README for better clarity and guidance**: README updated with clearer instructions and examples.
-
-### Version 1.5.4 - README Improvements and Enhancements
-
-- **Enhanced the README for clearer guidance and better user experience.**: The README has been improved with clearer instructions and detailed explanations to help users better understand how to use Supe Project Creator.
-
-### Version 1.5.3 - Basic Deno Support, JSDoc Improvements, and Linting Fixes
-
-- **Added basic Deno support, improved JSDoc documentation, and resolved linting issues in generated projects**: Supe Project Creator now supports Deno alongside Node.js and Bun. JSDoc documentation has been enhanced, including the addition of a new `runtime` variable. Linting issues in the generated Deno and Bun projects have also been fixed, ensuring cleaner, error-free code.
-
-### Version 1.5.2 - README Enhancements, and New Test Script
-
-- **Improved README, and introduced a tests.ts script for testing.**: The README has been updated for clearer guidance.
-
-### Version 1.5.1 - Require Project Name and Deno Compatibility
-
-- **Supe Project Creator now requires a project name to run and includes Deno types**: Running the tool without a project name triggers the help message, and the project is now set up for Deno compatibility.
-
-### Version 1.5.0 - Improved Project Creation and Validation
-
-- **Added project name validation and clear setup instructions**: Supe Project Creator now validates project names and provides colored console logs for guidance.
-
-### Version 1.4.9 - Improved README
-
-- **Enhanced README**: The README file was carefully reviewed and everything is now almost perfect
-
-### Version 1.4.8 - Added lock files and VSCode Workspace
-
-- **Improved Experience**: The project now have a new VSCode Workspace that hides all the unnecessary files from the view
-
-### Version 1.4.7 - Added Screenshots
-
-- **New README Screenshots and GIF**: Who doesn't like screenshots and GIFs, added some preview screenshots hosted in my profile repo (not on JSR)
-
-### Version 1.4.6 - Added colors to the version bumper logs
-
-- **Improved Version Bumper**: Added colors to console logs and optimized the algorithm
-
-### Version 1.4.5 - Added Code of Conduct
-
-- **New Rules**: It is important that new contributors read the code of conduct if they plan to contribute
-
-### Version 1.4.4 - Fixed Version Bumper
-
-- **Fixed Incorrect Answer Crashes the Version Bumper**: The version bumper will not crash anymore when inputting an incorrect answer (y/n)
-
-### Version 1.4.3 - Improved Version Bumper
-
-- **Smarter Questions**: Questions in the version bumper will now properly handle mistakes
-
-### Version 1.4.2 - README Enhancements
-
-- **Accurate project description**: The project description has changed from "powerful" to "simple" to better reflect what the project is about and remove "we" from the README
-
-### Version 1.4.1 - Removed an unused variable
-
-- **Fixed error no-unused-vars**: When using `deno lint` the project will be checked for TypeScript issues, Removing this unused variable was the last error to fix in both typescript files, note that `index.ts` is the main package used to create projects and `bump.ts` is a contributor only script to bump version in multiple files and then push to GitHub which will trigger the action to push into JSR. Good Job!
-
-### Version 1.4.0 - Improved Version Bumper Script
-
-- **Better Version Bump**: The version bumper new feature to push into GitHub was tested and will now operate as intented, Also added detailed from/to version logs
-
-### Version 1.3.9 - Improved Bump Script
-
-- **Version Control Support for the Bump Script**: When `deno run bump` is used the script will prompt to push into GitHub at the end, but if there are any pending changes it will ask you if you want to pull them first and let you know if there were conflicts while pushing, Otherwise it will use the bump message to commit a detailed commit into GitHub
-
-### Version 1.3.8 - Fixed Docs
-
-- **Moved JSDocs**: The docs were moved to the correct place and should appear properly now on JSR
-
-### Version 1.3.7 - Added JSDocs
-
-- **First Docs**: Added an extensive JSDocs for the main package function
-
-### Version 1.3.6 - Fixed linting and added default export
-
-- **Deno Lint and Default Export**: Fixed linting issues and added support for packages and cli at the same time
-
-### Version 1.3.5 - Fixed ESBuild Dependency
-
-- **Fixed Project Setup**: ESBuild was causing an unexpected issue when running for the first time, Notes were added.
-
-### Version 1.3.4 - README File Optimization
-
-- **Better Instructions**: A well-structured README file provides users with easy-to-follow instructions, reducing the likelihood of confusion, frustration, and support requests.
-
-### Version 1.3.3 - Enhanced Readme and Minor Improvements
-
-- **Improved readability and documentation**: Refactored README for better structure, added clear section headings, and reorganized content for easier navigation.
-
-### Version 1.3.2 - Improved Command and Readme
-
-- **Simplify usage and documentation**: Replaced lengthy command with concise alternative and revamped readme for enhanced user experience and clarity.
-
-### Version 1.3.1 - Improved Version Bumper
-
-- **Enhanced version bumping system**: Implemented a user-interactive auto bump system that requests confirmation before bumping the minor or major version. Added feature to input brief and secondary descriptions of changes for the README.md file.
-
-### Version 1.3.0 - Version Bump Script for Contributors
-
-- **Added Version Bump Script**: Implemented a simple script to streamline version bumping across multiple files, improving development efficiency.
-
-### Version 1.2.9 - Enhanced Roadmap and Fixed Bugs
-
-- **Preparing for the Future**: Added more planned features for upcoming versions to enhance the project's roadmap.
-- **Resolved GitHub Programming Language Misidentification**: Addressed an issue where GitHub falsely detected the project as 100% JavaScript due to the initial lines of code lacking TypeScript definitions. This was resolved by renaming `index.ts` and modifying the code to include TypeScript types within the first seven lines, ensuring accurate language detection.
-
-### Version 1.2.8 - NPX Preparation
-
-- **NPX Execution Preparation**: Preparing the package for seamless execution via NPX, Added a `bin` value in the `package.json` file.
-
-### Version 1.2.7 - Enhanced Documentation and NPX Preparation
-
-- **Added Informative Notes**: Included detailed notes to enhance user understanding and improve overall documentation quality.
-- **NPX Execution Preparation**: Made necessary adjustments to prepare the package for seamless execution via NPX, enhancing usability and accessibility.
-
-### Version 1.2.6 - Additional Typo Fixes
-
-- **Corrected Typos**: Identified and corrected minor typos.
-
-### Version 1.2.5 - Additional README Polish
-
-- **README Refinements**: Implemented additional polish to the README, ensuring clarity and concision in its content.
-
-### Version 1.2.4 - Typo Fixes and README Polish
-
-- **Corrected Typos**: Identified and corrected minor typographical errors throughout the README to maintain a professional tone and presentation.
-
-### Version 1.2.3 - Enhanced README Description
-
-- **Refined README Overview**: Improved the readability of the README's overview section by clarifying key points and ensuring grammatical accuracy.
-
-### Version 1.2.2 - Updated README Format
-
-- **Improved Overview Readability**: Enhanced the grammar and clarity of the overview section in the README with accurate information.
-
-### Version 1.2.1 - Added Project Navigation Instructions
-
-- **Project Navigation**: Added instructions for users to navigate to the newly created project directory before running the installation and development commands, ensuring they operate within the correct context.
-
-### Version 1.2.0 - Corrected README Formatting
-
-- **Lines Removed**: Removed trailing lines from the README. 
-
-### Version 1.1.9 - Updated README Format
-
-- **Improved Changelog Readability**: Enhanced the grammar and clarity of the changelog section in the README for easier understanding.
-
-### Version 1.1.8 - Enhanced Feature Descriptions
-
-- **Detailed Features**: Added comprehensive descriptions for all key features, giving a more detailed overview of each.
-
-### Version 1.1.7 - Integrated GitHub Actions
-
-- **Automation Boost**: Introduced GitHub Actions to automate the build and improve the JSR score through enhanced provenance tracking.
-
-### Version 1.1.6 - Updated Key Features in README
-
-- **Up-to-Date Information**: Refined the README by adding accurate and up-to-date descriptions of the tool's core features.
-
-### Version 1.1.5 - Corrected README Typos
-
-- **Typo Fixes**: Addressed minor typos in the README, ensuring the documentation reads more smoothly.
-
-### Version 1.1.4 - Optimized Update Mechanism
-
-- **Improved Installation**: Introduced an additional argument to the installation instructions to guarantee timely updates of the tool.
-
-### Version 1.1.3 - Path Bug Fix
-
-- **Resolved Path Issues**: Fixed a bug related to the relative path in `package.json` creation for newly generated projects.
-
-### Version 1.1.2 - Fixed Subfolder Creation Issue
-
-- **Subfolder Bug Fix**: Corrected an error that occurred when using a custom absolute path, ensuring subfolders are created correctly.
-
-### Version 1.1.1 - Resolved Absolute Path Bug
-
-- **Bug Squashing**: Fixed the 'ENOENT: No such file or directory' error that occurred when creating new projects with custom absolute paths.
-
-### Version 1.1.0 - Completed README
-
-- **Learning Milestone**: Finished understanding JSR and applied it to finalize the README structure.
-
-### Version 1.0.9 - Corrected Minor Typos
-
-- **Cleaned Up Documentation**: Addressed small typos to make the README file more professional and readable.
-
-### Version 1.0.8 - Enhanced Documentation
-
-- **Batteries Included**: Improved the README by triple-checking installation steps and adding a clearer "batteries-included" description.
-
-### Version 1.0.7 - Shortened Usage Commands
-
-- **User-Friendly Commands**: Streamlined the usage instructions by reducing the length of the command, making it easier to run.
-
-### Version 1.0.6 - Refined Installation Instructions
-
-- **Cross-Runtime Support**: Updated the README to better reflect the cross-runtime nature of JSR, ensuring compatibility across environments.
-
-### Version 1.0.5 - Global JSR Compatibility
-
-- **Initial Configuration**: Made the package globally compatible by adding the essential initial configurations to the `package.json` file.
-
-### Version 1.0.4 - Established Contribution Guidelines
-
-- **Community Standards**: Outlined clear guidelines for contributing, including code style, commit messages, and PR labeling for better project collaboration.
-
-### Version 1.0.3 - Documentation Improvements
-
-- **Expanded Details**: Enhanced the documentation to better inform contributors and new users on how to get started and contribute to the project.
-
-### Version 1.0.2 - README Expansion
-
-- **Comprehensive Overview**: Expanded the README file to provide a thorough overview of the project's goals and features.
-
-### Version 1.0.1 - Initial README Release
-
-- **Project Documentation**: Created the initial README to provide basic information about the project for users and contributors.
-
-### Version 1.0.0
-
-*Initial Release*
-
-Note: Since this is the first version of the changelog, there are no previous versions to report on. Future updates will include detailed information about changes, bug fixes, and new features.

@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.7.4 - Updated README
+
+- **Added Links & New Technical Detail**: New links to the changelog, roadmap, contributing, license and code of conduct were added, also rephrased some of the sentences to better reflect what it does
+
 ### Version 1.7.3 - Runtime CLI option
 
 - **Specify the runtime via the CLI**: Support for deno is almost complete

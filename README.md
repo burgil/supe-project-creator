@@ -12,9 +12,9 @@ This is the first package under the @supeprojects scope, with more planned for t
 
 Supe Project Creator is a simple tool designed to help you build simple web applications quickly and efficiently. It generates project templates boilerplate using **TypeScript**, **HTML**, and **CSS**, with included **hot reloading** for a seamless development workflow. But there's a catch - the generated project has no dependencies, a fresh start. All the source code that runs the project will be waiting for you in the generated project folder, no strings attached. It's as simple as you can get.
 
-[JSR](https://jsr.io/@supeprojects/supe-project-creator) - [Source Code](https://github.com/burgil/supe-project-creator) - [Known Issues](https://github.com/burgil/supe-project-creator/issues) - [Docs/Wiki](https://github.com/burgil/supe-project-creator/wiki)
+[JSR](https://jsr.io/@supeprojects/supe-project-creator) - [Source Code](https://github.com/burgil/supe-project-creator) - [Known Issues](https://github.com/burgil/supe-project-creator/issues) - [Docs/Wiki](https://github.com/burgil/supe-project-creator/wiki) - [Changelog](https://github.com/burgil/supe-project-creator/blob/main/CHANGELOG.md) - [Roadmap](https://github.com/burgil/supe-project-creator/blob/main/ROADMAP.md) - [Contributing](https://github.com/burgil/supe-project-creator/blob/main/CONTRIBUTING.md) - [Code of Conduct](https://github.com/burgil/supe-project-creator/blob/main/CODE_OF_CONDUCT.md) - [License](https://github.com/burgil/supe-project-creator/blob/main/LICENSE)
 
-**For a bit of technical detail:** how it does all of that is thanks to the built-in TypeScript compilers in the new runtimes. To avoid downloading dependencies, it uses `bunx` (an `npx` alternative) to fetch packages like `http-server`, `nodemon`, and `esbuild`.
+**For a bit of technical detail:** how it does all of that is thanks to the built-in TypeScript compilers in the new runtimes. This approach uses globally installed `http-server`, `nodemon`, and `esbuild` packages, eliminating the need for additional dependency downloads.
 
 > [!NOTE]
 > The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework, such as Express.JS, FastAPI, Cloudflare Workers, etc.

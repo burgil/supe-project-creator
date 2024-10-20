@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.7.6 - Preparing for V2
+
+- **Reorganized VSCode Workspace, Improved Readme, Simplified Comments**: Some comments were made simple, The readme file readability was improved, and the VSCode workspace now contain all the new files
+
 ### Version 1.7.5 - Fixed version not updating in README
 
 - **Deno Bug**: When you run the deno jsr: command it uses a cached version even if many newer versions were launched, to fix it I specify the version inside the installation

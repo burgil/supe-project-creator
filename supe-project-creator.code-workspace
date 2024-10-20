@@ -7,18 +7,21 @@
 	],
 	"settings": {
 		"files.exclude": {
-			"README.md": false,
 			"supe-project-creator.code-workspace": false,
 			// --
-			"package.json": false,
-			"bun.lockb": false,
-			"deno.json": false,
-			"deno.lock": false,
-			// --
-			"jsr.json": false,
-			// --
+			"README.md": false,
+			"ROADMAP.md": true,
+			"CHANGELOG.md": true,
 			"CODE_OF_CONDUCT.md": true,
+			"CONTRIBUTING.md": true,
 			"LICENSE": true,
+			// --
+			"jsr.json": true,
+			"deno.json": true,
+			"deno.lock": true,
+			// --
+			"*.test.ts": true,
+			// --
 			".gitignore": true,
 			".gitattributes": true,
 			".github": true,

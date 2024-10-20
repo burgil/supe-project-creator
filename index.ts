@@ -40,7 +40,7 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = '';
-    const supeVersion = '1.7.5';
+    const supeVersion = '1.7.6';
     const supeVersionDate = '2024-10-16';
     let runtime: 'deno' | 'bun' | 'node' | 'none' = 'none';
     if (argv.length === 0) argv.push('--help');
@@ -689,7 +689,7 @@ ${CleanProject ? '' : `
     browser: true,
     browserDelay: 1550,
     address: 'localhost',
-    secure: false, // Requires SSL Configuration, More Info: ${runtime === 'bun' ? 'bunx http-server --help' : ''}${runtime === 'deno' ? 'deno --allow-sys --allow-env npm:http-server --help' : ''}${runtime === 'node' ? 'npx -y http-server --help' : ''}
+    secure: false, // Requires SSL Configuration, More Info: http-server --help
     hotreload: true,
     reconnectDelay: 500,
     minify: false,

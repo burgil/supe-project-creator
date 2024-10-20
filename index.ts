@@ -33,15 +33,16 @@ const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely d
  * ```
  *
  * @param {string[]} argv - Command line arguments provided by the user. These control the behavior of the project creation.
- * @param {'bun' | 'deno' | 'node'} runtime - The runtime environment for the project creation process.
  * @returns {void}
  */
-export default function SupeProjectCreator(argv: string[], runtime: 'bun' | 'deno' | 'node'): void {
+export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = '';
-    const supeVersion = '1.7.0';
+    const supeVersion = '1.7.1';
     const supeVersionDate = '2024-10-16';
+    let runtime = '';
+    runtime = 'deno'; // WIP
     if (argv.length === 0) argv.push('--help');
 
     if (runtime === 'node') {
@@ -931,62 +932,12 @@ const timer = setInterval(() => {
     console.log('\x1b[36m%s\x1b[0m', `  ${runtime === 'bun' ? 'bun start' : ''}${runtime === 'deno' ? 'deno run start' : ''}${runtime === 'node' ? 'npm start' : ''}`);
 }
 
-// Function to render options
-function renderOptions(options: string[], currentIndex: number) {
-    console.clear();
-    console.log('Use arrow keys to navigate, press Enter to select\n');
-    options.forEach((option, index) => {
-        if (index === currentIndex) {
-            console.log(`\x1b[36m> ${capitalizeFirstChar(option)}\x1b[0m`); // Highlight current option
-        } else {
-            console.log(`  ${capitalizeFirstChar(option)}`);
-        }
-    });
-}
-
-// Function to handle keypress events
-function handleKeyPress(key: string, options: ('bun' | 'deno' | 'node')[], currentIndex: number): number {
-    let newCurrentIndex = currentIndex;
-    if (key === '\u001B\u005B\u0041') { // Up arrow
-        newCurrentIndex = newCurrentIndex > 0 ? newCurrentIndex - 1 : options.length - 1;
-    } else if (key === '\u001B\u005B\u0042') { // Down arrow
-        newCurrentIndex = newCurrentIndex < options.length - 1 ? newCurrentIndex + 1 : 0;
-    } else if (key === '\r') { // Enter key
-        console.clear();
-        console.log(`You selected: ${options[newCurrentIndex]}`);
-        const argv: string[] = process.argv.slice(2); // Parse command line arguments
-        SupeProjectCreator(argv, options[newCurrentIndex]);
-        process.exit();
-    } else if (key === '\u0003') { // Ctrl+C to exit
-        process.exit();
-    }
-    renderOptions(options, newCurrentIndex);
-    return newCurrentIndex;
-}
-
-function capitalizeFirstChar(str: string) {
-    if (!str) return str;
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
 // P/CLI - A half package half command line interface hybrid with cross-runtime support
 const DEBUG = true;
 if (import.meta.main) {
     if (DEBUG) console.log("Running from CLI");
-    // TODO: Remove selection and replace with CLI arguments
-    // Enable raw mode to capture input
-    process.stdin.setRawMode(true);
-    process.stdin.resume();
-    process.stdin.setEncoding('utf8');
-    // Options to navigate
-    const options: ('bun' | 'deno' | 'node')[] = ['bun', 'deno', 'node'];
-    let currentIndex = 0;
-    // Initial rendering of the options
-    renderOptions(options, currentIndex);
-    // Capture and handle keypresses
-    process.stdin.on('data', (key: string) => {
-        currentIndex = handleKeyPress(key, options, currentIndex);
-    });
+    const argv: string[] = process.argv.slice(2); // Parse command line arguments
+    SupeProjectCreator(argv);
 } else {
     if (DEBUG) console.log("Imported as a module");
 }

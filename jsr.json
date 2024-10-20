@@ -1,6 +1,6 @@
 {
     "name": "@supeprojects/supe-project-creator",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "exports": "./index.ts",
     "license": "MIT"
 }

@@ -1,4 +1,4 @@
-# Supe Project Creator v1.7.0
+# Supe Project Creator v1.7.1
 
 A simple tool for creating simple web projects with batteries included.
 
@@ -82,13 +82,13 @@ To start using Supe Project Creator, simply run the following command:
 
 ### Create an AI Demo Project in the Current Working Directory:
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.7.0 --demo -n cat-dog-detector -r deno
+deno jsr:@supeprojects/supe-project-creator@1.7.1 --demo -n cat-dog-detector -r deno
 cd cat-dog-detector
 ```
 
 ### Create a Clean Project in the Current Working Directory:
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.7.0 -n my-supe-project --runtime deno
+deno jsr:@supeprojects/supe-project-creator@1.7.1 -n my-supe-project --runtime deno
 cd my-supe-project
 ```
 
@@ -139,7 +139,7 @@ This behavior is, of course, configurable in `hotreload/config.ts`, allowing you
 To view the available options for Supe Project Creator, run the following command:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.7.0 --help
+deno jsr:@supeprojects/supe-project-creator@1.7.1 --help
 ```
 
 - `-h`, `--help`: Displays help information.
@@ -185,18 +185,18 @@ Utilizing SPC programmatically allows you to:
 #### Programmatic Use Example
 
 ```ts
-import SPC from 'jsr:@supeprojects/supe-project-creator@1.7.0';
+import SPC from 'jsr:@supeprojects/supe-project-creator@1.7.1';
 
 console.log("Testing SPC programmatically...");
 
 // Display the help menu
-SPC([], 'deno');
+SPC([]);
 
 // Create a new clean project named "my-example-project"
-SPC(['--name', 'my-example-project'], 'deno');
+SPC(['--name', 'my-example-project']);
 
 // Create a project with specific runtime and additional options (May soon be replaced with an argument instead of a variable)
-SPC(['--name', 'my-custom-project'], 'deno');
+SPC(['--name', 'my-custom-project']);
 
 // Generate a project and immediately start the development server - Not implemented yet! TODO: Implement --start script
 // SPC(['--name', 'my-fast-project', '--start']);
@@ -205,7 +205,6 @@ SPC(['--name', 'my-custom-project'], 'deno');
 ### Programmatic Use Parameters
 
 - `argv: string[]`: An array of command-line arguments that control the behavior of the project creation process. This includes options like `--name` for naming the project, and in the future, it might have a `--runtime` option to specify the environment (e.g., `bun`, `deno`, or `node`) or `--bun`, `--deno`, and `--node`.
-- `runtime: 'bun' | 'deno' | 'node'`: The runtime environment for the project creation process. You need to specify which environment to use by passing one of these values.
 
 For more detailed information on available options and flags, refer to the [CLI Options](#cli-options) section of the documentation.
 
@@ -218,17 +217,17 @@ With these commands, you can easily set up and utilize the Supe Project Creator 
 To add the `Supe Project Creator` package in Deno, you can import it directly without any installation if you use the `jsr:` prefix in your import:
 
 ```ts
-import * as SPC from "jsr:@supeprojects/supe-project-creator@1.7.0";
+import * as SPC from "jsr:@supeprojects/supe-project-creator@1.7.1";
 
 // Example usage
 console.log("Testing SPC in Deno...");
-SPC([], 'deno'); // Shows the help menu
+SPC([]); // Shows the help menu
 ```
 
 Alternatively, if you prefer to add it, use the following command:
 
 ```bash
-deno add jsr:@supeprojects/supe-project-creator@1.7.0
+deno add jsr:@supeprojects/supe-project-creator@1.7.1
 ```
 
 Then, you can import it like this:
@@ -238,7 +237,7 @@ import * as SPC from "@supeprojects/supe-project-creator";
 
 // Example usage
 console.log("Testing SPC in Deno...");
-SPC([], 'deno'); // Shows the help menu
+SPC([]); // Shows the help menu
 ```
 
 #### Bun
@@ -256,7 +255,7 @@ import * as SPC from "@supeprojects/supe-project-creator";
 
 // Example usage
 console.log("Testing SPC in Bun...");
-SPC([], 'bun'); // Shows the help menu
+SPC([]); // Shows the help menu
 ```
 
 #### Node.js
@@ -274,7 +273,7 @@ import * as SPC from "@supeprojects/supe-project-creator";
 
 // Example usage
 console.log("Testing SPC in Node...");
-SPC([], 'node'); // Shows the help menu
+SPC([]); // Shows the help menu
 ```
 
 ## License

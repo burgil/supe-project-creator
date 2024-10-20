@@ -1,8 +1,20 @@
 ## Changelog
 
+### Version 1.7.3 - Runtime CLI option
+
+- **Specify the runtime via the CLI**: Support for deno is almost complete
+
 ### Version 1.7.2 - Removed Example Files
 
 - **Ops**: Removed the example project pushed in the last version
+
+### Version 1.7.1 - Replaced the runtime argument with CLI options
+
+- **Preparing for v2**: The runtime variable was replaced with CLI options
+
+### Version 1.7.0 - Docs Refactor & Runtime Requirement
+
+- **Refactor Documentation and Introduce Mandatory Runtime Option**: The `runtime` variable is no longer optional and must be provided now, The change log was moved to `CHANGELOG.md`, The contributors guidelines were moved to `CONTRIBUTING.md`, The road map was moved to `ROADMAP.md`, README improvements
 
 ### Version 1.6.9 - Fixed Installation Command
 

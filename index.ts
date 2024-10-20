@@ -19,17 +19,18 @@ const CLI_COMMENT: string = "Hello World!"; // Keep this here to avoid falsely d
  * console.log("Testing SPC programmatically...");
  *
  * SPC([]); // Shows the help menu
- * SPC(['--name', 'my-example-project']); // Creates a new clean project
+ * SPC(['--help']); // Also shows the help menu
+ * SPC(['--name', 'my-example-project', '--runtime', 'deno']); // Creates a new clean project
  * ```
  *
  * @example CLI Usage
  * 
  * ```bash
- * deno jsr:@supeprojects/supe-project-creator -n my-supe-project
+ * deno jsr:@supeprojects/supe-project-creator -n my-supe-project -r deno
  * ```
  * or
  * ```bash
- * deno jsr:@supeprojects/supe-project-creator --demo -n cat-dog-detector
+ * deno jsr:@supeprojects/supe-project-creator --demo -n cat-dog-detector --runtime deno
  * ```
  *
  * @param {string[]} argv - Command line arguments provided by the user. These control the behavior of the project creation.
@@ -39,16 +40,10 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = '';
-    const supeVersion = '1.7.2';
+    const supeVersion = '1.7.3';
     const supeVersionDate = '2024-10-16';
-    let runtime = '';
-    runtime = 'deno'; // WIP
+    let runtime: 'deno' | 'bun' | 'node' | 'none' = 'none';
     if (argv.length === 0) argv.push('--help');
-
-    if (runtime === 'node') {
-        console.error(`The '${runtime}' is not supported yet. Follow up for changes in the GitHub repository!`);
-        // process.exit(); // Support is being actively explored, Uncommenting this leads to type errors
-    }
 
     // Loop through each argument
     for (const arg of argv) {
@@ -68,6 +63,20 @@ export default function SupeProjectCreator(argv: string[]): void {
             process.exit(0);
         } else if (arg === '-d' || arg === '--demo') {
             CleanProject = false;
+        } else if (arg === '-r' || arg === '--runtime') {
+            const nextArg = argv[argv.indexOf(arg) + 1];
+            if (nextArg === 'deno') {
+                runtime = 'deno';
+            } else if (nextArg === 'bun') {
+                runtime = 'bun';
+            } else if (nextArg === 'node') {
+                runtime = 'node';
+                console.error(`Warning: The '${runtime}' is not supported yet. Follow up for changes in the GitHub repository!`);
+                // process.exit(1); // Avoid type errors
+            } else {
+                console.error('Error: Project name must be either a valid lowercase alphanumeric name with hyphens and underscores, or follow the Deno pattern (@namespace/project).');
+                process.exit(1);
+            }
         } else if (arg === '-n' || arg === '--name') {
             const nextArg = argv[argv.indexOf(arg) + 1];
             if (nextArg && !nextArg.startsWith('-')) {
@@ -78,21 +87,22 @@ export default function SupeProjectCreator(argv: string[]): void {
                 if (isValidProjectName || isDenoProjectName) {
                     projectName = nextArg.toLowerCase();
                 } else {
-                    console.error(
-                        'Error: Project name must be either a valid lowercase alphanumeric name with hyphens and underscores, or follow the Deno pattern (@namespace/project).'
-                    );
+                    console.error('Error: Project name must be either a valid lowercase alphanumeric name with hyphens and underscores, or follow the Deno pattern (@namespace/project).');
                     process.exit(1);
                 }
             } else {
                 console.error('Error: Missing project name');
                 process.exit(1);
             }
-        } else {
-            if (arg.startsWith('-')) {
-                console.error(`Error: Unknown option ${arg}`);
-                process.exit(1);
-            }
+        } else if (arg.startsWith('-')) {
+            console.error(`Error: Unknown option ${arg}`);
+            process.exit(1);
         }
+    }
+
+    if (projectName === '' || runtime === 'none') {
+        console.error('Error: Missing options');
+        process.exit(1);
     }
 
     const outDir = projectName;

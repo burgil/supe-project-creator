@@ -193,13 +193,13 @@ console.log("Testing SPC programmatically...");
 SPC([]);
 
 // Create a new clean project named "my-example-project"
-SPC(['--name', 'my-example-project']);
+SPC(['--name', 'my-example-project', '--runtime', 'deno']);
 
 // Create a project with specific runtime and additional options (May soon be replaced with an argument instead of a variable)
-SPC(['--name', 'my-custom-project']);
+SPC(['--name', 'my-custom-project', '--runtime', 'deno']);
 
 // Generate a project and immediately start the development server - Not implemented yet! TODO: Implement --start script
-// SPC(['--name', 'my-fast-project', '--start']);
+// SPC(['--name', 'my-fast-project', '--start', '--runtime', 'deno']);
 ```
 
 ### Programmatic Use Parameters

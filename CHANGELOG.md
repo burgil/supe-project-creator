@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.8.4 - Fixed getting started output
+
+- **Fixed Wrong CD Path**: The CD path shown at the end of the new project creation was showing the project name instead of the folder name
+
 ### Version 1.8.3 - Fixed could not create file error
 
 - **OS File Name Error Fixed**: When creating the workspace file the name can not contain slashes, it was replaced with a plus

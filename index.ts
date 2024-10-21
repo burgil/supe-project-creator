@@ -40,7 +40,7 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = '';
-    const supeVersion = '1.8.3';
+    const supeVersion = '1.8.4';
     const supeVersionDate = '2024-10-16';
     let runtime: 'deno' | 'bun' | 'node' | 'none' = 'none';
     if (argv.length === 0) argv.push('--help');
@@ -144,11 +144,7 @@ export default function SupeProjectCreator(argv: string[]): void {
   "tasks": {
     "start": "deno --allow-read --allow-run hotreload/start.ts"
   },
-  "imports": {`;
-        if (!CleanProject) packageOutput += `
-    "@mediapipe/tasks-vision": "npm:@mediapipe/tasks-vision@^0.10.17"`;
-        packageOutput += `
-  },
+  "imports": {},
   "compilerOptions": {
     "lib": [
       "ESNext",
@@ -820,7 +816,7 @@ const httpserver_permissions = ['--allow-net', '--allow-env', '--allow-sys', '--
 const nodemon_permissions = ['--allow-env', '--allow-sys', '--allow-read', '--allow-run', '--allow-write=.', '--allow-net'];
 const refresh_permissions = ['--allow-net'];
 if (!process.argv.includes('--skip')) {
-    const answer = prompt(\`> Supe Project Creator requests full access in "start.ts" and "hotreload/server.ts" for "npm:http-server", "npm:nodemon" and "npm:esbuild" to work.
+    const answer = prompt(\`> The Super Project Creator requires access to "start.ts" and "hotreload/server.ts" in order for "npm:http-server", "npm:nodemon", and "npm:esbuild" to function properly.
     > Requested by \${config.paths.hotreloadFolder}/start.ts
     > ESBuild Permissions: \${esbuild_permissions.join(', ').replaceAll('--', '')}
     > HotReload Permissions: \${hotreload_permissions.join(', ').replaceAll('--', '')}
@@ -830,7 +826,7 @@ if (!process.argv.includes('--skip')) {
     > Run again with --skip to mute this prompt.
     > Allow All? [n/A] (n = no, deny; A = allow all permissions) >\`);
     if (answer !== 'A') {
-        console.error("> You declined the permissions, The program will exit, All the code it runs is in start.ts and hotreload/server.ts, the only packages used are esbuild, http-server, nodemon and typescript.");
+        console.error("> You declined the permissions, The program will exit.");
         process.exit();
     }
 }
@@ -1044,7 +1040,7 @@ const timer = setInterval(() => {
 
     console.log('\x1b[32m%s\x1b[0m', `Project has been created successfully at: ${resolve(outDir)}`);
     console.log('\x1b[36m%s\x1b[0m', '\nTo get started:');
-    console.log('\x1b[36m%s\x1b[0m', `  cd ${projectName}`);
+    console.log('\x1b[36m%s\x1b[0m', `  cd ${outDir}`);
     console.log('\x1b[36m%s\x1b[0m', `  ${runtime} install`);
     console.log('\x1b[36m%s\x1b[0m', `  ${runtime === 'bun' ? 'bun start' : ''}${runtime === 'deno' ? 'deno run start' : ''}${runtime === 'node' ? 'npm start' : ''}`);
 }

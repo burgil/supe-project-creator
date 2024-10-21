@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.8.2 - Deno is officially supported
+
+- **Deno is supported**: Deno support for newly created projects now works smoothly even with nodemon and the hotreload
+
 ### Version 1.8.1 - Fixed Failed MKDir
 
 - **The slash in the project name can not be used as a folder name**: Replaced the slash with a plus as seen in .deno node modules

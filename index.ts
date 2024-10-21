@@ -40,7 +40,7 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = '';
-    const supeVersion = '1.8.2';
+    const supeVersion = '1.8.3';
     const supeVersionDate = '2024-10-16';
     let runtime: 'deno' | 'bun' | 'node' | 'none' = 'none';
     if (argv.length === 0) argv.push('--help');
@@ -112,10 +112,15 @@ export default function SupeProjectCreator(argv: string[]): void {
     }
 
     const outDir = projectName.replaceAll('/', '+');
-    if (!fs.existsSync(outDir)) {
-        fs.mkdirSync(outDir);
-    } else {
-        console.error(`Error: Folder already exist ${outDir}`);
+    try {
+        if (!fs.existsSync(outDir)) {
+            fs.mkdirSync(outDir);
+        } else {
+            console.error(`Error: Folder already exist ${outDir}`);
+            process.exit(1);
+        }
+    } catch (_e) {
+        console.error(`Error: Could not create folder: ${outDir}`);
         process.exit(1);
     }
     const hotreloadDir = join(outDir, 'hotreload');
@@ -244,7 +249,7 @@ You have full control over all the source files of almost everything you see, Th
 }
 `);
 
-    fs.writeFileSync(join(outDir, `${projectName}.code-workspace`), `{
+    fs.writeFileSync(join(outDir, `${outDir}.code-workspace`), `{
 	"folders": [
 		{
 			"name": "▪${projectName}◾", // Yang and Yin. With great power comes great responsibility. wield your creation for the greater good, and never let it be used to harm or exploit others.
@@ -254,7 +259,7 @@ You have full control over all the source files of almost everything you see, Th
 	"settings": {
 		"files.exclude": {
 			"${packageJSON}": false,
-			"${projectName}.code-workspace": false,${runtime !== 'deno' ? '\n\t\t\t"tsconfig.json": false,' : ''}
+			"${outDir}.code-workspace": false,${runtime !== 'deno' ? '\n\t\t\t"tsconfig.json": false,' : ''}
 			// --
 			"README.md": true,
 			${runtime === 'bun' ? '"bun.lockb": true,' : ''}${runtime === 'deno' ? '"deno.lock": true,' : ''}${runtime === 'node' ? '"package-lock.json": true,' : ''}

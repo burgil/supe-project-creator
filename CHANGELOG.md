@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.8.3 - Fixed could not create file error
+
+- **OS File Name Error Fixed**: When creating the workspace file the name can not contain slashes, it was replaced with a plus
+
 ### Version 1.8.2 - Deno is officially supported
 
 - **Deno is supported**: Deno support for newly created projects now works smoothly even with nodemon and the hotreload

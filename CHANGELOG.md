@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.8.5 - Improved Comments & README
+
+- **Fixed README & Comments**: The readme is now more comperhensive, Added more examples and guides, Added production guide, Improved code structure and tsconfig
+
 ### Version 1.8.4 - Fixed getting started output
 
 - **Fixed Wrong CD Path**: The CD path shown at the end of the new project creation was showing the project name instead of the folder name

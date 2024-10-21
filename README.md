@@ -1,4 +1,4 @@
-# Supe Project Creator v1.8.4
+# Supe Project Creator v1.8.5
 
 A simple tool for creating simple web projects with batteries included.
 
@@ -58,10 +58,28 @@ Before executing any scripts, please take a moment to:
 
 1. **Read this entire document** to understand the necessary steps and requirements.
 2. **Verify that you have installed** the required runtime: `bun` | `deno 2` | `node`
+3. **Install recommended extensions**: Follow the instructions below and install `Deno` if you plan to use it.
 
 > [!WARNING]
 > Deno support for this package is currently actively worked on.
 > Node support will probably never work due to a missing built-in TypeScript compiler.
+
+> [!TIP]
+> **Recommended Extensions for Visual Studio Code**
+>
+> - **Deno**: The official Deno extension for Visual Studio Code provides features like syntax highlighting, code completion, linting, and debugging support for Deno projects.  
+>   [Install Deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
+>
+> - **Biome**: A fast and flexible linter, formatter, and style checker for JavaScript, TypeScript, JSON, and more, ensuring clean and consistent code formatting.  
+>   [Install Biome](https://marketplace.visualstudio.com/items?itemName=biomejs.biome)
+>
+> - **JavaScript and TypeScript Nightly**: Access nightly builds of the TypeScript language service, allowing you to use the latest features and fixes.  
+>   [Install JavaScript and TypeScript Nightly](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-next)
+>
+> **Manual Installation Steps:**
+> 1. Open VSCode and navigate to Extensions (`Ctrl + Shift + X`).
+> 2. Search for the name of the desired extension (e.g., "Deno", "Biome", or "JavaScript and TypeScript Nightly").
+> 3. Select the extension and click **Install**.
 
 ## 🛠 Getting Started - Usage - Quickstart - Tutorial
 
@@ -70,21 +88,37 @@ To start using Supe Project Creator, simply run the following command:
 ### Create a Clean Project in the Current Working Directory:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.8.4 -n @example/my-supe-project --runtime deno
+deno jsr:@supeprojects/supe-project-creator@1.8.5 --name @example/my-supe-project --runtime deno
+# or..
+deno jsr:@supeprojects/supe-project-creator@1.8.5 -n @example/my-supe-project -r deno
+# or..
+deno jsr:@supeprojects/supe-project-creator@1.8.5 -n my-supe-project -r bun
 ```
 
 ```bash
+cd @example+my-supe-project
+# or..
 cd my-supe-project
+# or..
+Open *.code-workspace
 ```
 
-### Create an AI Demo Project in the Current Working Directory:
+### Create an AI Demo Project in the Current Working Directory using the --demo flag:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.8.4 --demo -n @example/cat-dog-detector -r deno
+deno jsr:@supeprojects/supe-project-creator@1.8.5 --demo --name @example/cat-dog-detector --runtime deno
+# or..
+deno jsr:@supeprojects/supe-project-creator@1.8.5 -d -n @example/cat-dog-detector -r deno
+# or..
+deno jsr:@supeprojects/supe-project-creator@1.8.5 -d -n cat-dog-detector -r bun
 ```
 
 ```bash
+cd @example+cat-dog-detector
+# or..
 cd cat-dog-detector
+# or..
+Open *.code-workspace
 ```
 
 > [!IMPORTANT]
@@ -112,29 +146,12 @@ Now a new browser tab will open, directing you to `http://localhost` if it isn't
 
 This behavior is, of course, configurable in `hotreload/config.ts`, allowing you to customize the browser launch, hot reload, port or other settings according to your project's requirements.
 
-> [!TIP]
-> **Recommended Extensions for Visual Studio Code**
->
-> - **Deno**: The official Deno extension for Visual Studio Code provides features like syntax highlighting, code completion, linting, and debugging support for Deno projects.  
->   [Install Deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
->
-> - **Biome**: A fast and flexible linter, formatter, and style checker for JavaScript, TypeScript, JSON, and more, ensuring clean and consistent code formatting.  
->   [Install Biome](https://marketplace.visualstudio.com/items?itemName=biomejs.biome)
->
-> - **JavaScript and TypeScript Nightly**: Access nightly builds of the TypeScript language service, allowing you to use the latest features and fixes.  
->   [Install JavaScript and TypeScript Nightly](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-next)
->
-> **Manual Installation Steps:**
-> 1. Open VSCode and navigate to Extensions (`Ctrl + Shift + X`).
-> 2. Search for the name of the desired extension (e.g., "Deno", "Biome", or "JavaScript and TypeScript Nightly").
-> 3. Select the extension and click **Install**.
-
 ## CLI Options
 
 To view the available options for Supe Project Creator, run the following command:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.8.4 --help
+deno jsr:@supeprojects/supe-project-creator@1.8.5 --help
 ```
 
 - `-h`, `--help`: Displays help information.
@@ -164,6 +181,37 @@ Supe Project Creator organizes your project using the following structure:
 > - **Streamlined view**: Concentrate on your project's essential files, without clutter from `node_modules` and other irrelevant directories.
 > - **Improved performance**: By excluding unnecessary files, you'll experience faster loading times and more efficient search results.
 
+## Building for Production - How can you publish the website into a domain?
+
+The `public` directory contains static files that can be hosted on any platform, In this example we will use Cloudflare Pages, Make sure you have a [Cloudflare account](https://developers.cloudflare.com/fundamentals/setup/account/create-account/), It's free.
+
+1. To avoid modifying the `public` directory every time you want to push into production, and before this gets automated, it is recommended that you simply copy the folder `public` to `dist` and do the changes there.
+
+2. The hot reload script is not needed in production, In the future this part will be automated but for now delete the generated `dist/hotreload.js` file, And remove the link for that file in `dist/index.html`:
+
+```diff
++<script type="module" id="index-script"></script>
+-<script type="module" id="hotreload-script"></script>
+<script>
++    document.getElementById('index-script').src = `index.js?t=${Date.now()}`;
+-    document.getElementById('hotreload-script').src = `hotreload.js?t=${Date.now()}`;
+</script>
+```
+
+3. Now simply run the following command, customizing it to your needs:
+
+```bash
+npx wrangler pages deploy ./dist --project-name=mysupeproject
+```
+
+On the first time you use this command, it will prompt you to grant permission for wrangler to access your Cloudflare account, Wrangler was created by Cloudflare.
+
+You can also add this script to your `package.json`/`deno.json` scripts.
+
+> The following command will produce a domain that will be available after a few minutes, for example `<your-project-name>.pages.dev` - Make sure you choose a name that is not taken.
+
+> You can easily add a custom domain in your Cloudflare account and manage your deployments via the [Cloudflare dashboard](https://dash.cloudflare.com/) > `Workers & Pages`
+
 ## Programmatic Usage
 
 The Supe Project Creator (SPC) can be utilized programmatically within your TypeScript or JavaScript applications. This allows you to create projects dynamically and customize the initialization process according to your needs.
@@ -180,7 +228,7 @@ Utilizing SPC programmatically allows you to:
 #### Programmatic Use Example
 
 ```ts
-import SPC from 'jsr:@supeprojects/supe-project-creator@1.8.4';
+import SPC from 'jsr:@supeprojects/supe-project-creator@1.8.5';
 
 console.log("Testing SPC programmatically...");
 
@@ -212,7 +260,7 @@ With these commands, you can easily set up and utilize the Supe Project Creator 
 To add the `Supe Project Creator` package in Deno, you can import it directly without any installation if you use the `jsr:` prefix in your import:
 
 ```ts
-import * as SPC from "jsr:@supeprojects/supe-project-creator@1.8.4";
+import * as SPC from "jsr:@supeprojects/supe-project-creator@1.8.5";
 
 // Example usage
 console.log("Testing SPC in Deno...");
@@ -222,7 +270,7 @@ SPC([]); // Shows the help menu
 Alternatively, if you prefer to add it, use the following command:
 
 ```bash
-deno add jsr:@supeprojects/supe-project-creator@1.8.4
+deno add jsr:@supeprojects/supe-project-creator@1.8.5
 ```
 
 Then, you can import it like this:

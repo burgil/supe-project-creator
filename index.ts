@@ -40,7 +40,7 @@ export default function SupeProjectCreator(argv: string[]): void {
     // Variables:
     let CleanProject = true;
     let projectName = '';
-    const supeVersion = '1.8.4';
+    const supeVersion = '1.8.5';
     const supeVersionDate = '2024-10-16';
     let runtime: 'deno' | 'bun' | 'node' | 'none' = 'none';
     if (argv.length === 0) argv.push('--help');
@@ -192,6 +192,7 @@ export default function SupeProjectCreator(argv: string[]): void {
 
 > [!TIP]
 > Remember, the true measure of your project's success lies not in its power, but in the positive impact it has on the world. use it wisely and for the betterment of all.
+> ▪◾ Yang and Yin. With great power comes great responsibility. wield your creation for the greater good, and never let it be used to harm or exploit others.
 
 ## Usage:
 
@@ -216,7 +217,7 @@ You have full control over all the source files of almost everything you see, Th
 `);
 
     if (runtime !== 'deno') fs.writeFileSync(join(outDir, 'tsconfig.json'), `{
-  "include": ["src/**/*", "hotreload/**/*"],
+  "include": ["src/**/*"],
   "compilerOptions": {
     // Enable latest features
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
@@ -248,7 +249,7 @@ You have full control over all the source files of almost everything you see, Th
     fs.writeFileSync(join(outDir, `${outDir}.code-workspace`), `{
 	"folders": [
 		{
-			"name": "▪${projectName}◾", // Yang and Yin. With great power comes great responsibility. wield your creation for the greater good, and never let it be used to harm or exploit others.
+			"name": "${projectName}",
 			"path": "."
 		}
 	],
@@ -761,7 +762,7 @@ await Promise.all([
     // Serve public folder:
     $\`bunx http-server \${config.paths.publicFolder} -p \${config.port}\${!config.httpLogs ? ' --silent' : ''}\`,
     // Watch for changes in public and hotreload - On reload: Bundle index.ts + Refresh Page:
-    $\`bunx nodemon --ext \${config.watchExtensions} --watch \${config.paths.publicFolder} --watch \${config.paths.hotreloadFolder} --watch \${config.paths.srcFolder} --on-change-only --exec 'bunx esbuild \${index}\${config.refresh.changes ? \` && bun \${config.paths.hotreloadFolder}/\${config.paths.hotreload.refresh}\` : ''}'\`,
+    $\`bunx nodemon --ext \${config.watchExtensions} --watch \${config.paths.publicFolder} --watch \${config.paths.srcFolder} --on-change-only --exec 'bunx esbuild \${index}\${config.refresh.changes ? \` && bun \${config.paths.hotreloadFolder}/\${config.paths.hotreload.refresh}\` : ''}'\`,
     // Watch for errors - Detect TypeScript errors without cleaning the console:
     $\`tsc -b --watch --preserveWatchOutput\`,
 ])
@@ -794,8 +795,7 @@ function bundle(input: string, output: string): string[] {
 const denoPath = Deno.execPath();
 async function command(...args: string[]) {
     console.log('\$ deno', args.join(' '));
-    // If deno is used, replace it with it's actual path - More info: https://docs.deno.com/api/deno/~/Deno.Command
-    const command = new Deno.Command(denoPath, {
+    const command = new Deno.Command(denoPath, { // If deno is used, replace it with it's actual path - More info: https://docs.deno.com/api/deno/~/Deno.Command
         args: args.filter(Boolean), // Remove empty elements from an array in Javascript
     });
     const child = command.spawn();
@@ -805,10 +805,14 @@ async function command(...args: string[]) {
 const index = bundle(denoJSON.exports, \`\${config.paths.publicFolder}/\${basename(denoJSON.exports).replace('.ts', '.js')}\`);
 const hotreload = bundle(\`\${config.paths.hotreloadFolder}/\${config.paths.hotreload.client}\`, \`\${config.paths.publicFolder}/\${config.paths.hotreload.output}\`);
 
+// Deno.addSignalListener("SIGINT", () => {
+//     console.log("interrupted!");
+//     Deno.exit();
+// });
 setTimeout(() => {
     console.log(\`Hello World
 Thank you for using Supe Project Creator v${supeVersion}
-Press CTRL+C in the terminal to terminate the process.\`);
+Press CTRL+C in the terminal to terminate the process. (Note: This feature is not working properly right now, Please close the terminal until a fix is found)\`);
 }, 2000);
 const esbuild_permissions = ['--allow-write=.', '--allow-env', '--allow-read', '--allow-run'];
 const hotreload_permissions = ['--allow-net', '--allow-env', '--allow-read', '--allow-run'];
@@ -816,8 +820,7 @@ const httpserver_permissions = ['--allow-net', '--allow-env', '--allow-sys', '--
 const nodemon_permissions = ['--allow-env', '--allow-sys', '--allow-read', '--allow-run', '--allow-write=.', '--allow-net'];
 const refresh_permissions = ['--allow-net'];
 if (!process.argv.includes('--skip')) {
-    const answer = prompt(\`> The Super Project Creator requires access to "start.ts" and "hotreload/server.ts" in order for "npm:http-server", "npm:nodemon", and "npm:esbuild" to function properly.
-    > Requested by \${config.paths.hotreloadFolder}/start.ts
+    const answer = prompt(\`> The Super Project Creator requires access to "hotreload/start.ts" and "hotreload/server.ts" in order for "npm:http-server", "npm:nodemon", and "npm:esbuild" to function properly.
     > ESBuild Permissions: \${esbuild_permissions.join(', ').replaceAll('--', '')}
     > HotReload Permissions: \${hotreload_permissions.join(', ').replaceAll('--', '')}
     > HTTPServer Permissions: \${httpserver_permissions.join(', ').replaceAll('--', '')}
@@ -846,7 +849,7 @@ await Promise.all([
     // Serve public folder:
     command(...httpserver_permissions, 'npm:http-server', config.paths.publicFolder, '-p', config.port.toString(), !config.httpLogs ? '--silent' : ''),
     // Watch for changes in public and hotreload - On reload: Bundle index.ts + Refresh Page:
-    command(...nodemon_permissions, 'npm:nodemon', '--ext', config.watchExtensions, '--watch', config.paths.publicFolder, '--watch', config.paths.hotreloadFolder, '--watch', config.paths.srcFolder, '--on-change-only', '--exec', nodemonCommand),
+    command(...nodemon_permissions, 'npm:nodemon', '--ext', config.watchExtensions, '--watch', config.paths.publicFolder, '--watch', config.paths.srcFolder, '--on-change-only', '--exec', nodemonCommand),
 ]);
 // Watch for errors - Detect TypeScript errors without cleaning the console:
 // command('run tsc -b --watch --preserveWatchOutput'), // TODO test if 'deno check' can replace tsc watch command

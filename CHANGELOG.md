@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.8.6 - Removed second gif - Faster loading
+
+- **Two gifs were slowing down the page too much**: Removed the old gif from the README since the new gif is good enough
+
 ### Version 1.8.5 - Improved Comments & README
 
 - **Fixed README & Comments**: The readme is now more comperhensive, Added more examples and guides, Added production guide, Improved code structure and tsconfig

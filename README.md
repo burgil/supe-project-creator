@@ -1,4 +1,4 @@
-# Supe Project Creator v1.8.5
+# Supe Project Creator v1.8.6
 
 A simple tool for creating simple web projects with batteries included.
 
@@ -20,8 +20,6 @@ The tool comes with a **built-in web server**, making it easy to test and deploy
 > [JSR](https://jsr.io/@supeprojects/supe-project-creator) - [GitHub](https://github.com/burgil/supe-project-creator) - [Known Issues](https://github.com/burgil/supe-project-creator/issues) - [Wiki](https://github.com/burgil/supe-project-creator/wiki) - [Changelog](https://github.com/burgil/supe-project-creator/blob/main/CHANGELOG.md) - [Roadmap](https://github.com/burgil/supe-project-creator/blob/main/ROADMAP.md)
 
 > [Contributing](https://github.com/burgil/supe-project-creator/blob/main/CONTRIBUTING.md) - [Code of Conduct](https://github.com/burgil/supe-project-creator/blob/main/CODE_OF_CONDUCT.md) - [License](https://github.com/burgil/supe-project-creator/blob/main/LICENSE)
-
-![Supe Project Creator - AI Demo Project](https://github.com/burgil/burgil/blob/main/public/Supe-Project-Creator-Gif.gif?raw=true)
 
 > [!NOTE]
 > The created project is client-only. You are welcome to combine Supe Project Creator with any other server framework, such as Express.JS, FastAPI, Cloudflare Workers, etc.
@@ -88,11 +86,11 @@ To start using Supe Project Creator, simply run the following command:
 ### Create a Clean Project in the Current Working Directory:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.8.5 --name @example/my-supe-project --runtime deno
+deno jsr:@supeprojects/supe-project-creator@1.8.6 --name @example/my-supe-project --runtime deno
 # or..
-deno jsr:@supeprojects/supe-project-creator@1.8.5 -n @example/my-supe-project -r deno
+deno jsr:@supeprojects/supe-project-creator@1.8.6 -n @example/my-supe-project -r deno
 # or..
-deno jsr:@supeprojects/supe-project-creator@1.8.5 -n my-supe-project -r bun
+deno jsr:@supeprojects/supe-project-creator@1.8.6 -n my-supe-project -r bun
 ```
 
 ```bash
@@ -106,11 +104,11 @@ Open *.code-workspace
 ### Create an AI Demo Project in the Current Working Directory using the --demo flag:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.8.5 --demo --name @example/cat-dog-detector --runtime deno
+deno jsr:@supeprojects/supe-project-creator@1.8.6 --demo --name @example/cat-dog-detector --runtime deno
 # or..
-deno jsr:@supeprojects/supe-project-creator@1.8.5 -d -n @example/cat-dog-detector -r deno
+deno jsr:@supeprojects/supe-project-creator@1.8.6 -d -n @example/cat-dog-detector -r deno
 # or..
-deno jsr:@supeprojects/supe-project-creator@1.8.5 -d -n cat-dog-detector -r bun
+deno jsr:@supeprojects/supe-project-creator@1.8.6 -d -n cat-dog-detector -r bun
 ```
 
 ```bash
@@ -151,7 +149,7 @@ This behavior is, of course, configurable in `hotreload/config.ts`, allowing you
 To view the available options for Supe Project Creator, run the following command:
 
 ```bash
-deno jsr:@supeprojects/supe-project-creator@1.8.5 --help
+deno jsr:@supeprojects/supe-project-creator@1.8.6 --help
 ```
 
 - `-h`, `--help`: Displays help information.
@@ -228,7 +226,7 @@ Utilizing SPC programmatically allows you to:
 #### Programmatic Use Example
 
 ```ts
-import SPC from 'jsr:@supeprojects/supe-project-creator@1.8.5';
+import SPC from 'jsr:@supeprojects/supe-project-creator@1.8.6';
 
 console.log("Testing SPC programmatically...");
 
@@ -260,7 +258,7 @@ With these commands, you can easily set up and utilize the Supe Project Creator 
 To add the `Supe Project Creator` package in Deno, you can import it directly without any installation if you use the `jsr:` prefix in your import:
 
 ```ts
-import * as SPC from "jsr:@supeprojects/supe-project-creator@1.8.5";
+import * as SPC from "jsr:@supeprojects/supe-project-creator@1.8.6";
 
 // Example usage
 console.log("Testing SPC in Deno...");
@@ -270,7 +268,7 @@ SPC([]); // Shows the help menu
 Alternatively, if you prefer to add it, use the following command:
 
 ```bash
-deno add jsr:@supeprojects/supe-project-creator@1.8.5
+deno add jsr:@supeprojects/supe-project-creator@1.8.6
 ```
 
 Then, you can import it like this:
